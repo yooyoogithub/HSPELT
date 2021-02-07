@@ -135,6 +135,10 @@
                 overflow: auto;
             }
 
+            #capital {
+                font-size: 100px;                
+            }
+
             #ab{
                 width: 50px;
                 height: 50px;
@@ -151,13 +155,47 @@
             }
 
             #firstbody{
-                height: 150px;
+                height: 200px;
             }
 
             #bodybutton{
                 height: 50px;
                 width: auto;  
                 background-color: cyan;
+            }
+
+            #ef{
+                width : 80px;
+                height: 50px;
+                text-align: center;
+                font-size: 16px;
+                background-color: chocolate;
+            }
+
+            #gh{
+                width: 100px;
+                height: 100px;
+                text-align: center;
+                font-size: 25px; 
+            }
+
+            #hg{
+                width: 100px;
+                height: 100px;
+                text-align: center;
+                font-size: 25px; 
+                background-color: gold;
+                color: red;
+            }
+
+            #table{
+                display: relative;
+                top: 50px;
+                left: 200px;
+                height: 50px;
+                width: 100px;
+                background-color: cornsilk;
+                color: darkblue;
             }
 
         </style>
@@ -174,32 +212,24 @@
                 if(document.getElementById('phonics').checked){                    
                     title.innerText = "Phonics Test를 시작합니다.";
                     phonics1_test();
-                }
-
-                if(document.getElementById('grammar').checked){                    
+                } else if(document.getElementById('grammar').checked){                    
                     title.innerText = "Grammar Test를 시작합니다.";
                     grammar_test();
-                }
-
-                if(document.getElementById('voca').checked){                    
+                } else if(document.getElementById('voca').checked){                    
                     title.innerText = "Vocabulary Test를 시작합니다.";
                     voca_test();
-                }
-
-                if(document.getElementById('reading').checked){                    
+                } else if(document.getElementById('reading').checked){                    
                     title.innerText = "Reading Test를 시작합니다.";
                     reading_test();
-                }
-
-                if(document.getElementById('middle').checked){                    
+                } else if(document.getElementById('middle').checked){                    
                     title.innerText = "중등실력 Test를 시작합니다.";
                     middle_test();
-                }
-
-                if(document.getElementById('rtst').checked){                    
+                } else if(document.getElementById('rtst').checked){                    
                     title.innerText = "한솔플러스영어 교재선택을 위한 Test를 시작합니다.";
                     rtst_test();
-                }
+                } else{
+                    alert("체크된 시험이 없습니다.");
+                }   
             }
 
             let uplist = [["initial"],];
@@ -360,8 +390,6 @@
                 if(downlist[25] === '<input type="button" id="cd" value="Z" onclick="alphabetRemoveclick('+"Z"+')">'){
                     correct++;
                 }
-
-                console.log(correct);
 
                 table = table + '<br>대문자 정답률 : ' + Math.floor((correct / 26)*100) + "% <hr>";
 
@@ -528,8 +556,6 @@
                     correct++;
                 }
 
-                console.log(correct);
-
                 table = table + '<br>소문자 정답률 : ' + Math.floor((correct / 26)*100) + "% <hr>";
 
                 result.innerHTML = table;
@@ -568,7 +594,7 @@
                 }
 
                 uplist = au;
-                document.getElementById('firstbody').innerHTML = '<h1>'+au[0]+'</h1>';
+                document.getElementById('firstbody').innerHTML = '<span id="capital">'+au[0]+'</span>';
                 phonics3count = 0;
                 document.getElementById('secondbody').innerHTML = table;
             }
@@ -583,15 +609,23 @@
                 const firstbody = document.getElementById('firstbody');
                 const result = document.getElementById('result');
 
+                let table = result.innerHTML;
+
                 //정답확인
                 if(phonics3count<26){
-                    if(alphabet == uplist[phonics3count].toLowerCase()){
+                    table = table + uplist[phonics3count] + "=>" + alphabet + "/ ";
+                    if(alphabet === uplist[phonics3count].toLowerCase()){                        
                         correct++;
                     }
-                    //다음 문제출제
-                    firstbody.innerHTML = '<h1>'+uplist[phonics3count]+'</h1>';
-                    phonics3count++;
                 }
+
+                //다음 문제출제
+                phonics3count++;
+                if(phonics3count<26){
+                    firstbody.innerHTML = '<span id="capital">'+uplist[phonics3count]+'</span>';
+                }
+
+                result.innerHTML = table;
 
                 if(phonics3count == 26){
                     button.innerHTML = '<input type="button" id="bodybutton" onclick="phonics3_done()" value="제출합니다.">';
@@ -617,12 +651,249 @@
 
                 phonics4_test();
             }
+
             function phonics4_test(){
+                const title = document.getElementById('title');
+                const head = document.getElementById('head');
+                const body = document.getElementById('body');
+                const button = document.getElementById('button');
+
+                let table = "";
+                let table2 = "";
+
+                console.log("파닉스 Test 4 시작 됨.");
+                head.innerText = "아래 큐빜은 알파벳의 대문자,소문자,이름,소리를 표시한 것입니다. 노란색칸에 맞는 것을 찾아보세요.";
+
+                let au = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+                let an = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+                let al = ['에이','비','씨','디','이','에프','쥐','에이치','아이','제이','케이','엘','엠','엔','오','피','큐','알','에스','티','유','브이','더블유','엑스','와이','제트'];
+                let as = ['애','브','크','드','에','프','그','흐','이','즈','크','르','므','느','아','프','쿼','르','스','트','어','브','워','크스','이','즈'];
+
+                body.innerHTML = '<div id="firstbody"></div><div id="secondbody"></div>';
+                button.innerHTML = "";
+                correct = 0;
+
+                for(let i=0;i<al.length;){
+                    random = Math.floor(Math.random()*al.length);
+                    table = table + '<input type="button" id="ef" value="'+al[random]+'" onclick="alphabetclick4('+"'"+al[random]+"'"+')">';
+                    al.splice(random,1);
+                }
+
+                phonics3count = 0;
+                table2 = table2 + '<input type="button" id="gh" value="'+au[phonics3count]+'">';
+                table2 = table2 + '<input type="button" id="gh" value="'+an[phonics3count]+'"><br>';
+                table2 = table2 + '<input type="button" id="hg" value="이름">';
+                table2 = table2 + '<input type="button" id="gh" value="'+as[phonics3count]+'">';
+                
+                document.getElementById('firstbody').innerHTML = table2;
+
+                document.getElementById('secondbody').innerHTML = table;
+            }
+
+            function alphabetclick4(alphabetname){
+                const title = document.getElementById('title');
+                const head = document.getElementById('head');
+                const body = document.getElementById('body');
+                const button = document.getElementById('button');
+                const secondbody = document.getElementById('secondbody');
+                const firstbody = document.getElementById('firstbody');
+                const result = document.getElementById('result');
+
+                let au = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+                let an = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+                let al = ['에이','비','씨','디','이','에프','쥐','에이치','아이','제이','케이','엘','엠','엔','오','피','큐','알','에스','티','유','브이','더블유','엑스','와이','제트'];
+                let as = ['애','브','크','드','에','프','그','흐','이','즈','크','르','므','느','아','프','쿼','르','스','트','어','브','워','크스','이','즈'];
+
+                let table2 = "";
+                let table = result.innerHTML;
+
+                //정답확인
+                if(phonics3count<26){
+                    table = table + au[phonics3count] + "=>" + alphabetname + "/ ";
+                    if(alphabetname === al[phonics3count]){                        
+                        correct++;
+                    }
+                }
+
+                //다음 문제출제
+                phonics3count++;
+
+                if(phonics3count<26){
+                    table2 = table2 + '<input type="button" id="gh" value="'+au[phonics3count]+'">';
+                    table2 = table2 + '<input type="button" id="gh" value="'+an[phonics3count]+'"><br>';
+                    table2 = table2 + '<input type="button" id="hg" value="이름">';
+                    table2 = table2 + '<input type="button" id="gh" value="'+as[phonics3count]+'">';
+                    firstbody.innerHTML = table2;
+                }
+
+                result.innerHTML = table;
+
+                if(phonics3count == 26){
+                    button.innerHTML = '<input type="button" id="bodybutton" onclick="phonics4_done()" value="제출합니다.">';
+                }
+            }
+
+            function phonics4_done(){
+                const title = document.getElementById('title');
+                const head = document.getElementById('head');
+                const body = document.getElementById('body');
+                const button = document.getElementById('button');
+                const secondbody = document.getElementById('secondbody');
+                const firstbody = document.getElementById('firstbody');
+                const result = document.getElementById('result');
+
+                let table = result.innerHTML;
+
+                //대문자와 소문자가 같으면 정답
+                table = table + '<br>알파벳이름 정답률 : ' + Math.floor((correct / 26)*100) + "% <hr>";
+
+                result.innerHTML = table;
+                button.innerHTML = "";
+
+                phonics5_test();
+            }
+
+            function phonics5_test(){
+                const title = document.getElementById('title');
+                const head = document.getElementById('head');
+                const body = document.getElementById('body');
+                const button = document.getElementById('button');
+
+                let table = "";
+                let table2 = "";
+
+                console.log("파닉스 Test 5 시작 됨.");
+                head.innerText = "아래 큐빜은 알파벳의 대문자,소문자,이름,소리를 표시한 것입니다. 노란색칸에 맞는 것을 찾아보세요.";
+
+                let au = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+                let an = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+                let al = ['에이','비','씨','디','이','에프','쥐','에이치','아이','제이','케이','엘','엠','엔','오','피','큐','알','에스','티','유','브이','더블유','엑스','와이','제트'];
+                let as = ['애','브','크','드','에','프','그','흐','이','즈','크','르','므','느','아','프','쿼','르','스','트','어','브','워','크스','이','즈'];
+
+                body.innerHTML = '<div id="firstbody"></div><div id="secondbody"></div>';
+                button.innerHTML = "";
+                correct = 0;
+
+                for(let i=0;i<as.length;){
+                    random = Math.floor(Math.random()*as.length);
+                    table = table + '<input type="button" id="ef" value="'+as[random]+'" onclick="alphabetclick5('+"'"+as[random]+"'"+')">';
+                    as.splice(random,1);
+                }
+
+                phonics3count = 0;
+                table2 = table2 + '<input type="button" id="gh" value="'+au[phonics3count]+'">';
+                table2 = table2 + '<input type="button" id="gh" value="'+an[phonics3count]+'"><br>';
+                table2 = table2 + '<input type="button" id="gh" value="'+al[phonics3count]+'">';
+                table2 = table2 + '<input type="button" id="hg" value="소리">';
+                
+                document.getElementById('firstbody').innerHTML = table2;
+
+                document.getElementById('secondbody').innerHTML = table;
+            }
+
+            function alphabetclick5(alphabetsound){
+                const title = document.getElementById('title');
+                const head = document.getElementById('head');
+                const body = document.getElementById('body');
+                const button = document.getElementById('button');
+                const secondbody = document.getElementById('secondbody');
+                const firstbody = document.getElementById('firstbody');
+                const result = document.getElementById('result');
+
+                let au = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+                let an = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+                let al = ['에이','비','씨','디','이','에프','쥐','에이치','아이','제이','케이','엘','엠','엔','오','피','큐','알','에스','티','유','브이','더블유','엑스','와이','제트'];
+                let as = ['애','브','크','드','에','프','그','흐','이','즈','크','르','므','느','아','프','쿼','르','스','트','어','브','워','크스','이','즈'];
+
+                let table2 = "";
+                let table = result.innerHTML;
+
+                //정답확인
+                if(phonics3count<26){
+                    table = table + au[phonics3count] + "=>" + alphabetsound + "/ ";
+                    if(alphabetsound === as[phonics3count]){                        
+                        correct++;
+                    }
+                }
+
+                //다음 문제출제
+                phonics3count++;
+
+                if(phonics3count<26){
+                    table2 = table2 + '<input type="button" id="gh" value="'+au[phonics3count]+'">';
+                    table2 = table2 + '<input type="button" id="gh" value="'+an[phonics3count]+'"><br>';
+                    table2 = table2 + '<input type="button" id="gh" value="'+al[phonics3count]+'">';
+                    table2 = table2 + '<input type="button" id="hg" value="소리">';
+                    firstbody.innerHTML = table2;
+                }
+
+                result.innerHTML = table;
+
+                if(phonics3count == 26){
+                    button.innerHTML = '<input type="button" id="bodybutton" onclick="phonics5_done()" value="제출합니다.">';
+                }
+            }
+
+            function phonics5_done(){
+                const title = document.getElementById('title');
+                const head = document.getElementById('head');
+                const body = document.getElementById('body');
+                const button = document.getElementById('button');
+                const secondbody = document.getElementById('secondbody');
+                const firstbody = document.getElementById('firstbody');
+                const result = document.getElementById('result');
+
+                let table = result.innerHTML;
+
+                //대문자와 소문자가 같으면 정답
+                table = table + '<br>알파벳소리 정답률 : ' + Math.floor((correct / 26)*100) + "% <hr>";
+
+                result.innerHTML = table;
+                button.innerHTML = "";
+
+                if(document.getElementById('grammar').checked){                    
+                    title.innerText = "Grammar Test를 시작합니다.";
+                    grammar_test();
+                } else if(document.getElementById('voca').checked){                    
+                    title.innerText = "Vocabulary Test를 시작합니다.";
+                    voca_test();
+                } else if(document.getElementById('reading').checked){                    
+                    title.innerText = "Reading Test를 시작합니다.";
+                    reading_test();
+                } else if(document.getElementById('middle').checked){                    
+                    title.innerText = "중등실력 Test를 시작합니다.";
+                    middle_test();
+                } else if(document.getElementById('rtst').checked){                    
+                    title.innerText = "한솔플러스영어 교재선택을 위한 Test를 시작합니다.";
+                    rtst_test();
+                } else{
+                    alert("더 이상 출제된 시험이 없습니다.");
+                }               
 
             }
 
             function grammar_test(){
+                const title = document.getElementById('title');
+                const head = document.getElementById('head');
+                const body = document.getElementById('body');
+                const button = document.getElementById('button');
+                const result = document.getElementById('result');
+
+                let grammar_num = document.getElementById('grammar').value;
+                let grammar_start_point;
+
                 console.log("문법 Test 시작 됨.");
+
+                if(grammar_num === "Grammar Test 1"){
+                    grammar_start_point = 1;
+                }else if (grammar_num === "Grammar Test 2"){
+                    grammar_start_point = 2;
+                }else if (grammar_num === "Grammar Test 3"){
+                    grammar_start_point = 3;
+                }else{
+                    alert("Grammar 시작 단계가 설정되지 않았습니다.");
+                }
+                
             }
             
             function voca_test(){
@@ -654,7 +925,13 @@
                 <div class="subject">
                     Phonics : <input type="checkbox" class="checkbox" name="phonics" id="phonics" value="1"><br>
                     Grammar : <input type="checkbox" class="checkbox" name="grammar" id='grammar' value="2"><br>
-                    Vocabulary : <input type="checkbox" class="checkbox" name="voca" id='voca' value="3"><br>
+                    <select name="grammar" id="grammar">
+                        <option value="0">Grammar Test 1</option>
+                        <option value="1">Grammar Test 2</option>
+                        <option value="2">Grammar Test 3</option>
+                    </select><br>
+                    G주관식(?) : <input type="checkbox" class="checkbox" name="grammar" id='grammar_type' value="3"><br>
+                    Vocabulary : <input type="checkbox" class="checkbox" name="voca" id='voca' value="4"><br>
                     <select name="powervoca" id="pv">
                         <option value="0">기본 Vocabulary</option>
                         <option value="1">Power Voca 1 (초저)</option>
@@ -664,9 +941,10 @@
                         <option value="5">Power Voca 5 (중3)</option>
                     </select><br>
                     <span>단어갯수</span>
-                    <input type="text" class="wordnum">
-                    Reading: <input type="checkbox" class="checkbox" name="reading" id='reading' value="4"><br>
-                    중등: <input type="checkbox" class="checkbox" name="middle" id="middle" value="5"><br>
+                    <input type="text" class="wordnum"><br>
+                    V주관식(?) : <input type="checkbox" class="checkbox" name="grammar" id='grammar_type' value="5"><br>
+                    Reading: <input type="checkbox" class="checkbox" name="reading" id='reading' value="6"><br>
+                    중등: <input type="checkbox" class="checkbox" name="middle" id="middle" value="7"><br>
                     <select name="middle" id="grade">
                         <option value="1-1">1학년 1학기</option>
                         <option value="1-2">1학년 2학기</option>
@@ -675,7 +953,7 @@
                         <option value="3-1">3학년 1학기</option>
                         <option value="3-2">3학년 2학기</option>
                     </select><br>
-                    RT/ST : <input type="checkbox" class="checkbox" name="rtst" id="rtst" value="6"><br>
+                    RT/ST : <input type="checkbox" class="checkbox" name="rtst" id="rtst" value="8"><br>
                     <select name="rtst" id="rtst">
                         <option value="1">Level 1(Phonics)</option>
                         <option value="2">Level 2(ST1/RT30)</option>
