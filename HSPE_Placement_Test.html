@@ -199,10 +199,23 @@
                 color: darkblue;
             }
 
+            #grammarbutton{
+                height: 50px;
+                width: 300px;  
+                background-color:whitesmoke;
+                color: black;
+            }
+
         </style>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
         <script defer type="text/javascript">
 
             'user strict'
+
+            let total_result = [["subject","score","answers"],];
+            let answers=""; //각 단계의 사용자가 응답한 정답을 보관
+            let scores; // 각 단계의 점수를 보여줌
 
             function start(){
                 const title = document.getElementById('title');
@@ -245,6 +258,8 @@
 
                 console.log("파닉스 Test 시작 됨.");
                 head.innerText = "아래 알파벳을 순서에 맞게 배열하세요.";
+
+                answers ="";
 
                 let init_au = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
                 let al = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
@@ -375,10 +390,11 @@
                 for(let i=1;i<27;i++){
                     for(let j=0;j<26;j++){
                         if(downlist[i] === '<input type="button" id="cd" value="'+au[j]+'" onclick="alphabetRemoveclick('+"'"+au[j]+"'"+')">'){
-                            table = table + au[j];
+                            //table = table + au[j];
+                            answers = answers + au[j];
                             column ++;
                             if(column == 10){
-                                table = table + "<br>";
+                                //table = table + "<br>";
                                 column = 0;
                             }
                             if(downlist[i+1] === '<input type="button" id="cd" value="'+au[j+1]+'" onclick="alphabetRemoveclick('+"'"+au[j+1]+"'"+')">'){
@@ -392,10 +408,13 @@
                     correct++;
                 }
 
-                table = table + '<br>대문자 정답률 : ' + Math.floor((correct / 26)*100) + "% <hr>";
+                scores = Math.floor((correct / 26)*100); 
+                table = table + '대문자 정답률 : ' + scores + "% <hr>";
 
                 result.innerHTML = table;
                 button.innerHTML = "";
+
+                total_result.push(["대문자순서",scores,answers]);
 
                 phonics2_test();
             }
@@ -405,6 +424,8 @@
                 const head = document.getElementById('head');
                 const body = document.getElementById('body');
                 const button = document.getElementById('button');
+
+                answers ="";
 
                 downlist.splice(1,26);
 
@@ -540,10 +561,11 @@
                 for(let i=1;i<27;i++){
                     for(let j=0;j<26;j++){
                         if(downlist[i] === '<input type="button" id="cd" value="'+au[j]+'" onclick="alphabetRemoveclick2('+"'"+au[j]+"'"+')">'){
-                            table = table + au[j];
+                            //table = table + au[j];
+                            answers = answers + au[j];
                             column ++;
                             if(column == 10){
-                                table = table + "<br>";
+                                //table = table + "<br>";
                                 column = 0;
                             }
                             if(downlist[i+1] === '<input type="button" id="cd" value="'+au[j+1]+'" onclick="alphabetRemoveclick2('+"'"+au[j+1]+"'"+')">'){
@@ -557,10 +579,13 @@
                     correct++;
                 }
 
-                table = table + '<br>소문자 정답률 : ' + Math.floor((correct / 26)*100) + "% <hr>";
+                scores = Math.floor((correct / 26)*100);
+                table = table + '소문자 정답률 : ' + scores + "% <hr>";
 
                 result.innerHTML = table;
                 button.innerHTML = "";
+
+                total_result.push(["소문자순서",scores,answers]);
 
                 phonics3_test();
             }
@@ -610,11 +635,13 @@
                 const firstbody = document.getElementById('firstbody');
                 const result = document.getElementById('result');
 
+                let answers = "";
                 let table = result.innerHTML;
 
                 //정답확인
                 if(phonics3count<26){
-                    table = table + uplist[phonics3count] + "=>" + alphabet + "/ ";
+                    //table = table + uplist[phonics3count] + "=>" + alphabet + "/ ";
+                    answers = answers + uplist[phonics3count] + "=>" + alphabet + "/ ";
                     if(alphabet === uplist[phonics3count].toLowerCase()){                        
                         correct++;
                     }
@@ -630,6 +657,7 @@
 
                 if(phonics3count == 26){
                     button.innerHTML = '<input type="button" id="bodybutton" onclick="phonics3_done()" value="제출합니다.">';
+                    body.innerHTML = '<div><font size="200px" color="red">밑에 제출하기 버튼을 누르세요.</font></div>';
                 }
             }
 
@@ -645,12 +673,14 @@
                 let table = result.innerHTML;
 
                 //대문자와 소문자가 같으면 정답
-                table = table + '<br>대소문자매칭 정답률 : ' + Math.floor((correct / 26)*100) + "% <hr>";
+                scores = Math.floor((correct / 26)*100);
+                table = table + '대소문자매칭 정답률 : ' + scores + "% <hr>";
 
                 result.innerHTML = table;
                 button.innerHTML = "";
 
-                phonics4_test();
+                total_result.push(["대소문자매칭",scores,answers]);
+                phonics4_test();                
             }
 
             function phonics4_test(){
@@ -661,6 +691,7 @@
 
                 let table = "";
                 let table2 = "";
+                answers ="";
 
                 console.log("파닉스 Test 4 시작 됨.");
                 head.innerText = "아래 큐빜은 알파벳의 대문자,소문자,이름,소리를 표시한 것입니다. 노란색칸에 맞는 것을 찾아보세요.";
@@ -710,7 +741,8 @@
 
                 //정답확인
                 if(phonics3count<26){
-                    table = table + au[phonics3count] + "=>" + alphabetname + "/ ";
+                    //table = table + au[phonics3count] + "=>" + alphabetname + "/ ";
+                    answers = answers + au[phonics3count] + "=>" + alphabetname + "/ ";
                     if(alphabetname === al[phonics3count]){                        
                         correct++;
                     }
@@ -731,6 +763,7 @@
 
                 if(phonics3count == 26){
                     button.innerHTML = '<input type="button" id="bodybutton" onclick="phonics4_done()" value="제출합니다.">';
+                    body.innerHTML = '<div><font size="200px" color="red">밑에 제출하기 버튼을 누르세요.</font></div>';
                 }
             }
 
@@ -746,11 +779,13 @@
                 let table = result.innerHTML;
 
                 //대문자와 소문자가 같으면 정답
-                table = table + '<br>알파벳이름 정답률 : ' + Math.floor((correct / 26)*100) + "% <hr>";
+                scores = Math.floor((correct / 26)*100);
+                table = table + '알파벳이름 정답률 : ' + scores + "% <hr>";
 
                 result.innerHTML = table;
                 button.innerHTML = "";
 
+                total_result.push(["알파벳이름",scores,answers]);
                 phonics5_test();
             }
 
@@ -762,6 +797,8 @@
 
                 let table = "";
                 let table2 = "";
+
+                answers ="";
 
                 console.log("파닉스 Test 5 시작 됨.");
                 head.innerText = "아래 큐빜은 알파벳의 대문자,소문자,이름,소리를 표시한 것입니다. 노란색칸에 맞는 것을 찾아보세요.";
@@ -811,7 +848,8 @@
 
                 //정답확인
                 if(phonics3count<26){
-                    table = table + au[phonics3count] + "=>" + alphabetsound + "/ ";
+                    //table = table + au[phonics3count] + "=>" + alphabetsound + "/ ";
+                    answers = answers + au[phonics3count] + "=>" + alphabetsound + "/ ";
                     if(alphabetsound === as[phonics3count]){                        
                         correct++;
                     }
@@ -832,6 +870,7 @@
 
                 if(phonics3count == 26){
                     button.innerHTML = '<input type="button" id="bodybutton" onclick="phonics5_done()" value="제출합니다.">';
+                    body.innerHTML = '<div><font size="200px" color="red">밑에 제출하기 버튼을 누르세요.</font></div>';
                 }
             }
 
@@ -847,10 +886,13 @@
                 let table = result.innerHTML;
 
                 //대문자와 소문자가 같으면 정답
-                table = table + '<br>알파벳소리 정답률 : ' + Math.floor((correct / 26)*100) + "% <hr>";
+                scores = Math.floor((correct / 26)*100);
+                table = table + '알파벳소리 정답률 : ' + scores + "% <hr>";
 
                 result.innerHTML = table;
                 button.innerHTML = "";
+
+                total_result.push(["알파벳소리",scores,answers]);
 
                 if(document.getElementById('grammar').checked){                    
                     title.innerText = "Grammar Test를 시작합니다.";
@@ -873,6 +915,8 @@
 
             }
 
+            let qnum;
+
             function grammar_test(){
                 const title = document.getElementById('title');
                 const head = document.getElementById('head');
@@ -880,27 +924,500 @@
                 const button = document.getElementById('button');
                 const result = document.getElementById('result');
 
-                let grammar_num = document.getElementById('grammar').value;
-                let grammar_start_point;
-
+                let grammar_num = document.getElementById('grammarnum').value;
+                
                 console.log("문법 Test 시작 됨.");
 
-                if(grammar_num === "Grammar Test 1"){
-                    grammar_start_point = 1;
-                }else if (grammar_num === "Grammar Test 2"){
-                    grammar_start_point = 2;
-                }else if (grammar_num === "Grammar Test 3"){
-                    grammar_start_point = 3;
+                body.innerHTML = '<div id="firstbody"></div><div id="secondbody"></div>';
+                button.innerHTML = "";
+                correct = 0;
+
+                if(grammar_num === "0"){   
+                    qnum = 0;                 
+                    grammar1_start();
+                }else if (grammar_num === "1"){
+                    qnum = 0;                 
+                    grammar2_start();
+                }else if (grammar_num === "2"){
+                    qnum = 0;                 
+                    grammar3_start();
                 }else{
                     alert("Grammar 시작 단계가 설정되지 않았습니다.");
+                    body.innerHTML =  "";
                 }
-                
+            }
+
+            let grammar_JSON;
+
+            function grammar1_start(){
+                const title = document.getElementById('title');
+                const head = document.getElementById('head');
+                const body = document.getElementById('body');
+                const button = document.getElementById('button');
+                const secondbody = document.getElementById('secondbody');
+                const firstbody = document.getElementById('firstbody');
+                const result = document.getElementById('result');
+
+                let table = result.innerHTML;
+
+                phonics3count = 0;
+                answers = "";
+
+                title.innerText = "Grammar 1 Test를 시작합니다.";
+
+                // test 파일 불러와서 json 파일로 만들기
+                let selectedFile = new XMLHttpRequest();
+                //selectedFile.open("GET","https://yooyoogithub.github.io/HSPELT/level_test_grammar_1.xlsx");
+                selectedFile.open("GET","https://yooyoogithub.github.io/HSPELT/grammar_1.xlsx"); //파일명의 길이도 문제가 되는 것 같음. 짧게 유지
+                //selectedFile.open("GET","https://yooyoogithub.github.io/HSPELT/test.xlsx");
+                selectedFile.setRequestHeader('Content-Type','application/x-www-form-urlencoded; charset=UTF-8');
+                selectedFile.responseType = "blob"; //Blob형식으로 부탁합니다!
+                selectedFile.send();  //위 요청을 보낸다.
+
+                selectedFile.onload = function(){ 
+
+                    if(selectedFile.status === 200){
+
+                        let blob = new Blob([selectedFile.response], {type:'application/xlsx'}); //받은 파일의 내용을 blob 형태로 변환
+
+                        if(blob.size>0){
+                            let fileReader = new FileReader();
+                            fileReader.readAsBinaryString(blob);                    
+                            fileReader.onload = (event)=>{
+                                let data = event.target.result;
+                                let workbook = XLSX.read(data,{type:"binary"});
+                                workbook.SheetNames.forEach(sheet => {
+                                    //console.log("sheet=>"+sheet);
+                                    sheet = 'grammar_1';
+                                    let rowObject = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheet]);
+                                    let jsonexcelfile = JSON.stringify(rowObject, undefined, 4);
+                                    let jsonexcelfileparse = JSON.parse(jsonexcelfile);
+                                    grammar_JSON = JSON.parse(jsonexcelfile);
+                                    //console.log(jsonexcelfileparse);
+                                    //document.getElementById("jsondata").innerHTML = jsonexcelfile;
+                                    //console.log(jsonexcelfileparse[0].no);
+                                    head.innerHTML = jsonexcelfileparse[qnum].head;
+                                    firstbody.innerHTML = jsonexcelfileparse[qnum].q;
+                                    //secondbody.innerHTML = jsonexcelfileparse[qnum].w;
+                                    secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${jsonexcelfileparse[qnum].a1}" onclick="grammar1_click(1)"><br>`+
+                                    `<input type="button" id="grammarbutton" value="${jsonexcelfileparse[qnum].a2}" onclick="grammar1_click(2)"><br>`+
+                                    `<input type="button" id="grammarbutton" value="${jsonexcelfileparse[qnum].a3}" onclick="grammar1_click(3)"><br>`+
+                                    `<input type="button" id="grammarbutton" value="${jsonexcelfileparse[qnum].a4}" onclick="grammar1_click(4)">`;
+
+                                    //button.innerHTML = '<input type="button" id="bodybutton" onclick="grammar1_start()" value="제출합니다.">'
+                                });
+                                qnum++;
+                            }
+                        }
+                    }
+                }
+                //여기까지 파일 불러와서 jsonexcelfileparse에 저장 하기
+            }
+
+            function grammar1_click(useranswer){
+                const title = document.getElementById('title');
+                const head = document.getElementById('head');
+                const body = document.getElementById('body');
+                const button = document.getElementById('button');
+                const secondbody = document.getElementById('secondbody');
+                const firstbody = document.getElementById('firstbody');
+                const result = document.getElementById('result');
+
+                let table = result.innerHTML;
+
+                let tqnum = grammar_JSON.length;
+
+                //정답체크
+                if(phonics3count < tqnum){
+                    answers = answers + (phonics3count+1) + "번." + useranswer + "/";
+                    //console.log((phonics3count+1) + "번." + useranswer + "/" + "정답"+grammar_JSON[phonics3count].a_answer);
+                    if(useranswer === grammar_JSON[phonics3count].a_answer){
+                        correct ++;
+                    }
+                }
+
+                //다음 문제출제
+                phonics3count++;
+
+                if(phonics3count<tqnum){
+                    head.innerHTML = grammar_JSON[phonics3count].head;
+                    firstbody.innerHTML = grammar_JSON[phonics3count].q;
+                    secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${grammar_JSON[phonics3count].a1}" onclick="grammar1_click(1)"><br>`+
+                                        `<input type="button" id="grammarbutton" value="${grammar_JSON[phonics3count].a2}" onclick="grammar1_click(2)"><br>`+
+                                        `<input type="button" id="grammarbutton" value="${grammar_JSON[phonics3count].a3}" onclick="grammar1_click(3)"><br>`+
+                                        `<input type="button" id="grammarbutton" value="${grammar_JSON[phonics3count].a4}" onclick="grammar1_click(4)">`;
+                }
+
+                if(phonics3count === tqnum){
+                    button.innerHTML = `<input type="button" id="bodybutton" onclick="grammar1_done(${tqnum})" value="제출합니다.">`;
+                    firstbody.innerHTML = '<div><font size="200px" color="red">밑에 제출하기 버튼을 누르세요.</font></div>';
+                }
+
+            }
+
+            function grammar1_done(tqnum){
+                const title = document.getElementById('title');
+                const head = document.getElementById('head');
+                const body = document.getElementById('body');
+                const button = document.getElementById('button');
+                const secondbody = document.getElementById('secondbody');
+                const firstbody = document.getElementById('firstbody');
+                const result = document.getElementById('result');
+
+                let table = result.innerHTML;
+
+                //대문자와 소문자가 같으면 정답
+                scores = Math.floor((correct / tqnum)*100);
+                table = table + 'Grammar 1 정답률 : ' + scores + "% <hr>";
+
+                result.innerHTML = table;
+                button.innerHTML = "";
+
+                total_result.push(["Grammar 1",scores,answers]);
+
+                grammar2_start();
+
+            }
+
+            function grammar2_start(){
+                const title = document.getElementById('title');
+                const head = document.getElementById('head');
+                const body = document.getElementById('body');
+                const button = document.getElementById('button');
+                const secondbody = document.getElementById('secondbody');
+                const firstbody = document.getElementById('firstbody');
+                const result = document.getElementById('result');
+
+                let table = result.innerHTML;
+
+                phonics3count = 0;
+                answers = "";
+
+                qnum = 0;
+
+                title.innerText = "Grammar 2 Test를 시작합니다.";
+
+                // test 파일 불러와서 json 파일로 만들기
+                let selectedFile = new XMLHttpRequest();
+                //selectedFile.open("GET","https://yooyoogithub.github.io/HSPELT/level_test_grammar_1.xlsx");
+                selectedFile.open("GET","https://yooyoogithub.github.io/HSPELT/grammar_2.xlsx"); //파일명의 길이도 문제가 되는 것 같음. 짧게 유지
+                //selectedFile.open("GET","https://yooyoogithub.github.io/HSPELT/test.xlsx");
+                selectedFile.setRequestHeader('Content-Type','application/x-www-form-urlencoded; charset=UTF-8');
+                selectedFile.responseType = "blob"; //Blob형식으로 부탁합니다!
+                selectedFile.send();  //위 요청을 보낸다.
+
+                selectedFile.onload = function(){ 
+
+                    if(selectedFile.status === 200){
+
+                        let blob = new Blob([selectedFile.response], {type:'application/xlsx'}); //받은 파일의 내용을 blob 형태로 변환
+
+                        if(blob.size>0){
+                            let fileReader = new FileReader();
+                            fileReader.readAsBinaryString(blob);                    
+                            fileReader.onload = (event)=>{
+                                let data = event.target.result;
+                                let workbook = XLSX.read(data,{type:"binary"});
+                                workbook.SheetNames.forEach(sheet => {
+                                    //console.log("sheet=>"+sheet);
+                                    sheet = 'grammar_2';
+                                    let rowObject = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheet]);
+                                    let jsonexcelfile = JSON.stringify(rowObject, undefined, 4);
+                                    let jsonexcelfileparse = JSON.parse(jsonexcelfile);
+                                    grammar_JSON = JSON.parse(jsonexcelfile);
+                                    //console.log(jsonexcelfileparse);
+                                    //document.getElementById("jsondata").innerHTML = jsonexcelfile;
+                                    //console.log(jsonexcelfileparse[0].no);
+                                    head.innerHTML = jsonexcelfileparse[qnum].head;
+                                    firstbody.innerHTML = jsonexcelfileparse[qnum].q;
+                                    //secondbody.innerHTML = jsonexcelfileparse[qnum].w;
+                                    secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${jsonexcelfileparse[qnum].a1}" onclick="grammar2_click(1)"><br>`+
+                                    `<input type="button" id="grammarbutton" value="${jsonexcelfileparse[qnum].a2}" onclick="grammar2_click(2)"><br>`+
+                                    `<input type="button" id="grammarbutton" value="${jsonexcelfileparse[qnum].a3}" onclick="grammar2_click(3)"><br>`+
+                                    `<input type="button" id="grammarbutton" value="${jsonexcelfileparse[qnum].a4}" onclick="grammar2_click(4)">`;
+
+                                    //button.innerHTML = '<input type="button" id="bodybutton" onclick="grammar2_start()" value="제출합니다.">'
+                                });
+                                qnum++;
+                            }
+                        }
+                    }
+                }
+                //여기까지 파일 불러와서 jsonexcelfileparse에 저장 하기
+            }
+
+            function grammar2_click(useranswer){
+                const title = document.getElementById('title');
+                const head = document.getElementById('head');
+                const body = document.getElementById('body');
+                const button = document.getElementById('button');
+                const secondbody = document.getElementById('secondbody');
+                const firstbody = document.getElementById('firstbody');
+                const result = document.getElementById('result');
+
+                let table = result.innerHTML;
+
+                let tqnum = grammar_JSON.length;
+
+                //정답체크
+                if(phonics3count < tqnum){
+                    answers = answers + (phonics3count+1) + "번." + useranswer + "/";
+                    //console.log((phonics3count+1) + "번." + useranswer + "/" + "정답"+grammar2_JSON[phonics3count].a_answer);
+                    if(useranswer === grammar_JSON[phonics3count].a_answer){
+                        correct ++;
+                    }
+                }
+
+                //다음 문제출제
+                phonics3count++;
+
+                if(phonics3count<tqnum){
+                    head.innerHTML = grammar_JSON[phonics3count].head;
+                    firstbody.innerHTML = grammar_JSON[phonics3count].q;
+                    secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${grammar_JSON[phonics3count].a1}" onclick="grammar2_click(1)"><br>`+
+                                        `<input type="button" id="grammarbutton" value="${grammar_JSON[phonics3count].a2}" onclick="grammar2_click(2)"><br>`+
+                                        `<input type="button" id="grammarbutton" value="${grammar_JSON[phonics3count].a3}" onclick="grammar2_click(3)"><br>`+
+                                        `<input type="button" id="grammarbutton" value="${grammar_JSON[phonics3count].a4}" onclick="grammar2_click(4)">`;
+                }
+
+                if(phonics3count === tqnum){
+                    button.innerHTML = `<input type="button" id="bodybutton" onclick="grammar2_done(${tqnum})" value="제출합니다.">`;
+                    firstbody.innerHTML = '<div><font size="200px" color="red">밑에 제출하기 버튼을 누르세요.</font></div>';
+                }
+
+            }
+
+            function grammar2_done(tqnum){
+                const title = document.getElementById('title');
+                const head = document.getElementById('head');
+                const body = document.getElementById('body');
+                const button = document.getElementById('button');
+                const secondbody = document.getElementById('secondbody');
+                const firstbody = document.getElementById('firstbody');
+                const result = document.getElementById('result');
+
+                let table = result.innerHTML;
+
+                //대문자와 소문자가 같으면 정답
+                scores = Math.floor((correct / tqnum)*100);
+                table = table + 'Grammar 2 정답률 : ' + scores + "% <hr>";
+
+                result.innerHTML = table;
+                button.innerHTML = "";
+
+                total_result.push(["Grammar 2",scores,answers]);
+
+                grammar3_start();
             }
             
+            function grammar3_start(){
+                const title = document.getElementById('title');
+                const head = document.getElementById('head');
+                const body = document.getElementById('body');
+                const button = document.getElementById('button');
+                const secondbody = document.getElementById('secondbody');
+                const firstbody = document.getElementById('firstbody');
+                const result = document.getElementById('result');
+
+                let table = result.innerHTML;
+
+                phonics3count = 0;
+                answers = "";
+
+                qnum = 0;
+
+                title.innerText = "Grammar 3 Test를 시작합니다.";
+
+                // test 파일 불러와서 json 파일로 만들기
+                let selectedFile = new XMLHttpRequest();
+                //selectedFile.open("GET","https://yooyoogithub.github.io/HSPELT/level_test_grammar_1.xlsx");
+                selectedFile.open("GET","https://yooyoogithub.github.io/HSPELT/grammar_3.xlsx"); //파일명의 길이도 문제가 되는 것 같음. 짧게 유지
+                //selectedFile.open("GET","https://yooyoogithub.github.io/HSPELT/test.xlsx");
+                selectedFile.setRequestHeader('Content-Type','application/x-www-form-urlencoded; charset=UTF-8');
+                selectedFile.responseType = "blob"; //Blob형식으로 부탁합니다!
+                selectedFile.send();  //위 요청을 보낸다.
+
+                selectedFile.onload = function(){ 
+
+                    if(selectedFile.status === 200){
+
+                        let blob = new Blob([selectedFile.response], {type:'application/xlsx'}); //받은 파일의 내용을 blob 형태로 변환
+
+                        if(blob.size>0){
+                            let fileReader = new FileReader();
+                            fileReader.readAsBinaryString(blob);                    
+                            fileReader.onload = (event)=>{
+                                let data = event.target.result;
+                                let workbook = XLSX.read(data,{type:"binary"});
+                                workbook.SheetNames.forEach(sheet => {
+                                    //console.log("sheet=>"+sheet);
+                                    sheet = 'grammar_3';
+                                    let rowObject = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheet]);
+                                    let jsonexcelfile = JSON.stringify(rowObject, undefined, 4);
+                                    let jsonexcelfileparse = JSON.parse(jsonexcelfile);
+                                    grammar_JSON = JSON.parse(jsonexcelfile);
+                                    //console.log(jsonexcelfileparse);
+                                    //document.getElementById("jsondata").innerHTML = jsonexcelfile;
+                                    //console.log(jsonexcelfileparse[0].no);
+                                    head.innerHTML = jsonexcelfileparse[qnum].head;
+                                    firstbody.innerHTML = jsonexcelfileparse[qnum].q;
+                                    //secondbody.innerHTML = jsonexcelfileparse[qnum].w;
+                                    secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${jsonexcelfileparse[qnum].a1}" onclick="grammar3_click(1)"><br>`+
+                                    `<input type="button" id="grammarbutton" value="${jsonexcelfileparse[qnum].a2}" onclick="grammar3_click(2)"><br>`+
+                                    `<input type="button" id="grammarbutton" value="${jsonexcelfileparse[qnum].a3}" onclick="grammar3_click(3)"><br>`+
+                                    `<input type="button" id="grammarbutton" value="${jsonexcelfileparse[qnum].a4}" onclick="grammar3_click(4)">`;
+
+                                    //button.innerHTML = '<input type="button" id="bodybutton" onclick="grammar3_start()" value="제출합니다.">'
+                                });
+                                qnum++;
+                            }
+                        }
+                    }
+                }
+                //여기까지 파일 불러와서 jsonexcelfileparse에 저장 하기
+            }
+
+            function grammar3_click(useranswer){
+                const title = document.getElementById('title');
+                const head = document.getElementById('head');
+                const body = document.getElementById('body');
+                const button = document.getElementById('button');
+                const secondbody = document.getElementById('secondbody');
+                const firstbody = document.getElementById('firstbody');
+                const result = document.getElementById('result');
+
+                let table = result.innerHTML;
+
+                let tqnum = grammar_JSON.length;
+
+                //정답체크
+                if(phonics3count < tqnum){
+                    answers = answers + (phonics3count+1) + "번." + useranswer + "/";
+                    //console.log((phonics3count+1) + "번." + useranswer + "/" + "정답"+grammar3_JSON[phonics3count].a_answer);
+                    if(useranswer === grammar_JSON[phonics3count].a_answer){
+                        correct ++;
+                    }
+                }
+
+                //다음 문제출제
+                phonics3count++;
+
+                if(phonics3count<tqnum){
+                    head.innerHTML = grammar_JSON[phonics3count].head;
+                    firstbody.innerHTML = grammar_JSON[phonics3count].q;
+                    secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${grammar_JSON[phonics3count].a1}" onclick="grammar3_click(1)"><br>`+
+                                        `<input type="button" id="grammarbutton" value="${grammar_JSON[phonics3count].a2}" onclick="grammar3_click(2)"><br>`+
+                                        `<input type="button" id="grammarbutton" value="${grammar_JSON[phonics3count].a3}" onclick="grammar3_click(3)"><br>`+
+                                        `<input type="button" id="grammarbutton" value="${grammar_JSON[phonics3count].a4}" onclick="grammar3_click(4)">`;
+                }
+
+                if(phonics3count === tqnum){
+                    button.innerHTML = `<input type="button" id="bodybutton" onclick="grammar3_done(${tqnum})" value="제출합니다.">`;
+                    body.innerHTML = '<div><font size="200px" color="red">밑에 제출하기 버튼을 누르세요.</font></div>';
+                }
+
+            }
+
+            function grammar3_done(tqnum){
+                const title = document.getElementById('title');
+                const head = document.getElementById('head');
+                const body = document.getElementById('body');
+                const button = document.getElementById('button');
+                const secondbody = document.getElementById('secondbody');
+                const firstbody = document.getElementById('firstbody');
+                const result = document.getElementById('result');
+
+                let table = result.innerHTML;
+
+                //대문자와 소문자가 같으면 정답
+                scores = Math.floor((correct / tqnum)*100);
+                table = table + 'Grammar 3 정답률 : ' + scores + "% <hr>";
+
+                result.innerHTML = table;
+                button.innerHTML = "";
+
+                total_result.push(["Grammar 3",scores,answers]);
+
+                if(document.getElementById('voca').checked){                    
+                    title.innerText = "Vocabulary Test를 시작합니다.";
+                    voca_test();
+                } else if(document.getElementById('reading').checked){                    
+                    title.innerText = "Reading Test를 시작합니다.";
+                    reading_test();
+                } else if(document.getElementById('middle').checked){                    
+                    title.innerText = "중등실력 Test를 시작합니다.";
+                    middle_test();
+                } else if(document.getElementById('rtst').checked){                    
+                    title.innerText = "한솔플러스영어 교재선택을 위한 Test를 시작합니다.";
+                    rtst_test();
+                } else{
+                    alert("더 이상 출제된 시험이 없습니다.");
+                }   
+            }
+
             function voca_test(){
+                const title = document.getElementById('title');
+                const head = document.getElementById('head');
+                const body = document.getElementById('body');
+                const button = document.getElementById('button');
+                const result = document.getElementById('result');
+
+                let voca_num = document.getElementById('pv').value;
+                
                 console.log("어휘 Test 시작 됨.");
+
+                body.innerHTML = '<div id="firstbody"></div><div id="secondbody"></div>';
+                button.innerHTML = "";
+                correct = 0;
+
+                if(voca_num === "0"){   
+                    qnum = 0;                 
+                    pv0_start();
+                }else if (voca_num === "1"){
+                    qnum = 0;                 
+                    pv1_start();
+                }else if (voca_num === "2"){
+                    qnum = 0;                 
+                    pv2_start();
+                }else if (voca_num === "3"){
+                    qnum = 0;                 
+                    pv3_start();
+                }else if (voca_num === "4"){
+                    qnum = 0;                 
+                    pv4_start();
+                }else if (voca_num === "5"){
+                    qnum = 0;                 
+                    pv5_start();
+                }else{
+                    alert("Grammar 시작 단계가 설정되지 않았습니다.");
+                    body.innerHTML =  "";
+                }
             }
             
+            function pv0_start(){
+                console.log("기본 어휘 Test 시작 됨.");
+            }
+
+            function pv1_start(){
+                console.log("파워보카 1 Test 시작 됨.");
+            }
+
+            function pv2_start(){
+                console.log("파워보카 1 Test 시작 됨.");
+            }
+
+            function pv3_start(){
+                console.log("파워보카 1 Test 시작 됨.");
+            }
+
+            function pv4_start(){
+                console.log("파워보카 1 Test 시작 됨.");
+            }
+
+            function pv5_start(){
+                console.log("파워보카 1 Test 시작 됨.");
+            }
+
             function reading_test(){
                 console.log("Reading Test 시작 됨.");
             }
@@ -926,7 +1443,7 @@
                 <div class="subject">
                     Phonics : <input type="checkbox" class="checkbox" name="phonics" id="phonics" value="1"><br>
                     Grammar : <input type="checkbox" class="checkbox" name="grammar" id='grammar' value="2"><br>
-                    <select name="grammar" id="grammar">
+                    <select name="grammar" id="grammarnum">
                         <option value="0">Grammar Test 1</option>
                         <option value="1">Grammar Test 2</option>
                         <option value="2">Grammar Test 3</option>
@@ -982,7 +1499,7 @@
                 </div>
             </div>
             <div class="result" id="result">
-                <h1>RESULT</h1><hr><br>                
+                <h1>RESULT</h1><hr>                
             </div>
         </div>
     </body>
