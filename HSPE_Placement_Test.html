@@ -216,6 +216,7 @@
             let total_result = [["subject","score","answers"],];
             let answers=""; //각 단계의 사용자가 응답한 정답을 보관
             let scores; // 각 단계의 점수를 보여줌
+            let grammar_result = [["level","no","ox","classify"],]; //Grammar 문제에 대한 답변의 정오를 저장 => 나중에 취약점 분석용
 
             function start(){
                 const title = document.getElementById('title');
@@ -996,7 +997,7 @@
                                     //console.log(jsonexcelfileparse);
                                     //document.getElementById("jsondata").innerHTML = jsonexcelfile;
                                     //console.log(jsonexcelfileparse[0].no);
-                                    head.innerHTML = jsonexcelfileparse[qnum].head;
+                                    head.innerHTML = qnum+1+"번."+jsonexcelfileparse[qnum].head;
                                     firstbody.innerHTML = jsonexcelfileparse[qnum].q;
                                     //secondbody.innerHTML = jsonexcelfileparse[qnum].w;
                                     secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${jsonexcelfileparse[qnum].a1}" onclick="grammar1_click(1)"><br>`+
@@ -1033,6 +1034,10 @@
                     //console.log((phonics3count+1) + "번." + useranswer + "/" + "정답"+grammar_JSON[phonics3count].a_answer);
                     if(useranswer === grammar_JSON[phonics3count].a_answer){
                         correct ++;
+                        //grammar_result = [["level 1,2,3","no","ox : 오답=0, 정답=1","classify"],];
+                        grammar_result.push([1,phonics3count+1,1,grammar_JSON[phonics3count].type]);
+                    }else{
+                        grammar_result.push([1,phonics3count+1,0,grammar_JSON[phonics3count].type]);
                     }
                 }
 
@@ -1040,7 +1045,7 @@
                 phonics3count++;
 
                 if(phonics3count<tqnum){
-                    head.innerHTML = grammar_JSON[phonics3count].head;
+                    head.innerHTML = phonics3count+1+"번."+grammar_JSON[phonics3count].head;
                     firstbody.innerHTML = grammar_JSON[phonics3count].q;
                     secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${grammar_JSON[phonics3count].a1}" onclick="grammar1_click(1)"><br>`+
                                         `<input type="button" id="grammarbutton" value="${grammar_JSON[phonics3count].a2}" onclick="grammar1_click(2)"><br>`+
@@ -1129,7 +1134,7 @@
                                     //console.log(jsonexcelfileparse);
                                     //document.getElementById("jsondata").innerHTML = jsonexcelfile;
                                     //console.log(jsonexcelfileparse[0].no);
-                                    head.innerHTML = jsonexcelfileparse[qnum].head;
+                                    head.innerHTML = qnum+1+"번."+jsonexcelfileparse[qnum].head;
                                     firstbody.innerHTML = jsonexcelfileparse[qnum].q;
                                     //secondbody.innerHTML = jsonexcelfileparse[qnum].w;
                                     secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${jsonexcelfileparse[qnum].a1}" onclick="grammar2_click(1)"><br>`+
@@ -1161,11 +1166,16 @@
                 let tqnum = grammar_JSON.length;
 
                 //정답체크
+
                 if(phonics3count < tqnum){
                     answers = answers + (phonics3count+1) + "번." + useranswer + "/";
-                    //console.log((phonics3count+1) + "번." + useranswer + "/" + "정답"+grammar2_JSON[phonics3count].a_answer);
+                    //console.log((phonics3count+1) + "번." + useranswer + "/" + "정답"+grammar_JSON[phonics3count].a_answer);
                     if(useranswer === grammar_JSON[phonics3count].a_answer){
                         correct ++;
+                        //grammar_result = [["level 1,2,3","no","ox : 오답=0, 정답=1","classify"],];
+                        grammar_result.push([2,phonics3count+1,1,grammar_JSON[phonics3count].type]);
+                    }else{
+                        grammar_result.push([2,phonics3count+1,0,grammar_JSON[phonics3count].type]);
                     }
                 }
 
@@ -1173,7 +1183,7 @@
                 phonics3count++;
 
                 if(phonics3count<tqnum){
-                    head.innerHTML = grammar_JSON[phonics3count].head;
+                    head.innerHTML = phonics3count+1+"번."+grammar_JSON[phonics3count].head;
                     firstbody.innerHTML = grammar_JSON[phonics3count].q;
                     secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${grammar_JSON[phonics3count].a1}" onclick="grammar2_click(1)"><br>`+
                                         `<input type="button" id="grammarbutton" value="${grammar_JSON[phonics3count].a2}" onclick="grammar2_click(2)"><br>`+
@@ -1261,7 +1271,7 @@
                                     //console.log(jsonexcelfileparse);
                                     //document.getElementById("jsondata").innerHTML = jsonexcelfile;
                                     //console.log(jsonexcelfileparse[0].no);
-                                    head.innerHTML = jsonexcelfileparse[qnum].head;
+                                    head.innerHTML = qnum+1+"번."+jsonexcelfileparse[qnum].head;
                                     firstbody.innerHTML = jsonexcelfileparse[qnum].q;
                                     //secondbody.innerHTML = jsonexcelfileparse[qnum].w;
                                     secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${jsonexcelfileparse[qnum].a1}" onclick="grammar3_click(1)"><br>`+
@@ -1295,9 +1305,13 @@
                 //정답체크
                 if(phonics3count < tqnum){
                     answers = answers + (phonics3count+1) + "번." + useranswer + "/";
-                    //console.log((phonics3count+1) + "번." + useranswer + "/" + "정답"+grammar3_JSON[phonics3count].a_answer);
+                    //console.log((phonics3count+1) + "번." + useranswer + "/" + "정답"+grammar_JSON[phonics3count].a_answer);
                     if(useranswer === grammar_JSON[phonics3count].a_answer){
                         correct ++;
+                        //grammar_result = [["level 1,2,3","no","ox : 오답=0, 정답=1","classify"],];
+                        grammar_result.push([3,phonics3count+1,1,grammar_JSON[phonics3count].type]);
+                    }else{
+                        grammar_result.push([3,phonics3count+1,0,grammar_JSON[phonics3count].type]);
                     }
                 }
 
@@ -1305,7 +1319,7 @@
                 phonics3count++;
 
                 if(phonics3count<tqnum){
-                    head.innerHTML = grammar_JSON[phonics3count].head;
+                    head.innerHTML = phonics3count+1+"번."+grammar_JSON[phonics3count].head;
                     firstbody.innerHTML = grammar_JSON[phonics3count].q;
                     secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${grammar_JSON[phonics3count].a1}" onclick="grammar3_click(1)"><br>`+
                                         `<input type="button" id="grammarbutton" value="${grammar_JSON[phonics3count].a2}" onclick="grammar3_click(2)"><br>`+
@@ -1402,22 +1416,27 @@
             }
 
             function pv1_start(){
+                qnum = 0; 
                 console.log("파워보카 1 Test 시작 됨.");
             }
 
             function pv2_start(){
+                qnum = 0;                 
                 console.log("파워보카 1 Test 시작 됨.");
             }
 
             function pv3_start(){
+                qnum = 0; 
                 console.log("파워보카 1 Test 시작 됨.");
             }
 
             function pv4_start(){
+                qnum = 0; 
                 console.log("파워보카 1 Test 시작 됨.");
             }
 
             function pv5_start(){
+                qnum = 0; 
                 console.log("파워보카 1 Test 시작 됨.");
             }
 
