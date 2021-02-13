@@ -4000,6 +4000,8 @@
 
                 let table = result.innerHTML;
 
+                let choicemade = false;
+
                 //점수 계산 후 표시
                 scores = Math.floor((correct / qnum)*100);
                 table = table + '중등 All In One '+aio_num_global+' Test 정답률 : ' + scores + "% <hr>";
@@ -4035,9 +4037,11 @@
                             aio_start(aio_num_global+1);
                         }else{
                             aio_choice = "AIO 2";
+                            choicemade = true; 
                         }
                     }else{
                         aio_choice = "AIO 1";
+                        choicemade = true;
                     }
                 }else if(aio_num_global === 2){
                     if(scores > 70){
@@ -4045,15 +4049,18 @@
                             aio_start(aio_num_global+1);
                         }else{
                             aio_choice = "AIO 3";
+                            choicemade = true;
                         }
                     }else if(scores < 30){
                         if(!aio1done){
                             aio_start(aio_num_global-1);
                         }else{
                             aio_choice = "AIO 2";
+                            choicemade = true;
                         }
                     }else{
                         aio_choice = "AIO 2";
+                        choicemade = true;
                     }
                 }else if(aio_num_global === 3){
                     if(scores > 70){
@@ -4061,15 +4068,18 @@
                             aio_start(aio_num_global+1);
                         }else{
                             aio_choice = "AIO 4";
+                            choicemade = true;
                         }
                     }else if(scores < 30){
                         if(!aio2done){
                             aio_start(aio_num_global-1);
                         }else{
                             aio_choice = "AIO 3";
+                            choicemade = true;
                         }
                     }else{
                         aio_choice = "AIO 3";
+                        choicemade = true;
                     }
                 }else if(aio_num_global === 4){
                     if(scores > 70){
@@ -4077,15 +4087,18 @@
                             aio_start(aio_num_global+1);
                         }else{
                             aio_choice = "AIO 5";
+                            choicemade = true;
                         }
                     }else if(scores < 30){
                         if(!aio3done){
                             aio_start(aio_num_global-1);
                         }else{
                             aio_choice = "AIO 4";
+                            choicemade = true;
                         }
                     }else{
                         aio_choice = "AIO 4";
+                        choicemade = true;
                     }
                 }else if(aio_num_global === 5){
                     if(scores > 70){
@@ -4093,36 +4106,44 @@
                             aio_start(aio_num_global+1);
                         }else{
                             aio_choice = "AIO 6";
+                            choicemade = true;
                         }
                     }else if(scores < 30){
                         if(!aio4done){
                             aio_start(aio_num_global-1);
                         }else{
                             aio_choice = "AIO 5";
+                            choicemade = true;
                         }
                     }else{
                         aio_choice = "AIO 5";
+                        choicemade = true;
                     }
                 }else{ //aio_num_globa === 6 일경우
                     if(scores > 70){
                             aio_choice = "AIO 6";
+                            choicemade = true;
                     }else if(scores < 30){
                         if(!aio5done){
                             aio_start(aio_num_global-1);
                         }else{
                             aio_choice = "AIO 6";
+                            choicemade = true;
                         }
                     }else{
                         aio_choice = "AIO 6";
+                        choicemade = true;
                     }
                 }
                 
-                if(document.getElementById('rtst').checked){                    
-                    title.innerText = "한솔플러스영어 교재선택을 위한 Test를 시작합니다.";
-                    rtst_test();
-                } else{
-                    alert("더 이상 출제된 시험이 없습니다.");
-                } 
+                if(choicemade){
+                    if(document.getElementById('rtst').checked){                    
+                        title.innerText = "한솔플러스영어 교재선택을 위한 Test를 시작합니다.";
+                        rtst_test();
+                    } else{
+                        alert("더 이상 출제된 시험이 없습니다.");
+                    } 
+                }
             }
 
             function rtst_test(){
