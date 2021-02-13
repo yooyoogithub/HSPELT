@@ -241,9 +241,6 @@
                 } else if(document.getElementById('voca').checked){                    
                     title.innerText = "Vocabulary Test를 시작합니다.";
                     voca_test();
-                } else if(document.getElementById('reading').checked){                    
-                    title.innerText = "Reading Test를 시작합니다.";
-                    reading_test();
                 } else if(document.getElementById('middle').checked){                    
                     title.innerText = "중등실력 Test를 시작합니다.";
                     middle_test();
@@ -1436,6 +1433,7 @@
                 let p1text;     //보기1문자
                 let p2text;     //보기2문자
                 let p3text;     //보기3문자
+                let prob; //문제
 
                 phonics3count = 0;
 
@@ -1497,6 +1495,7 @@
                                             let random = Math.floor(Math.random()*(total_pv_num))+1;
                                             if(document.getElementById('pv_korean').checked){
                                                 head.innerHTML = qnum+1+"번. 다음 주어진 영어단어의 한글뜻을 선택하세요";
+                                                prob = grammar_JSON[random].eng
                                                 firstbody.innerHTML = grammar_JSON[random].eng;
                                                 answertext = grammar_JSON[random].kor;
                                                 grammar_JSON.splice(random,1);
@@ -1513,7 +1512,8 @@
                                                 Temp_JSON.splice(random2,1);
                                             }else if(document.getElementById('pv_english').checked){
                                                 head.innerHTML = qnum+1+"번. 다음 주어진 한글 뜻에 해당되는 영어단어를 선택하세요";
-                                                firstbody.innerHTML = grammar_JSON[random].kor;
+                                                prob = grammar_JSON[random].kor
+                                                firstbody.innerHTML = prob;
                                                 answertext = grammar_JSON[random].eng;
                                                 grammar_JSON.splice(random,1);
                                                 //나머지 3가지 보기를 만듬
@@ -1531,6 +1531,7 @@
                                                 let ke_random = Math.floor(Math.random()*2);
                                                 if(ke_random === 0){ //0이면 뜻 맞추기
                                                     head.innerHTML = qnum+1+"번. 다음 주어진 영어단어의 한글뜻을 선택하세요";
+                                                    prob = grammar_JSON[random].eng;
                                                     firstbody.innerHTML = grammar_JSON[random].eng;
                                                     answertext = grammar_JSON[random].kor;
                                                     grammar_JSON.splice(random,1);
@@ -1547,6 +1548,7 @@
                                                     Temp_JSON.splice(random2,1);
                                                 }else{ // 1이면 영어 맞추기
                                                     head.innerHTML = qnum+1+"번. 다음 주어진 한글 뜻에 해당되는 영어단어를 선택하세요";
+                                                    prob = grammar_JSON[random].kor;
                                                     firstbody.innerHTML = grammar_JSON[random].kor;
                                                     answertext = grammar_JSON[random].eng;
                                                     grammar_JSON.splice(random,1);                                            
@@ -1568,25 +1570,25 @@
                                         pvanswer = answerrandom;
 
                                         if(answerrandom === 1){
-                                            secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv0_click(1)"><br>`+
-                                                `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv0_click(2)"><br>`+
-                                                `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv0_click(3)"><br>`+
-                                                `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv0_click(4)">`;
+                                            secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv0_click(1,'${prob}','${answertext}','${answertext}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv0_click(2,'${prob}','${answertext}','${p1text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv0_click(3,'${prob}','${answertext}','${p2text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv0_click(4,'${prob}','${answertext}','${p3text}')">`;
                                         }else if(answerrandom === 2){
-                                            secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv0_click(1)"><br>`+
-                                                `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv0_click(2)"><br>`+
-                                                `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv0_click(3)"><br>`+
-                                                `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv0_click(4)">`;
+                                            secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv0_click(1,'${prob}','${answertext}','${p1text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv0_click(2'${prob}','${answertext}','${answertext}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv0_click(3,'${prob}','${answertext}','${p2text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv0_click(4,'${prob}','${answertext}','${p3text}')">`;
                                         }else if(answerrandom === 3){
-                                            secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv0_click(1)"><br>`+
-                                                `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv0_click(2)"><br>`+
-                                                `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv0_click(3)"><br>`+
-                                                `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv0_click(4)">`;
+                                            secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv0_click(1,'${prob}','${answertext}','${p2text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv0_click(2,'${prob}','${answertext}','${p1text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv0_click(3'${prob}','${answertext}','${answertext}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv0_click(4,'${prob}','${answertext}','${p3text}')">`;
                                         }else{
-                                            secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv0_click(1)"><br>`+
-                                                `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv0_click(2)"><br>`+
-                                                `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv0_click(3)"><br>`+
-                                                `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv0_click(4)">`;
+                                            secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv0_click(1,'${prob}','${answertext}','${p3text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv0_click(2,'${prob}','${answertext}','${p1text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv0_click(3,'${prob}','${answertext}','${p2text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv0_click(4'${prob}','${answertext}','${answertext}')">`;
                                         }
 
                                         //secondbody.innerHTML = jsonexcelfileparse[qnum].w;
@@ -1609,7 +1611,7 @@
                 //여기까지 파일 불러와서 jsonexcelfileparse에 저장 하기
             }
 
-            function pv0_click(useranswer){
+            function pv0_click(useranswer,proba,correctanswera,useranswera){
                 const title = document.getElementById('title');
                 const head = document.getElementById('head');
                 const body = document.getElementById('body');
@@ -1626,12 +1628,14 @@
                 let p2text;     //보기2문자
                 let p3text;     //보기3문자
 
+                let prob;
+
                 //정답체크
                 if(pvanswer === useranswer){
                     correct ++;
                 }
 
-                answers = answers + qnum + "번.대답(" + useranswer + ")-정답(" + pvanswer+ ")/";
+                answers = answers + (qnum+1) + `번.문제(${proba})-대답(${useranswer}:${useranswera})-정답(${pvanswer}:${correctanswera})/`;
 
                 qnum++;
 
@@ -1650,101 +1654,105 @@
                 }
 
                 if(qnum < real_num){ //주어진 단어갯수보다 작아야 됨
-                    let total_pv_num = grammar_JSON.length;
-                    let random = Math.floor(Math.random()*(total_pv_num))+1;
-                    if(document.getElementById('pv_korean').checked){
-                        head.innerHTML = qnum+1+"번. 다음 주어진 영어단어의 한글뜻을 선택하세요";
-                        firstbody.innerHTML = grammar_JSON[random].eng;
-                        answertext = grammar_JSON[random].kor;
-                        grammar_JSON.splice(random,1);
-                        //나머지 3가지 보기를 만듬
-                        Temp_JSON = grammar_JSON;
-                        let random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
-                        p1text = Temp_JSON[random2].kor;
-                        Temp_JSON.splice(random2,1);
-                        random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
-                        p2text = Temp_JSON[random2].kor;
-                        Temp_JSON.splice(random2,1);
-                        random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
-                        p3text = Temp_JSON[random2].kor;
-                        Temp_JSON.splice(random2,1);
-                    }else if(document.getElementById('pv_english').checked){
-                        head.innerHTML = qnum+1+"번. 다음 주어진 한글 뜻에 해당되는 영어단어를 선택하세요";
-                        firstbody.innerHTML = grammar_JSON[random].kor;
-                        answertext = grammar_JSON[random].eng;
-                        grammar_JSON.splice(random,1);
-                        //나머지 3가지 보기를 만듬
-                        Temp_JSON = grammar_JSON;
-                        let random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
-                        p1text = Temp_JSON[random2].eng;
-                        Temp_JSON.splice(random2,1);
-                        random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
-                        p2text = Temp_JSON[random2].eng;
-                        Temp_JSON.splice(random2,1);
-                        random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
-                        p3text = Temp_JSON[random2].eng;
-                        Temp_JSON.splice(random2,1);
-                    }else{
-                        let ke_random = Math.floor(Math.random()*2);
-                        if(ke_random === 0){ //0이면 뜻 맞추기
-                            head.innerHTML = qnum+1+"번. 다음 주어진 영어단어의 한글뜻을 선택하세요";
-                            firstbody.innerHTML = grammar_JSON[random].eng;
-                            answertext = grammar_JSON[random].kor;
-                            grammar_JSON.splice(random,1);
-                            //나머지 3가지 보기를 만듬
-                            Temp_JSON = grammar_JSON;
-                            let random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
-                            p1text = Temp_JSON[random2].kor;
-                            Temp_JSON.splice(random2,1);
-                            random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
-                            p2text = Temp_JSON[random2].kor;
-                            Temp_JSON.splice(random2,1);
-                            random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
-                            p3text = Temp_JSON[random2].kor;
-                            Temp_JSON.splice(random2,1);
-                        }else{ // 1이면 영어 맞추기
-                            head.innerHTML = qnum+1+"번. 다음 주어진 한글 뜻에 해당되는 영어단어를 선택하세요";
-                            firstbody.innerHTML = grammar_JSON[random].kor;
-                            answertext = grammar_JSON[random].eng;
-                            grammar_JSON.splice(random,1);                                            
-                            //나머지 3가지 보기를 만듬
-                            Temp_JSON = grammar_JSON;
-                            let random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
-                            p1text = Temp_JSON[random2].eng;
-                            Temp_JSON.splice(random2,1);
-                            random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
-                            p2text = Temp_JSON[random2].eng;
-                            Temp_JSON.splice(random2,1);
-                            random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
-                            p3text = Temp_JSON[random2].eng;
-                            Temp_JSON.splice(random2,1);
-                        }
-                    }
-                }
+                                            let total_pv_num = grammar_JSON.length;
+                                            let random = Math.floor(Math.random()*(total_pv_num))+1;
+                                            if(document.getElementById('pv_korean').checked){
+                                                head.innerHTML = qnum+1+"번. 다음 주어진 영어단어의 한글뜻을 선택하세요";
+                                                prob = grammar_JSON[random].eng
+                                                firstbody.innerHTML = grammar_JSON[random].eng;
+                                                answertext = grammar_JSON[random].kor;
+                                                grammar_JSON.splice(random,1);
+                                                //나머지 3가지 보기를 만듬
+                                                Temp_JSON = grammar_JSON;
+                                                let random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
+                                                p1text = Temp_JSON[random2].kor;
+                                                Temp_JSON.splice(random2,1);
+                                                random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
+                                                p2text = Temp_JSON[random2].kor;
+                                                Temp_JSON.splice(random2,1);
+                                                random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
+                                                p3text = Temp_JSON[random2].kor;
+                                                Temp_JSON.splice(random2,1);
+                                            }else if(document.getElementById('pv_english').checked){
+                                                head.innerHTML = qnum+1+"번. 다음 주어진 한글 뜻에 해당되는 영어단어를 선택하세요";
+                                                prob = grammar_JSON[random].kor
+                                                firstbody.innerHTML = prob;
+                                                answertext = grammar_JSON[random].eng;
+                                                grammar_JSON.splice(random,1);
+                                                //나머지 3가지 보기를 만듬
+                                                Temp_JSON = grammar_JSON;
+                                                let random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
+                                                p1text = Temp_JSON[random2].eng;
+                                                Temp_JSON.splice(random2,1);
+                                                random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
+                                                p2text = Temp_JSON[random2].eng;
+                                                Temp_JSON.splice(random2,1);
+                                                random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
+                                                p3text = Temp_JSON[random2].eng;
+                                                Temp_JSON.splice(random2,1);
+                                            }else{
+                                                let ke_random = Math.floor(Math.random()*2);
+                                                if(ke_random === 0){ //0이면 뜻 맞추기
+                                                    head.innerHTML = qnum+1+"번. 다음 주어진 영어단어의 한글뜻을 선택하세요";
+                                                    prob = grammar_JSON[random].eng;
+                                                    firstbody.innerHTML = grammar_JSON[random].eng;
+                                                    answertext = grammar_JSON[random].kor;
+                                                    grammar_JSON.splice(random,1);
+                                                    //나머지 3가지 보기를 만듬
+                                                    Temp_JSON = grammar_JSON;
+                                                    let random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
+                                                    p1text = Temp_JSON[random2].kor;
+                                                    Temp_JSON.splice(random2,1);
+                                                    random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
+                                                    p2text = Temp_JSON[random2].kor;
+                                                    Temp_JSON.splice(random2,1);
+                                                    random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
+                                                    p3text = Temp_JSON[random2].kor;
+                                                    Temp_JSON.splice(random2,1);
+                                                }else{ // 1이면 영어 맞추기
+                                                    head.innerHTML = qnum+1+"번. 다음 주어진 한글 뜻에 해당되는 영어단어를 선택하세요";
+                                                    prob = grammar_JSON[random].kor;
+                                                    firstbody.innerHTML = grammar_JSON[random].kor;
+                                                    answertext = grammar_JSON[random].eng;
+                                                    grammar_JSON.splice(random,1);                                            
+                                                    //나머지 3가지 보기를 만듬
+                                                    Temp_JSON = grammar_JSON;
+                                                    let random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
+                                                    p1text = Temp_JSON[random2].eng;
+                                                    Temp_JSON.splice(random2,1);
+                                                    random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
+                                                    p2text = Temp_JSON[random2].eng;
+                                                    Temp_JSON.splice(random2,1);
+                                                    random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
+                                                    p3text = Temp_JSON[random2].eng;
+                                                    Temp_JSON.splice(random2,1);
+                                                }
+                                            }
+                                        }
 
-                pvanswer = answerrandom;
+                                        pvanswer = answerrandom;
 
-                if(answerrandom === 1){
-                    secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv0_click(1)"><br>`+
-                        `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv0_click(2)"><br>`+
-                        `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv0_click(3)"><br>`+
-                        `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv0_click(4)">`;
-                }else if(answerrandom === 2){
-                    secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv0_click(1)"><br>`+
-                        `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv0_click(2)"><br>`+
-                        `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv0_click(3)"><br>`+
-                        `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv0_click(4)">`;
-                }else if(answerrandom === 3){
-                    secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv0_click(1)"><br>`+
-                        `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv0_click(2)"><br>`+
-                        `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv0_click(3)"><br>`+
-                        `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv0_click(4)">`;
-                }else{
-                    secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv0_click(1)"><br>`+
-                        `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv0_click(2)"><br>`+
-                        `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv0_click(3)"><br>`+
-                        `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv0_click(4)">`;
-                }
+                                        if(answerrandom === 1){
+                                            secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv0_click(1,'${prob}','${answertext}','${answertext}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv0_click(2,'${prob}','${answertext}','${p1text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv0_click(3,'${prob}','${answertext}','${p2text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv0_click(4,'${prob}','${answertext}','${p3text}')">`;
+                                        }else if(answerrandom === 2){
+                                            secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv0_click(1,'${prob}','${answertext}','${p1text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv0_click(2'${prob}','${answertext}','${answertext}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv0_click(3,'${prob}','${answertext}','${p2text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv0_click(4,'${prob}','${answertext}','${p3text}')">`;
+                                        }else if(answerrandom === 3){
+                                            secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv0_click(1,'${prob}','${answertext}','${p2text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv0_click(2,'${prob}','${answertext}','${p1text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv0_click(3'${prob}','${answertext}','${answertext}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv0_click(4,'${prob}','${answertext}','${p3text}')">`;
+                                        }else{
+                                            secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv0_click(1,'${prob}','${answertext}','${p3text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv0_click(2,'${prob}','${answertext}','${p1text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv0_click(3,'${prob}','${answertext}','${p2text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv0_click(4'${prob}','${answertext}','${answertext}')">`;
+                                        }
 
                 // 완료되면 제출버튼 표시
                 if(qnum === real_num){
@@ -1798,6 +1806,8 @@
                 let p1text;     //보기1문자
                 let p2text;     //보기2문자
                 let p3text;     //보기3문자
+
+                let prob;
 
                 phonics3count = 0;
 
@@ -1859,6 +1869,7 @@
                                             let random = Math.floor(Math.random()*(total_pv_num))+1;
                                             if(document.getElementById('pv_korean').checked){
                                                 head.innerHTML = qnum+1+"번. 다음 주어진 영어단어의 한글뜻을 선택하세요";
+                                                prob = grammar_JSON[random].eng
                                                 firstbody.innerHTML = grammar_JSON[random].eng;
                                                 answertext = grammar_JSON[random].kor;
                                                 grammar_JSON.splice(random,1);
@@ -1875,7 +1886,8 @@
                                                 Temp_JSON.splice(random2,1);
                                             }else if(document.getElementById('pv_english').checked){
                                                 head.innerHTML = qnum+1+"번. 다음 주어진 한글 뜻에 해당되는 영어단어를 선택하세요";
-                                                firstbody.innerHTML = grammar_JSON[random].kor;
+                                                prob = grammar_JSON[random].kor
+                                                firstbody.innerHTML = prob;
                                                 answertext = grammar_JSON[random].eng;
                                                 grammar_JSON.splice(random,1);
                                                 //나머지 3가지 보기를 만듬
@@ -1893,6 +1905,7 @@
                                                 let ke_random = Math.floor(Math.random()*2);
                                                 if(ke_random === 0){ //0이면 뜻 맞추기
                                                     head.innerHTML = qnum+1+"번. 다음 주어진 영어단어의 한글뜻을 선택하세요";
+                                                    prob = grammar_JSON[random].eng;
                                                     firstbody.innerHTML = grammar_JSON[random].eng;
                                                     answertext = grammar_JSON[random].kor;
                                                     grammar_JSON.splice(random,1);
@@ -1909,6 +1922,7 @@
                                                     Temp_JSON.splice(random2,1);
                                                 }else{ // 1이면 영어 맞추기
                                                     head.innerHTML = qnum+1+"번. 다음 주어진 한글 뜻에 해당되는 영어단어를 선택하세요";
+                                                    prob = grammar_JSON[random].kor;
                                                     firstbody.innerHTML = grammar_JSON[random].kor;
                                                     answertext = grammar_JSON[random].eng;
                                                     grammar_JSON.splice(random,1);                                            
@@ -1930,26 +1944,27 @@
                                         pvanswer = answerrandom;
 
                                         if(answerrandom === 1){
-                                            secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv1_click(1)"><br>`+
-                                                `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv1_click(2)"><br>`+
-                                                `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv1_click(3)"><br>`+
-                                                `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv1_click(4)">`;
+                                            secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv1_click(1,'${prob}','${answertext}','${answertext}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv1_click(2,'${prob}','${answertext}','${p1text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv1_click(3,'${prob}','${answertext}','${p2text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv1_click(4,'${prob}','${answertext}','${p3text}')">`;
                                         }else if(answerrandom === 2){
-                                            secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv1_click(1)"><br>`+
-                                                `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv1_click(2)"><br>`+
-                                                `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv1_click(3)"><br>`+
-                                                `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv1_click(4)">`;
+                                            secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv1_click(1,'${prob}','${answertext}','${p1text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv1_click(2'${prob}','${answertext}','${answertext}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv1_click(3,'${prob}','${answertext}','${p2text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv1_click(4,'${prob}','${answertext}','${p3text}')">`;
                                         }else if(answerrandom === 3){
-                                            secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv1_click(1)"><br>`+
-                                                `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv1_click(2)"><br>`+
-                                                `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv1_click(3)"><br>`+
-                                                `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv1_click(4)">`;
+                                            secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv1_click(1,'${prob}','${answertext}','${p2text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv1_click(2,'${prob}','${answertext}','${p1text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv1_click(3'${prob}','${answertext}','${answertext}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv1_click(4,'${prob}','${answertext}','${p3text}')">`;
                                         }else{
-                                            secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv1_click(1)"><br>`+
-                                                `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv1_click(2)"><br>`+
-                                                `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv1_click(3)"><br>`+
-                                                `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv1_click(4)">`;
+                                            secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv1_click(1,'${prob}','${answertext}','${p3text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv1_click(2,'${prob}','${answertext}','${p1text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv1_click(3,'${prob}','${answertext}','${p2text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv1_click(4'${prob}','${answertext}','${answertext}')">`;
                                         }
+
 
                                         //secondbody.innerHTML = jsonexcelfileparse[qnum].w;
                                         /*let total_pv_num = grammar_JSON.length-1;
@@ -1971,7 +1986,7 @@
                 //여기까지 파일 불러와서 jsonexcelfileparse에 저장 하기
             }
 
-            function pv1_click(useranswer){
+            function pv1_click(useranswer,proba,correctanswera,useranswera){
                 const title = document.getElementById('title');
                 const head = document.getElementById('head');
                 const body = document.getElementById('body');
@@ -1988,12 +2003,14 @@
                 let p2text;     //보기2문자
                 let p3text;     //보기3문자
 
+                let prob;
+
                 //정답체크
                 if(pvanswer === useranswer){
                     correct ++;
                 }
 
-                answers = answers + qnum + "번.대답(" + useranswer + ")-정답(" + pvanswer+ ")/";
+                answers = answers + (qnum+1) + `번.문제(${proba})-대답(${useranswer}:${useranswera})-정답(${pvanswer}:${correctanswera})/`; 
 
                 qnum++;
 
@@ -2012,101 +2029,105 @@
                 }
 
                 if(qnum < real_num){ //주어진 단어갯수보다 작아야 됨
-                    let total_pv_num = grammar_JSON.length;
-                    let random = Math.floor(Math.random()*(total_pv_num))+1;
-                    if(document.getElementById('pv_korean').checked){
-                        head.innerHTML = qnum+1+"번. 다음 주어진 영어단어의 한글뜻을 선택하세요";
-                        firstbody.innerHTML = grammar_JSON[random].eng;
-                        answertext = grammar_JSON[random].kor;
-                        grammar_JSON.splice(random,1);
-                        //나머지 3가지 보기를 만듬
-                        Temp_JSON = grammar_JSON;
-                        let random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
-                        p1text = Temp_JSON[random2].kor;
-                        Temp_JSON.splice(random2,1);
-                        random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
-                        p2text = Temp_JSON[random2].kor;
-                        Temp_JSON.splice(random2,1);
-                        random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
-                        p3text = Temp_JSON[random2].kor;
-                        Temp_JSON.splice(random2,1);
-                    }else if(document.getElementById('pv_english').checked){
-                        head.innerHTML = qnum+1+"번. 다음 주어진 한글 뜻에 해당되는 영어단어를 선택하세요";
-                        firstbody.innerHTML = grammar_JSON[random].kor;
-                        answertext = grammar_JSON[random].eng;
-                        grammar_JSON.splice(random,1);
-                        //나머지 3가지 보기를 만듬
-                        Temp_JSON = grammar_JSON;
-                        let random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
-                        p1text = Temp_JSON[random2].eng;
-                        Temp_JSON.splice(random2,1);
-                        random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
-                        p2text = Temp_JSON[random2].eng;
-                        Temp_JSON.splice(random2,1);
-                        random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
-                        p3text = Temp_JSON[random2].eng;
-                        Temp_JSON.splice(random2,1);
-                    }else{
-                        let ke_random = Math.floor(Math.random()*2);
-                        if(ke_random === 0){ //0이면 뜻 맞추기
-                            head.innerHTML = qnum+1+"번. 다음 주어진 영어단어의 한글뜻을 선택하세요";
-                            firstbody.innerHTML = grammar_JSON[random].eng;
-                            answertext = grammar_JSON[random].kor;
-                            grammar_JSON.splice(random,1);
-                            //나머지 3가지 보기를 만듬
-                            Temp_JSON = grammar_JSON;
-                            let random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
-                            p1text = Temp_JSON[random2].kor;
-                            Temp_JSON.splice(random2,1);
-                            random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
-                            p2text = Temp_JSON[random2].kor;
-                            Temp_JSON.splice(random2,1);
-                            random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
-                            p3text = Temp_JSON[random2].kor;
-                            Temp_JSON.splice(random2,1);
-                        }else{ // 1이면 영어 맞추기
-                            head.innerHTML = qnum+1+"번. 다음 주어진 한글 뜻에 해당되는 영어단어를 선택하세요";
-                            firstbody.innerHTML = grammar_JSON[random].kor;
-                            answertext = grammar_JSON[random].eng;
-                            grammar_JSON.splice(random,1);                                            
-                            //나머지 3가지 보기를 만듬
-                            Temp_JSON = grammar_JSON;
-                            let random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
-                            p1text = Temp_JSON[random2].eng;
-                            Temp_JSON.splice(random2,1);
-                            random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
-                            p2text = Temp_JSON[random2].eng;
-                            Temp_JSON.splice(random2,1);
-                            random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
-                            p3text = Temp_JSON[random2].eng;
-                            Temp_JSON.splice(random2,1);
-                        }
-                    }
-                }
+                                            let total_pv_num = grammar_JSON.length;
+                                            let random = Math.floor(Math.random()*(total_pv_num))+1;
+                                            if(document.getElementById('pv_korean').checked){
+                                                head.innerHTML = qnum+1+"번. 다음 주어진 영어단어의 한글뜻을 선택하세요";
+                                                prob = grammar_JSON[random].eng
+                                                firstbody.innerHTML = grammar_JSON[random].eng;
+                                                answertext = grammar_JSON[random].kor;
+                                                grammar_JSON.splice(random,1);
+                                                //나머지 3가지 보기를 만듬
+                                                Temp_JSON = grammar_JSON;
+                                                let random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
+                                                p1text = Temp_JSON[random2].kor;
+                                                Temp_JSON.splice(random2,1);
+                                                random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
+                                                p2text = Temp_JSON[random2].kor;
+                                                Temp_JSON.splice(random2,1);
+                                                random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
+                                                p3text = Temp_JSON[random2].kor;
+                                                Temp_JSON.splice(random2,1);
+                                            }else if(document.getElementById('pv_english').checked){
+                                                head.innerHTML = qnum+1+"번. 다음 주어진 한글 뜻에 해당되는 영어단어를 선택하세요";
+                                                prob = grammar_JSON[random].kor
+                                                firstbody.innerHTML = prob;
+                                                answertext = grammar_JSON[random].eng;
+                                                grammar_JSON.splice(random,1);
+                                                //나머지 3가지 보기를 만듬
+                                                Temp_JSON = grammar_JSON;
+                                                let random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
+                                                p1text = Temp_JSON[random2].eng;
+                                                Temp_JSON.splice(random2,1);
+                                                random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
+                                                p2text = Temp_JSON[random2].eng;
+                                                Temp_JSON.splice(random2,1);
+                                                random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
+                                                p3text = Temp_JSON[random2].eng;
+                                                Temp_JSON.splice(random2,1);
+                                            }else{
+                                                let ke_random = Math.floor(Math.random()*2);
+                                                if(ke_random === 0){ //0이면 뜻 맞추기
+                                                    head.innerHTML = qnum+1+"번. 다음 주어진 영어단어의 한글뜻을 선택하세요";
+                                                    prob = grammar_JSON[random].eng;
+                                                    firstbody.innerHTML = grammar_JSON[random].eng;
+                                                    answertext = grammar_JSON[random].kor;
+                                                    grammar_JSON.splice(random,1);
+                                                    //나머지 3가지 보기를 만듬
+                                                    Temp_JSON = grammar_JSON;
+                                                    let random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
+                                                    p1text = Temp_JSON[random2].kor;
+                                                    Temp_JSON.splice(random2,1);
+                                                    random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
+                                                    p2text = Temp_JSON[random2].kor;
+                                                    Temp_JSON.splice(random2,1);
+                                                    random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
+                                                    p3text = Temp_JSON[random2].kor;
+                                                    Temp_JSON.splice(random2,1);
+                                                }else{ // 1이면 영어 맞추기
+                                                    head.innerHTML = qnum+1+"번. 다음 주어진 한글 뜻에 해당되는 영어단어를 선택하세요";
+                                                    prob = grammar_JSON[random].kor;
+                                                    firstbody.innerHTML = grammar_JSON[random].kor;
+                                                    answertext = grammar_JSON[random].eng;
+                                                    grammar_JSON.splice(random,1);                                            
+                                                    //나머지 3가지 보기를 만듬
+                                                    Temp_JSON = grammar_JSON;
+                                                    let random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
+                                                    p1text = Temp_JSON[random2].eng;
+                                                    Temp_JSON.splice(random2,1);
+                                                    random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
+                                                    p2text = Temp_JSON[random2].eng;
+                                                    Temp_JSON.splice(random2,1);
+                                                    random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
+                                                    p3text = Temp_JSON[random2].eng;
+                                                    Temp_JSON.splice(random2,1);
+                                                }
+                                            }
+                                        }
 
-                pvanswer = answerrandom;
+                                        pvanswer = answerrandom;
 
-                if(answerrandom === 1){
-                    secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv1_click(1)"><br>`+
-                        `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv1_click(2)"><br>`+
-                        `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv1_click(3)"><br>`+
-                        `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv1_click(4)">`;
-                }else if(answerrandom === 2){
-                    secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv1_click(1)"><br>`+
-                        `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv1_click(2)"><br>`+
-                        `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv1_click(3)"><br>`+
-                        `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv1_click(4)">`;
-                }else if(answerrandom === 3){
-                    secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv1_click(1)"><br>`+
-                        `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv1_click(2)"><br>`+
-                        `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv1_click(3)"><br>`+
-                        `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv1_click(4)">`;
-                }else{
-                    secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv1_click(1)"><br>`+
-                        `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv1_click(2)"><br>`+
-                        `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv1_click(3)"><br>`+
-                        `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv1_click(4)">`;
-                }
+                                        if(answerrandom === 1){
+                                            secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv1_click(1,'${prob}','${answertext}','${answertext}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv1_click(2,'${prob}','${answertext}','${p1text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv1_click(3,'${prob}','${answertext}','${p2text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv1_click(4,'${prob}','${answertext}','${p3text}')">`;
+                                        }else if(answerrandom === 2){
+                                            secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv1_click(1,'${prob}','${answertext}','${p1text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv1_click(2'${prob}','${answertext}','${answertext}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv1_click(3,'${prob}','${answertext}','${p2text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv1_click(4,'${prob}','${answertext}','${p3text}')">`;
+                                        }else if(answerrandom === 3){
+                                            secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv1_click(1,'${prob}','${answertext}','${p2text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv1_click(2,'${prob}','${answertext}','${p1text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv1_click(3'${prob}','${answertext}','${answertext}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv1_click(4,'${prob}','${answertext}','${p3text}')">`;
+                                        }else{
+                                            secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv1_click(1,'${prob}','${answertext}','${p3text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv1_click(2,'${prob}','${answertext}','${p1text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv1_click(3,'${prob}','${answertext}','${p2text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv1_click(4'${prob}','${answertext}','${answertext}')">`;
+                                        }
 
                 // 완료되면 제출버튼 표시
                 if(qnum === real_num){
@@ -2147,10 +2168,7 @@
                 }else{
                     voca_choice = "Power Voca 1";
 
-                    if(document.getElementById('reading').checked){                    
-                        title.innerText = "Reading Test를 시작합니다.";
-                        reading_test();
-                    } else if(document.getElementById('middle').checked){                    
+                    if(document.getElementById('middle').checked){                    
                         title.innerText = "중등실력 Test를 시작합니다.";
                         middle_test();
                     } else if(document.getElementById('rtst').checked){                    
@@ -2178,6 +2196,8 @@
                 let p1text;     //보기1문자
                 let p2text;     //보기2문자
                 let p3text;     //보기3문자
+
+                let prob;
 
                 phonics3count = 0;
 
@@ -2239,6 +2259,7 @@
                                             let random = Math.floor(Math.random()*(total_pv_num))+1;
                                             if(document.getElementById('pv_korean').checked){
                                                 head.innerHTML = qnum+1+"번. 다음 주어진 영어단어의 한글뜻을 선택하세요";
+                                                prob = grammar_JSON[random].eng
                                                 firstbody.innerHTML = grammar_JSON[random].eng;
                                                 answertext = grammar_JSON[random].kor;
                                                 grammar_JSON.splice(random,1);
@@ -2255,7 +2276,8 @@
                                                 Temp_JSON.splice(random2,1);
                                             }else if(document.getElementById('pv_english').checked){
                                                 head.innerHTML = qnum+1+"번. 다음 주어진 한글 뜻에 해당되는 영어단어를 선택하세요";
-                                                firstbody.innerHTML = grammar_JSON[random].kor;
+                                                prob = grammar_JSON[random].kor
+                                                firstbody.innerHTML = prob;
                                                 answertext = grammar_JSON[random].eng;
                                                 grammar_JSON.splice(random,1);
                                                 //나머지 3가지 보기를 만듬
@@ -2273,6 +2295,7 @@
                                                 let ke_random = Math.floor(Math.random()*2);
                                                 if(ke_random === 0){ //0이면 뜻 맞추기
                                                     head.innerHTML = qnum+1+"번. 다음 주어진 영어단어의 한글뜻을 선택하세요";
+                                                    prob = grammar_JSON[random].eng;
                                                     firstbody.innerHTML = grammar_JSON[random].eng;
                                                     answertext = grammar_JSON[random].kor;
                                                     grammar_JSON.splice(random,1);
@@ -2289,6 +2312,7 @@
                                                     Temp_JSON.splice(random2,1);
                                                 }else{ // 1이면 영어 맞추기
                                                     head.innerHTML = qnum+1+"번. 다음 주어진 한글 뜻에 해당되는 영어단어를 선택하세요";
+                                                    prob = grammar_JSON[random].kor;
                                                     firstbody.innerHTML = grammar_JSON[random].kor;
                                                     answertext = grammar_JSON[random].eng;
                                                     grammar_JSON.splice(random,1);                                            
@@ -2310,25 +2334,25 @@
                                         pvanswer = answerrandom;
 
                                         if(answerrandom === 1){
-                                            secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv2_click(1)"><br>`+
-                                                `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv2_click(2)"><br>`+
-                                                `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv2_click(3)"><br>`+
-                                                `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv2_click(4)">`;
+                                            secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv2_click(1,'${prob}','${answertext}','${answertext}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv2_click(2,'${prob}','${answertext}','${p1text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv2_click(3,'${prob}','${answertext}','${p2text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv2_click(4,'${prob}','${answertext}','${p3text}')">`;
                                         }else if(answerrandom === 2){
-                                            secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv2_click(1)"><br>`+
-                                                `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv2_click(2)"><br>`+
-                                                `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv2_click(3)"><br>`+
-                                                `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv2_click(4)">`;
+                                            secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv2_click(1,'${prob}','${answertext}','${p1text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv2_click(2'${prob}','${answertext}','${answertext}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv2_click(3,'${prob}','${answertext}','${p2text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv2_click(4,'${prob}','${answertext}','${p3text}')">`;
                                         }else if(answerrandom === 3){
-                                            secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv2_click(1)"><br>`+
-                                                `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv2_click(2)"><br>`+
-                                                `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv2_click(3)"><br>`+
-                                                `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv2_click(4)">`;
+                                            secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv2_click(1,'${prob}','${answertext}','${p2text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv2_click(2,'${prob}','${answertext}','${p1text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv2_click(3'${prob}','${answertext}','${answertext}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv2_click(4,'${prob}','${answertext}','${p3text}')">`;
                                         }else{
-                                            secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv2_click(1)"><br>`+
-                                                `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv2_click(2)"><br>`+
-                                                `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv2_click(3)"><br>`+
-                                                `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv2_click(4)">`;
+                                            secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv2_click(1,'${prob}','${answertext}','${p3text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv2_click(2,'${prob}','${answertext}','${p1text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv2_click(3,'${prob}','${answertext}','${p2text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv2_click(4'${prob}','${answertext}','${answertext}')">`;
                                         }
 
                                         //secondbody.innerHTML = jsonexcelfileparse[qnum].w;
@@ -2351,7 +2375,7 @@
                 //여기까지 파일 불러와서 jsonexcelfileparse에 저장 하기
             }
 
-            function pv2_click(useranswer){
+            function pv2_click(useranswer,proba,correctanswera,useranswera) {
                 const title = document.getElementById('title');
                 const head = document.getElementById('head');
                 const body = document.getElementById('body');
@@ -2368,12 +2392,14 @@
                 let p2text;     //보기2문자
                 let p3text;     //보기3문자
 
+                let prob;
+
                 //정답체크
                 if(pvanswer === useranswer){
                     correct ++;
                 }
 
-                answers = answers + qnum + "번.대답(" + useranswer + ")-정답(" + pvanswer+ ")/";
+                answers = answers + (qnum+1) + `번.문제(${proba})-대답(${useranswer}:${useranswera})-정답(${pvanswer}:${correctanswera})/`; 
 
                 qnum++;
 
@@ -2392,101 +2418,105 @@
                 }
 
                 if(qnum < real_num){ //주어진 단어갯수보다 작아야 됨
-                    let total_pv_num = grammar_JSON.length;
-                    let random = Math.floor(Math.random()*(total_pv_num))+1;
-                    if(document.getElementById('pv_korean').checked){
-                        head.innerHTML = qnum+1+"번. 다음 주어진 영어단어의 한글뜻을 선택하세요";
-                        firstbody.innerHTML = grammar_JSON[random].eng;
-                        answertext = grammar_JSON[random].kor;
-                        grammar_JSON.splice(random,1);
-                        //나머지 3가지 보기를 만듬
-                        Temp_JSON = grammar_JSON;
-                        let random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
-                        p1text = Temp_JSON[random2].kor;
-                        Temp_JSON.splice(random2,1);
-                        random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
-                        p2text = Temp_JSON[random2].kor;
-                        Temp_JSON.splice(random2,1);
-                        random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
-                        p3text = Temp_JSON[random2].kor;
-                        Temp_JSON.splice(random2,1);
-                    }else if(document.getElementById('pv_english').checked){
-                        head.innerHTML = qnum+1+"번. 다음 주어진 한글 뜻에 해당되는 영어단어를 선택하세요";
-                        firstbody.innerHTML = grammar_JSON[random].kor;
-                        answertext = grammar_JSON[random].eng;
-                        grammar_JSON.splice(random,1);
-                        //나머지 3가지 보기를 만듬
-                        Temp_JSON = grammar_JSON;
-                        let random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
-                        p1text = Temp_JSON[random2].eng;
-                        Temp_JSON.splice(random2,1);
-                        random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
-                        p2text = Temp_JSON[random2].eng;
-                        Temp_JSON.splice(random2,1);
-                        random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
-                        p3text = Temp_JSON[random2].eng;
-                        Temp_JSON.splice(random2,1);
-                    }else{
-                        let ke_random = Math.floor(Math.random()*2);
-                        if(ke_random === 0){ //0이면 뜻 맞추기
-                            head.innerHTML = qnum+1+"번. 다음 주어진 영어단어의 한글뜻을 선택하세요";
-                            firstbody.innerHTML = grammar_JSON[random].eng;
-                            answertext = grammar_JSON[random].kor;
-                            grammar_JSON.splice(random,1);
-                            //나머지 3가지 보기를 만듬
-                            Temp_JSON = grammar_JSON;
-                            let random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
-                            p1text = Temp_JSON[random2].kor;
-                            Temp_JSON.splice(random2,1);
-                            random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
-                            p2text = Temp_JSON[random2].kor;
-                            Temp_JSON.splice(random2,1);
-                            random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
-                            p3text = Temp_JSON[random2].kor;
-                            Temp_JSON.splice(random2,1);
-                        }else{ // 1이면 영어 맞추기
-                            head.innerHTML = qnum+1+"번. 다음 주어진 한글 뜻에 해당되는 영어단어를 선택하세요";
-                            firstbody.innerHTML = grammar_JSON[random].kor;
-                            answertext = grammar_JSON[random].eng;
-                            grammar_JSON.splice(random,1);                                            
-                            //나머지 3가지 보기를 만듬
-                            Temp_JSON = grammar_JSON;
-                            let random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
-                            p1text = Temp_JSON[random2].eng;
-                            Temp_JSON.splice(random2,1);
-                            random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
-                            p2text = Temp_JSON[random2].eng;
-                            Temp_JSON.splice(random2,1);
-                            random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
-                            p3text = Temp_JSON[random2].eng;
-                            Temp_JSON.splice(random2,1);
-                        }
-                    }
-                }
+                                            let total_pv_num = grammar_JSON.length;
+                                            let random = Math.floor(Math.random()*(total_pv_num))+1;
+                                            if(document.getElementById('pv_korean').checked){
+                                                head.innerHTML = qnum+1+"번. 다음 주어진 영어단어의 한글뜻을 선택하세요";
+                                                prob = grammar_JSON[random].eng
+                                                firstbody.innerHTML = grammar_JSON[random].eng;
+                                                answertext = grammar_JSON[random].kor;
+                                                grammar_JSON.splice(random,1);
+                                                //나머지 3가지 보기를 만듬
+                                                Temp_JSON = grammar_JSON;
+                                                let random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
+                                                p1text = Temp_JSON[random2].kor;
+                                                Temp_JSON.splice(random2,1);
+                                                random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
+                                                p2text = Temp_JSON[random2].kor;
+                                                Temp_JSON.splice(random2,1);
+                                                random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
+                                                p3text = Temp_JSON[random2].kor;
+                                                Temp_JSON.splice(random2,1);
+                                            }else if(document.getElementById('pv_english').checked){
+                                                head.innerHTML = qnum+1+"번. 다음 주어진 한글 뜻에 해당되는 영어단어를 선택하세요";
+                                                prob = grammar_JSON[random].kor
+                                                firstbody.innerHTML = prob;
+                                                answertext = grammar_JSON[random].eng;
+                                                grammar_JSON.splice(random,1);
+                                                //나머지 3가지 보기를 만듬
+                                                Temp_JSON = grammar_JSON;
+                                                let random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
+                                                p1text = Temp_JSON[random2].eng;
+                                                Temp_JSON.splice(random2,1);
+                                                random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
+                                                p2text = Temp_JSON[random2].eng;
+                                                Temp_JSON.splice(random2,1);
+                                                random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
+                                                p3text = Temp_JSON[random2].eng;
+                                                Temp_JSON.splice(random2,1);
+                                            }else{
+                                                let ke_random = Math.floor(Math.random()*2);
+                                                if(ke_random === 0){ //0이면 뜻 맞추기
+                                                    head.innerHTML = qnum+1+"번. 다음 주어진 영어단어의 한글뜻을 선택하세요";
+                                                    prob = grammar_JSON[random].eng;
+                                                    firstbody.innerHTML = grammar_JSON[random].eng;
+                                                    answertext = grammar_JSON[random].kor;
+                                                    grammar_JSON.splice(random,1);
+                                                    //나머지 3가지 보기를 만듬
+                                                    Temp_JSON = grammar_JSON;
+                                                    let random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
+                                                    p1text = Temp_JSON[random2].kor;
+                                                    Temp_JSON.splice(random2,1);
+                                                    random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
+                                                    p2text = Temp_JSON[random2].kor;
+                                                    Temp_JSON.splice(random2,1);
+                                                    random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
+                                                    p3text = Temp_JSON[random2].kor;
+                                                    Temp_JSON.splice(random2,1);
+                                                }else{ // 1이면 영어 맞추기
+                                                    head.innerHTML = qnum+1+"번. 다음 주어진 한글 뜻에 해당되는 영어단어를 선택하세요";
+                                                    prob = grammar_JSON[random].kor;
+                                                    firstbody.innerHTML = grammar_JSON[random].kor;
+                                                    answertext = grammar_JSON[random].eng;
+                                                    grammar_JSON.splice(random,1);                                            
+                                                    //나머지 3가지 보기를 만듬
+                                                    Temp_JSON = grammar_JSON;
+                                                    let random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
+                                                    p1text = Temp_JSON[random2].eng;
+                                                    Temp_JSON.splice(random2,1);
+                                                    random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
+                                                    p2text = Temp_JSON[random2].eng;
+                                                    Temp_JSON.splice(random2,1);
+                                                    random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
+                                                    p3text = Temp_JSON[random2].eng;
+                                                    Temp_JSON.splice(random2,1);
+                                                }
+                                            }
+                                        }
 
-                pvanswer = answerrandom;
+                                        pvanswer = answerrandom;
 
-                if(answerrandom === 1){
-                    secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv2_click(1)"><br>`+
-                        `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv2_click(2)"><br>`+
-                        `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv2_click(3)"><br>`+
-                        `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv2_click(4)">`;
-                }else if(answerrandom === 2){
-                    secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv2_click(1)"><br>`+
-                        `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv2_click(2)"><br>`+
-                        `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv2_click(3)"><br>`+
-                        `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv2_click(4)">`;
-                }else if(answerrandom === 3){
-                    secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv2_click(1)"><br>`+
-                        `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv2_click(2)"><br>`+
-                        `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv2_click(3)"><br>`+
-                        `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv2_click(4)">`;
-                }else{
-                    secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv2_click(1)"><br>`+
-                        `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv2_click(2)"><br>`+
-                        `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv2_click(3)"><br>`+
-                        `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv2_click(4)">`;
-                }
+                                        if(answerrandom === 1){
+                                            secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv2_click(1,'${prob}','${answertext}','${answertext}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv2_click(2,'${prob}','${answertext}','${p1text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv2_click(3,'${prob}','${answertext}','${p2text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv2_click(4,'${prob}','${answertext}','${p3text}')">`;
+                                        }else if(answerrandom === 2){
+                                            secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv2_click(1,'${prob}','${answertext}','${p1text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv2_click(2'${prob}','${answertext}','${answertext}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv2_click(3,'${prob}','${answertext}','${p2text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv2_click(4,'${prob}','${answertext}','${p3text}')">`;
+                                        }else if(answerrandom === 3){
+                                            secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv2_click(1,'${prob}','${answertext}','${p2text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv2_click(2,'${prob}','${answertext}','${p1text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv2_click(3'${prob}','${answertext}','${answertext}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv2_click(4,'${prob}','${answertext}','${p3text}')">`;
+                                        }else{
+                                            secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv2_click(1,'${prob}','${answertext}','${p3text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv2_click(2,'${prob}','${answertext}','${p1text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv2_click(3,'${prob}','${answertext}','${p2text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv2_click(4'${prob}','${answertext}','${answertext}')">`;
+                                        }
 
                 // 완료되면 제출버튼 표시
                 if(qnum === real_num){
@@ -2533,10 +2563,7 @@
                 }else{
                     voca_choice = "Power Voca 2";
 
-                    if(document.getElementById('reading').checked){                    
-                        title.innerText = "Reading Test를 시작합니다.";
-                        reading_test();
-                    } else if(document.getElementById('middle').checked){                    
+                    if(document.getElementById('middle').checked){                    
                         title.innerText = "중등실력 Test를 시작합니다.";
                         middle_test();
                     } else if(document.getElementById('rtst').checked){                    
@@ -2565,6 +2592,8 @@
                 let p1text;     //보기1문자
                 let p2text;     //보기2문자
                 let p3text;     //보기3문자
+
+                let prob;
 
                 phonics3count = 0;
 
@@ -2626,6 +2655,7 @@
                                             let random = Math.floor(Math.random()*(total_pv_num))+1;
                                             if(document.getElementById('pv_korean').checked){
                                                 head.innerHTML = qnum+1+"번. 다음 주어진 영어단어의 한글뜻을 선택하세요";
+                                                prob = grammar_JSON[random].eng
                                                 firstbody.innerHTML = grammar_JSON[random].eng;
                                                 answertext = grammar_JSON[random].kor;
                                                 grammar_JSON.splice(random,1);
@@ -2642,7 +2672,8 @@
                                                 Temp_JSON.splice(random2,1);
                                             }else if(document.getElementById('pv_english').checked){
                                                 head.innerHTML = qnum+1+"번. 다음 주어진 한글 뜻에 해당되는 영어단어를 선택하세요";
-                                                firstbody.innerHTML = grammar_JSON[random].kor;
+                                                prob = grammar_JSON[random].kor
+                                                firstbody.innerHTML = prob;
                                                 answertext = grammar_JSON[random].eng;
                                                 grammar_JSON.splice(random,1);
                                                 //나머지 3가지 보기를 만듬
@@ -2660,6 +2691,7 @@
                                                 let ke_random = Math.floor(Math.random()*2);
                                                 if(ke_random === 0){ //0이면 뜻 맞추기
                                                     head.innerHTML = qnum+1+"번. 다음 주어진 영어단어의 한글뜻을 선택하세요";
+                                                    prob = grammar_JSON[random].eng;
                                                     firstbody.innerHTML = grammar_JSON[random].eng;
                                                     answertext = grammar_JSON[random].kor;
                                                     grammar_JSON.splice(random,1);
@@ -2676,6 +2708,7 @@
                                                     Temp_JSON.splice(random2,1);
                                                 }else{ // 1이면 영어 맞추기
                                                     head.innerHTML = qnum+1+"번. 다음 주어진 한글 뜻에 해당되는 영어단어를 선택하세요";
+                                                    prob = grammar_JSON[random].kor;
                                                     firstbody.innerHTML = grammar_JSON[random].kor;
                                                     answertext = grammar_JSON[random].eng;
                                                     grammar_JSON.splice(random,1);                                            
@@ -2697,25 +2730,25 @@
                                         pvanswer = answerrandom;
 
                                         if(answerrandom === 1){
-                                            secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv3_click(1)"><br>`+
-                                                `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv3_click(2)"><br>`+
-                                                `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv3_click(3)"><br>`+
-                                                `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv3_click(4)">`;
+                                            secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv3_click(1,'${prob}','${answertext}','${answertext}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv3_click(2,'${prob}','${answertext}','${p1text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv3_click(3,'${prob}','${answertext}','${p2text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv3_click(4,'${prob}','${answertext}','${p3text}')">`;
                                         }else if(answerrandom === 2){
-                                            secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv3_click(1)"><br>`+
-                                                `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv3_click(2)"><br>`+
-                                                `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv3_click(3)"><br>`+
-                                                `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv3_click(4)">`;
+                                            secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv3_click(1,'${prob}','${answertext}','${p1text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv3_click(2'${prob}','${answertext}','${answertext}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv3_click(3,'${prob}','${answertext}','${p2text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv3_click(4,'${prob}','${answertext}','${p3text}')">`;
                                         }else if(answerrandom === 3){
-                                            secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv3_click(1)"><br>`+
-                                                `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv3_click(2)"><br>`+
-                                                `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv3_click(3)"><br>`+
-                                                `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv3_click(4)">`;
+                                            secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv3_click(1,'${prob}','${answertext}','${p2text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv3_click(2,'${prob}','${answertext}','${p1text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv3_click(3'${prob}','${answertext}','${answertext}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv3_click(4,'${prob}','${answertext}','${p3text}')">`;
                                         }else{
-                                            secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv3_click(1)"><br>`+
-                                                `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv3_click(2)"><br>`+
-                                                `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv3_click(3)"><br>`+
-                                                `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv3_click(4)">`;
+                                            secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv3_click(1,'${prob}','${answertext}','${p3text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv3_click(2,'${prob}','${answertext}','${p1text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv3_click(3,'${prob}','${answertext}','${p2text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv3_click(4'${prob}','${answertext}','${answertext}')">`;
                                         }
 
                                         //secondbody.innerHTML = jsonexcelfileparse[qnum].w;
@@ -2738,7 +2771,7 @@
                 //여기까지 파일 불러와서 jsonexcelfileparse에 저장 하기
             }
 
-            function pv3_click(useranswer){
+            function pv3_click(useranswer,proba,correctanswera,useranswera) {
                 const title = document.getElementById('title');
                 const head = document.getElementById('head');
                 const body = document.getElementById('body');
@@ -2755,12 +2788,14 @@
                 let p2text;     //보기2문자
                 let p3text;     //보기3문자
 
+                let prob;
+
                 //정답체크
                 if(pvanswer === useranswer){
                     correct ++;
                 }
 
-                answers = answers + qnum + "번.대답(" + useranswer + ")-정답(" + pvanswer+ ")/";
+                answers = answers + (qnum+1) + `번.문제(${proba})-대답(${useranswer}:${useranswera})-정답(${pvanswer}:${correctanswera})/`; 
 
                 qnum++;
 
@@ -2779,101 +2814,105 @@
                 }
 
                 if(qnum < real_num){ //주어진 단어갯수보다 작아야 됨
-                    let total_pv_num = grammar_JSON.length;
-                    let random = Math.floor(Math.random()*(total_pv_num))+1;
-                    if(document.getElementById('pv_korean').checked){
-                        head.innerHTML = qnum+1+"번. 다음 주어진 영어단어의 한글뜻을 선택하세요";
-                        firstbody.innerHTML = grammar_JSON[random].eng;
-                        answertext = grammar_JSON[random].kor;
-                        grammar_JSON.splice(random,1);
-                        //나머지 3가지 보기를 만듬
-                        Temp_JSON = grammar_JSON;
-                        let random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
-                        p1text = Temp_JSON[random2].kor;
-                        Temp_JSON.splice(random2,1);
-                        random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
-                        p2text = Temp_JSON[random2].kor;
-                        Temp_JSON.splice(random2,1);
-                        random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
-                        p3text = Temp_JSON[random2].kor;
-                        Temp_JSON.splice(random2,1);
-                    }else if(document.getElementById('pv_english').checked){
-                        head.innerHTML = qnum+1+"번. 다음 주어진 한글 뜻에 해당되는 영어단어를 선택하세요";
-                        firstbody.innerHTML = grammar_JSON[random].kor;
-                        answertext = grammar_JSON[random].eng;
-                        grammar_JSON.splice(random,1);
-                        //나머지 3가지 보기를 만듬
-                        Temp_JSON = grammar_JSON;
-                        let random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
-                        p1text = Temp_JSON[random2].eng;
-                        Temp_JSON.splice(random2,1);
-                        random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
-                        p2text = Temp_JSON[random2].eng;
-                        Temp_JSON.splice(random2,1);
-                        random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
-                        p3text = Temp_JSON[random2].eng;
-                        Temp_JSON.splice(random2,1);
-                    }else{
-                        let ke_random = Math.floor(Math.random()*2);
-                        if(ke_random === 0){ //0이면 뜻 맞추기
-                            head.innerHTML = qnum+1+"번. 다음 주어진 영어단어의 한글뜻을 선택하세요";
-                            firstbody.innerHTML = grammar_JSON[random].eng;
-                            answertext = grammar_JSON[random].kor;
-                            grammar_JSON.splice(random,1);
-                            //나머지 3가지 보기를 만듬
-                            Temp_JSON = grammar_JSON;
-                            let random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
-                            p1text = Temp_JSON[random2].kor;
-                            Temp_JSON.splice(random2,1);
-                            random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
-                            p2text = Temp_JSON[random2].kor;
-                            Temp_JSON.splice(random2,1);
-                            random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
-                            p3text = Temp_JSON[random2].kor;
-                            Temp_JSON.splice(random2,1);
-                        }else{ // 1이면 영어 맞추기
-                            head.innerHTML = qnum+1+"번. 다음 주어진 한글 뜻에 해당되는 영어단어를 선택하세요";
-                            firstbody.innerHTML = grammar_JSON[random].kor;
-                            answertext = grammar_JSON[random].eng;
-                            grammar_JSON.splice(random,1);                                            
-                            //나머지 3가지 보기를 만듬
-                            Temp_JSON = grammar_JSON;
-                            let random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
-                            p1text = Temp_JSON[random2].eng;
-                            Temp_JSON.splice(random2,1);
-                            random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
-                            p2text = Temp_JSON[random2].eng;
-                            Temp_JSON.splice(random2,1);
-                            random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
-                            p3text = Temp_JSON[random2].eng;
-                            Temp_JSON.splice(random2,1);
-                        }
-                    }
-                }
+                                            let total_pv_num = grammar_JSON.length;
+                                            let random = Math.floor(Math.random()*(total_pv_num))+1;
+                                            if(document.getElementById('pv_korean').checked){
+                                                head.innerHTML = qnum+1+"번. 다음 주어진 영어단어의 한글뜻을 선택하세요";
+                                                prob = grammar_JSON[random].eng
+                                                firstbody.innerHTML = grammar_JSON[random].eng;
+                                                answertext = grammar_JSON[random].kor;
+                                                grammar_JSON.splice(random,1);
+                                                //나머지 3가지 보기를 만듬
+                                                Temp_JSON = grammar_JSON;
+                                                let random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
+                                                p1text = Temp_JSON[random2].kor;
+                                                Temp_JSON.splice(random2,1);
+                                                random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
+                                                p2text = Temp_JSON[random2].kor;
+                                                Temp_JSON.splice(random2,1);
+                                                random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
+                                                p3text = Temp_JSON[random2].kor;
+                                                Temp_JSON.splice(random2,1);
+                                            }else if(document.getElementById('pv_english').checked){
+                                                head.innerHTML = qnum+1+"번. 다음 주어진 한글 뜻에 해당되는 영어단어를 선택하세요";
+                                                prob = grammar_JSON[random].kor
+                                                firstbody.innerHTML = prob;
+                                                answertext = grammar_JSON[random].eng;
+                                                grammar_JSON.splice(random,1);
+                                                //나머지 3가지 보기를 만듬
+                                                Temp_JSON = grammar_JSON;
+                                                let random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
+                                                p1text = Temp_JSON[random2].eng;
+                                                Temp_JSON.splice(random2,1);
+                                                random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
+                                                p2text = Temp_JSON[random2].eng;
+                                                Temp_JSON.splice(random2,1);
+                                                random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
+                                                p3text = Temp_JSON[random2].eng;
+                                                Temp_JSON.splice(random2,1);
+                                            }else{
+                                                let ke_random = Math.floor(Math.random()*2);
+                                                if(ke_random === 0){ //0이면 뜻 맞추기
+                                                    head.innerHTML = qnum+1+"번. 다음 주어진 영어단어의 한글뜻을 선택하세요";
+                                                    prob = grammar_JSON[random].eng;
+                                                    firstbody.innerHTML = grammar_JSON[random].eng;
+                                                    answertext = grammar_JSON[random].kor;
+                                                    grammar_JSON.splice(random,1);
+                                                    //나머지 3가지 보기를 만듬
+                                                    Temp_JSON = grammar_JSON;
+                                                    let random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
+                                                    p1text = Temp_JSON[random2].kor;
+                                                    Temp_JSON.splice(random2,1);
+                                                    random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
+                                                    p2text = Temp_JSON[random2].kor;
+                                                    Temp_JSON.splice(random2,1);
+                                                    random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
+                                                    p3text = Temp_JSON[random2].kor;
+                                                    Temp_JSON.splice(random2,1);
+                                                }else{ // 1이면 영어 맞추기
+                                                    head.innerHTML = qnum+1+"번. 다음 주어진 한글 뜻에 해당되는 영어단어를 선택하세요";
+                                                    prob = grammar_JSON[random].kor;
+                                                    firstbody.innerHTML = grammar_JSON[random].kor;
+                                                    answertext = grammar_JSON[random].eng;
+                                                    grammar_JSON.splice(random,1);                                            
+                                                    //나머지 3가지 보기를 만듬
+                                                    Temp_JSON = grammar_JSON;
+                                                    let random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
+                                                    p1text = Temp_JSON[random2].eng;
+                                                    Temp_JSON.splice(random2,1);
+                                                    random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
+                                                    p2text = Temp_JSON[random2].eng;
+                                                    Temp_JSON.splice(random2,1);
+                                                    random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
+                                                    p3text = Temp_JSON[random2].eng;
+                                                    Temp_JSON.splice(random2,1);
+                                                }
+                                            }
+                                        }
 
-                pvanswer = answerrandom;
+                                        pvanswer = answerrandom;
 
-                if(answerrandom === 1){
-                    secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv3_click(1)"><br>`+
-                        `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv3_click(2)"><br>`+
-                        `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv3_click(3)"><br>`+
-                        `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv3_click(4)">`;
-                }else if(answerrandom === 2){
-                    secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv3_click(1)"><br>`+
-                        `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv3_click(2)"><br>`+
-                        `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv3_click(3)"><br>`+
-                        `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv3_click(4)">`;
-                }else if(answerrandom === 3){
-                    secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv3_click(1)"><br>`+
-                        `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv3_click(2)"><br>`+
-                        `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv3_click(3)"><br>`+
-                        `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv3_click(4)">`;
-                }else{
-                    secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv3_click(1)"><br>`+
-                        `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv3_click(2)"><br>`+
-                        `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv3_click(3)"><br>`+
-                        `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv3_click(4)">`;
-                }
+                                        if(answerrandom === 1){
+                                            secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv3_click(1,'${prob}','${answertext}','${answertext}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv3_click(2,'${prob}','${answertext}','${p1text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv3_click(3,'${prob}','${answertext}','${p2text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv3_click(4,'${prob}','${answertext}','${p3text}')">`;
+                                        }else if(answerrandom === 2){
+                                            secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv3_click(1,'${prob}','${answertext}','${p1text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv3_click(2'${prob}','${answertext}','${answertext}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv3_click(3,'${prob}','${answertext}','${p2text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv3_click(4,'${prob}','${answertext}','${p3text}')">`;
+                                        }else if(answerrandom === 3){
+                                            secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv3_click(1,'${prob}','${answertext}','${p2text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv3_click(2,'${prob}','${answertext}','${p1text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv3_click(3'${prob}','${answertext}','${answertext}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv3_click(4,'${prob}','${answertext}','${p3text}')">`;
+                                        }else{
+                                            secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv3_click(1,'${prob}','${answertext}','${p3text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv3_click(2,'${prob}','${answertext}','${p1text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv3_click(3,'${prob}','${answertext}','${p2text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv3_click(4'${prob}','${answertext}','${answertext}')">`;
+                                        }
 
                 // 완료되면 제출버튼 표시
                 if(qnum === real_num){
@@ -2921,10 +2960,7 @@
                 }else{
                     voca_choice = "Power Voca 3";
 
-                    if(document.getElementById('reading').checked){                    
-                        title.innerText = "Reading Test를 시작합니다.";
-                        reading_test();
-                    } else if(document.getElementById('middle').checked){                    
+                    if(document.getElementById('middle').checked){                    
                         title.innerText = "중등실력 Test를 시작합니다.";
                         middle_test();
                     } else if(document.getElementById('rtst').checked){                    
@@ -2952,6 +2988,8 @@
                 let p1text;     //보기1문자
                 let p2text;     //보기2문자
                 let p3text;     //보기3문자
+
+                let prob;
 
                 phonics3count = 0;
 
@@ -3013,6 +3051,7 @@
                                             let random = Math.floor(Math.random()*(total_pv_num))+1;
                                             if(document.getElementById('pv_korean').checked){
                                                 head.innerHTML = qnum+1+"번. 다음 주어진 영어단어의 한글뜻을 선택하세요";
+                                                prob = grammar_JSON[random].eng
                                                 firstbody.innerHTML = grammar_JSON[random].eng;
                                                 answertext = grammar_JSON[random].kor;
                                                 grammar_JSON.splice(random,1);
@@ -3029,7 +3068,8 @@
                                                 Temp_JSON.splice(random2,1);
                                             }else if(document.getElementById('pv_english').checked){
                                                 head.innerHTML = qnum+1+"번. 다음 주어진 한글 뜻에 해당되는 영어단어를 선택하세요";
-                                                firstbody.innerHTML = grammar_JSON[random].kor;
+                                                prob = grammar_JSON[random].kor
+                                                firstbody.innerHTML = prob;
                                                 answertext = grammar_JSON[random].eng;
                                                 grammar_JSON.splice(random,1);
                                                 //나머지 3가지 보기를 만듬
@@ -3047,6 +3087,7 @@
                                                 let ke_random = Math.floor(Math.random()*2);
                                                 if(ke_random === 0){ //0이면 뜻 맞추기
                                                     head.innerHTML = qnum+1+"번. 다음 주어진 영어단어의 한글뜻을 선택하세요";
+                                                    prob = grammar_JSON[random].eng;
                                                     firstbody.innerHTML = grammar_JSON[random].eng;
                                                     answertext = grammar_JSON[random].kor;
                                                     grammar_JSON.splice(random,1);
@@ -3063,6 +3104,7 @@
                                                     Temp_JSON.splice(random2,1);
                                                 }else{ // 1이면 영어 맞추기
                                                     head.innerHTML = qnum+1+"번. 다음 주어진 한글 뜻에 해당되는 영어단어를 선택하세요";
+                                                    prob = grammar_JSON[random].kor;
                                                     firstbody.innerHTML = grammar_JSON[random].kor;
                                                     answertext = grammar_JSON[random].eng;
                                                     grammar_JSON.splice(random,1);                                            
@@ -3084,25 +3126,25 @@
                                         pvanswer = answerrandom;
 
                                         if(answerrandom === 1){
-                                            secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv4_click(1)"><br>`+
-                                                `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv4_click(2)"><br>`+
-                                                `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv4_click(3)"><br>`+
-                                                `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv4_click(4)">`;
+                                            secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv4_click(1,'${prob}','${answertext}','${answertext}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv4_click(2,'${prob}','${answertext}','${p1text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv4_click(3,'${prob}','${answertext}','${p2text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv4_click(4,'${prob}','${answertext}','${p3text}')">`;
                                         }else if(answerrandom === 2){
-                                            secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv4_click(1)"><br>`+
-                                                `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv4_click(2)"><br>`+
-                                                `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv4_click(3)"><br>`+
-                                                `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv4_click(4)">`;
+                                            secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv4_click(1,'${prob}','${answertext}','${p1text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv4_click(2'${prob}','${answertext}','${answertext}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv4_click(3,'${prob}','${answertext}','${p2text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv4_click(4,'${prob}','${answertext}','${p3text}')">`;
                                         }else if(answerrandom === 3){
-                                            secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv4_click(1)"><br>`+
-                                                `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv4_click(2)"><br>`+
-                                                `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv4_click(3)"><br>`+
-                                                `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv4_click(4)">`;
+                                            secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv4_click(1,'${prob}','${answertext}','${p2text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv4_click(2,'${prob}','${answertext}','${p1text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv4_click(3'${prob}','${answertext}','${answertext}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv4_click(4,'${prob}','${answertext}','${p3text}')">`;
                                         }else{
-                                            secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv4_click(1)"><br>`+
-                                                `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv4_click(2)"><br>`+
-                                                `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv4_click(3)"><br>`+
-                                                `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv4_click(4)">`;
+                                            secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv4_click(1,'${prob}','${answertext}','${p3text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv4_click(2,'${prob}','${answertext}','${p1text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv4_click(3,'${prob}','${answertext}','${p2text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv4_click(4'${prob}','${answertext}','${answertext}')">`;
                                         }
 
                                         //secondbody.innerHTML = jsonexcelfileparse[qnum].w;
@@ -3125,7 +3167,7 @@
                 //여기까지 파일 불러와서 jsonexcelfileparse에 저장 하기
             }
 
-            function pv4_click(useranswer){
+            function pv4_click(useranswer,proba,correctanswera,useranswera){
                 const title = document.getElementById('title');
                 const head = document.getElementById('head');
                 const body = document.getElementById('body');
@@ -3142,12 +3184,14 @@
                 let p2text;     //보기2문자
                 let p3text;     //보기3문자
 
+                let prob;
+
                 //정답체크
                 if(pvanswer === useranswer){
                     correct ++;
                 }
 
-                answers = answers + qnum + "번.대답(" + useranswer + ")-정답(" + pvanswer+ ")/";
+                answers = answers + (qnum+1) + `번.문제(${proba})-대답(${useranswer}:${useranswera})-정답(${pvanswer}:${correctanswera})/`; 
 
                 qnum++;
 
@@ -3166,101 +3210,105 @@
                 }
 
                 if(qnum < real_num){ //주어진 단어갯수보다 작아야 됨
-                    let total_pv_num = grammar_JSON.length;
-                    let random = Math.floor(Math.random()*(total_pv_num))+1;
-                    if(document.getElementById('pv_korean').checked){
-                        head.innerHTML = qnum+1+"번. 다음 주어진 영어단어의 한글뜻을 선택하세요";
-                        firstbody.innerHTML = grammar_JSON[random].eng;
-                        answertext = grammar_JSON[random].kor;
-                        grammar_JSON.splice(random,1);
-                        //나머지 3가지 보기를 만듬
-                        Temp_JSON = grammar_JSON;
-                        let random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
-                        p1text = Temp_JSON[random2].kor;
-                        Temp_JSON.splice(random2,1);
-                        random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
-                        p2text = Temp_JSON[random2].kor;
-                        Temp_JSON.splice(random2,1);
-                        random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
-                        p3text = Temp_JSON[random2].kor;
-                        Temp_JSON.splice(random2,1);
-                    }else if(document.getElementById('pv_english').checked){
-                        head.innerHTML = qnum+1+"번. 다음 주어진 한글 뜻에 해당되는 영어단어를 선택하세요";
-                        firstbody.innerHTML = grammar_JSON[random].kor;
-                        answertext = grammar_JSON[random].eng;
-                        grammar_JSON.splice(random,1);
-                        //나머지 3가지 보기를 만듬
-                        Temp_JSON = grammar_JSON;
-                        let random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
-                        p1text = Temp_JSON[random2].eng;
-                        Temp_JSON.splice(random2,1);
-                        random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
-                        p2text = Temp_JSON[random2].eng;
-                        Temp_JSON.splice(random2,1);
-                        random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
-                        p3text = Temp_JSON[random2].eng;
-                        Temp_JSON.splice(random2,1);
-                    }else{
-                        let ke_random = Math.floor(Math.random()*2);
-                        if(ke_random === 0){ //0이면 뜻 맞추기
-                            head.innerHTML = qnum+1+"번. 다음 주어진 영어단어의 한글뜻을 선택하세요";
-                            firstbody.innerHTML = grammar_JSON[random].eng;
-                            answertext = grammar_JSON[random].kor;
-                            grammar_JSON.splice(random,1);
-                            //나머지 3가지 보기를 만듬
-                            Temp_JSON = grammar_JSON;
-                            let random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
-                            p1text = Temp_JSON[random2].kor;
-                            Temp_JSON.splice(random2,1);
-                            random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
-                            p2text = Temp_JSON[random2].kor;
-                            Temp_JSON.splice(random2,1);
-                            random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
-                            p3text = Temp_JSON[random2].kor;
-                            Temp_JSON.splice(random2,1);
-                        }else{ // 1이면 영어 맞추기
-                            head.innerHTML = qnum+1+"번. 다음 주어진 한글 뜻에 해당되는 영어단어를 선택하세요";
-                            firstbody.innerHTML = grammar_JSON[random].kor;
-                            answertext = grammar_JSON[random].eng;
-                            grammar_JSON.splice(random,1);                                            
-                            //나머지 3가지 보기를 만듬
-                            Temp_JSON = grammar_JSON;
-                            let random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
-                            p1text = Temp_JSON[random2].eng;
-                            Temp_JSON.splice(random2,1);
-                            random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
-                            p2text = Temp_JSON[random2].eng;
-                            Temp_JSON.splice(random2,1);
-                            random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
-                            p3text = Temp_JSON[random2].eng;
-                            Temp_JSON.splice(random2,1);
-                        }
-                    }
-                }
+                                            let total_pv_num = grammar_JSON.length;
+                                            let random = Math.floor(Math.random()*(total_pv_num))+1;
+                                            if(document.getElementById('pv_korean').checked){
+                                                head.innerHTML = qnum+1+"번. 다음 주어진 영어단어의 한글뜻을 선택하세요";
+                                                prob = grammar_JSON[random].eng
+                                                firstbody.innerHTML = grammar_JSON[random].eng;
+                                                answertext = grammar_JSON[random].kor;
+                                                grammar_JSON.splice(random,1);
+                                                //나머지 3가지 보기를 만듬
+                                                Temp_JSON = grammar_JSON;
+                                                let random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
+                                                p1text = Temp_JSON[random2].kor;
+                                                Temp_JSON.splice(random2,1);
+                                                random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
+                                                p2text = Temp_JSON[random2].kor;
+                                                Temp_JSON.splice(random2,1);
+                                                random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
+                                                p3text = Temp_JSON[random2].kor;
+                                                Temp_JSON.splice(random2,1);
+                                            }else if(document.getElementById('pv_english').checked){
+                                                head.innerHTML = qnum+1+"번. 다음 주어진 한글 뜻에 해당되는 영어단어를 선택하세요";
+                                                prob = grammar_JSON[random].kor
+                                                firstbody.innerHTML = prob;
+                                                answertext = grammar_JSON[random].eng;
+                                                grammar_JSON.splice(random,1);
+                                                //나머지 3가지 보기를 만듬
+                                                Temp_JSON = grammar_JSON;
+                                                let random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
+                                                p1text = Temp_JSON[random2].eng;
+                                                Temp_JSON.splice(random2,1);
+                                                random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
+                                                p2text = Temp_JSON[random2].eng;
+                                                Temp_JSON.splice(random2,1);
+                                                random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
+                                                p3text = Temp_JSON[random2].eng;
+                                                Temp_JSON.splice(random2,1);
+                                            }else{
+                                                let ke_random = Math.floor(Math.random()*2);
+                                                if(ke_random === 0){ //0이면 뜻 맞추기
+                                                    head.innerHTML = qnum+1+"번. 다음 주어진 영어단어의 한글뜻을 선택하세요";
+                                                    prob = grammar_JSON[random].eng;
+                                                    firstbody.innerHTML = grammar_JSON[random].eng;
+                                                    answertext = grammar_JSON[random].kor;
+                                                    grammar_JSON.splice(random,1);
+                                                    //나머지 3가지 보기를 만듬
+                                                    Temp_JSON = grammar_JSON;
+                                                    let random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
+                                                    p1text = Temp_JSON[random2].kor;
+                                                    Temp_JSON.splice(random2,1);
+                                                    random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
+                                                    p2text = Temp_JSON[random2].kor;
+                                                    Temp_JSON.splice(random2,1);
+                                                    random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
+                                                    p3text = Temp_JSON[random2].kor;
+                                                    Temp_JSON.splice(random2,1);
+                                                }else{ // 1이면 영어 맞추기
+                                                    head.innerHTML = qnum+1+"번. 다음 주어진 한글 뜻에 해당되는 영어단어를 선택하세요";
+                                                    prob = grammar_JSON[random].kor;
+                                                    firstbody.innerHTML = grammar_JSON[random].kor;
+                                                    answertext = grammar_JSON[random].eng;
+                                                    grammar_JSON.splice(random,1);                                            
+                                                    //나머지 3가지 보기를 만듬
+                                                    Temp_JSON = grammar_JSON;
+                                                    let random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
+                                                    p1text = Temp_JSON[random2].eng;
+                                                    Temp_JSON.splice(random2,1);
+                                                    random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
+                                                    p2text = Temp_JSON[random2].eng;
+                                                    Temp_JSON.splice(random2,1);
+                                                    random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
+                                                    p3text = Temp_JSON[random2].eng;
+                                                    Temp_JSON.splice(random2,1);
+                                                }
+                                            }
+                                        }
 
-                pvanswer = answerrandom;
+                                        pvanswer = answerrandom;
 
-                if(answerrandom === 1){
-                    secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv4_click(1)"><br>`+
-                        `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv4_click(2)"><br>`+
-                        `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv4_click(3)"><br>`+
-                        `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv4_click(4)">`;
-                }else if(answerrandom === 2){
-                    secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv4_click(1)"><br>`+
-                        `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv4_click(2)"><br>`+
-                        `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv4_click(3)"><br>`+
-                        `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv4_click(4)">`;
-                }else if(answerrandom === 3){
-                    secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv4_click(1)"><br>`+
-                        `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv4_click(2)"><br>`+
-                        `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv4_click(3)"><br>`+
-                        `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv4_click(4)">`;
-                }else{
-                    secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv4_click(1)"><br>`+
-                        `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv4_click(2)"><br>`+
-                        `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv4_click(3)"><br>`+
-                        `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv4_click(4)">`;
-                }
+                                        if(answerrandom === 1){
+                                            secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv4_click(1,'${prob}','${answertext}','${answertext}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv4_click(2,'${prob}','${answertext}','${p1text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv4_click(3,'${prob}','${answertext}','${p2text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv4_click(4,'${prob}','${answertext}','${p3text}')">`;
+                                        }else if(answerrandom === 2){
+                                            secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv4_click(1,'${prob}','${answertext}','${p1text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv4_click(2'${prob}','${answertext}','${answertext}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv4_click(3,'${prob}','${answertext}','${p2text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv4_click(4,'${prob}','${answertext}','${p3text}')">`;
+                                        }else if(answerrandom === 3){
+                                            secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv4_click(1,'${prob}','${answertext}','${p2text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv4_click(2,'${prob}','${answertext}','${p1text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv4_click(3'${prob}','${answertext}','${answertext}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv4_click(4,'${prob}','${answertext}','${p3text}')">`;
+                                        }else{
+                                            secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv4_click(1,'${prob}','${answertext}','${p3text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv4_click(2,'${prob}','${answertext}','${p1text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv4_click(3,'${prob}','${answertext}','${p2text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv4_click(4'${prob}','${answertext}','${answertext}')">`;
+                                        }
 
                 // 완료되면 제출버튼 표시
                 if(qnum === real_num){
@@ -3307,10 +3355,7 @@
                 }else{
                     voca_choice = "Power Voca 4";
 
-                    if(document.getElementById('reading').checked){                    
-                        title.innerText = "Reading Test를 시작합니다.";
-                        reading_test();
-                    } else if(document.getElementById('middle').checked){                    
+                    if(document.getElementById('middle').checked){                    
                         title.innerText = "중등실력 Test를 시작합니다.";
                         middle_test();
                     } else if(document.getElementById('rtst').checked){                    
@@ -3338,6 +3383,9 @@
                 let p1text;     //보기1문자
                 let p2text;     //보기2문자
                 let p3text;     //보기3문자
+                let p4text;     //보기4문자
+
+                let prob;
 
                 phonics3count = 0;
 
@@ -3399,6 +3447,7 @@
                                             let random = Math.floor(Math.random()*(total_pv_num))+1;
                                             if(document.getElementById('pv_korean').checked){
                                                 head.innerHTML = qnum+1+"번. 다음 주어진 영어단어의 한글뜻을 선택하세요";
+                                                prob = grammar_JSON[random].eng
                                                 firstbody.innerHTML = grammar_JSON[random].eng;
                                                 answertext = grammar_JSON[random].kor;
                                                 grammar_JSON.splice(random,1);
@@ -3415,7 +3464,8 @@
                                                 Temp_JSON.splice(random2,1);
                                             }else if(document.getElementById('pv_english').checked){
                                                 head.innerHTML = qnum+1+"번. 다음 주어진 한글 뜻에 해당되는 영어단어를 선택하세요";
-                                                firstbody.innerHTML = grammar_JSON[random].kor;
+                                                prob = grammar_JSON[random].kor
+                                                firstbody.innerHTML = prob;
                                                 answertext = grammar_JSON[random].eng;
                                                 grammar_JSON.splice(random,1);
                                                 //나머지 3가지 보기를 만듬
@@ -3433,6 +3483,7 @@
                                                 let ke_random = Math.floor(Math.random()*2);
                                                 if(ke_random === 0){ //0이면 뜻 맞추기
                                                     head.innerHTML = qnum+1+"번. 다음 주어진 영어단어의 한글뜻을 선택하세요";
+                                                    prob = grammar_JSON[random].eng;
                                                     firstbody.innerHTML = grammar_JSON[random].eng;
                                                     answertext = grammar_JSON[random].kor;
                                                     grammar_JSON.splice(random,1);
@@ -3449,6 +3500,7 @@
                                                     Temp_JSON.splice(random2,1);
                                                 }else{ // 1이면 영어 맞추기
                                                     head.innerHTML = qnum+1+"번. 다음 주어진 한글 뜻에 해당되는 영어단어를 선택하세요";
+                                                    prob = grammar_JSON[random].kor;
                                                     firstbody.innerHTML = grammar_JSON[random].kor;
                                                     answertext = grammar_JSON[random].eng;
                                                     grammar_JSON.splice(random,1);                                            
@@ -3470,25 +3522,25 @@
                                         pvanswer = answerrandom;
 
                                         if(answerrandom === 1){
-                                            secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv5_click(1)"><br>`+
-                                                `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv5_click(2)"><br>`+
-                                                `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv5_click(3)"><br>`+
-                                                `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv5_click(4)">`;
+                                            secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv5_click(1,'${prob}','${answertext}','${answertext}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv5_click(2,'${prob}','${answertext}','${p1text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv5_click(3,'${prob}','${answertext}','${p2text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv5_click(4,'${prob}','${answertext}','${p3text}')">`;
                                         }else if(answerrandom === 2){
-                                            secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv5_click(1)"><br>`+
-                                                `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv5_click(2)"><br>`+
-                                                `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv5_click(3)"><br>`+
-                                                `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv5_click(4)">`;
+                                            secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv5_click(1,'${prob}','${answertext}','${p1text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv5_click(2'${prob}','${answertext}','${answertext}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv5_click(3,'${prob}','${answertext}','${p2text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv5_click(4,'${prob}','${answertext}','${p3text}')">`;
                                         }else if(answerrandom === 3){
-                                            secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv5_click(1)"><br>`+
-                                                `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv5_click(2)"><br>`+
-                                                `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv5_click(3)"><br>`+
-                                                `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv5_click(4)">`;
+                                            secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv5_click(1,'${prob}','${answertext}','${p2text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv5_click(2,'${prob}','${answertext}','${p1text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv5_click(3'${prob}','${answertext}','${answertext}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv5_click(4,'${prob}','${answertext}','${p3text}')">`;
                                         }else{
-                                            secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv5_click(1)"><br>`+
-                                                `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv5_click(2)"><br>`+
-                                                `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv5_click(3)"><br>`+
-                                                `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv5_click(4)">`;
+                                            secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv5_click(1,'${prob}','${answertext}','${p3text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv5_click(2,'${prob}','${answertext}','${p1text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv5_click(3,'${prob}','${answertext}','${p2text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv5_click(4'${prob}','${answertext}','${answertext}')">`;
                                         }
 
                                         //secondbody.innerHTML = jsonexcelfileparse[qnum].w;
@@ -3511,7 +3563,7 @@
                 //여기까지 파일 불러와서 jsonexcelfileparse에 저장 하기
             }
 
-            function pv5_click(useranswer){
+            function pv5_click(useranswer,proba,correctanswera,useranswera) {
                 const title = document.getElementById('title');
                 const head = document.getElementById('head');
                 const body = document.getElementById('body');
@@ -3528,12 +3580,14 @@
                 let p2text;     //보기2문자
                 let p3text;     //보기3문자
 
+                let prob;
+
                 //정답체크
                 if(pvanswer === useranswer){
                     correct ++;
                 }
 
-                answers = answers + qnum + "번.대답(" + useranswer + ")-정답(" + pvanswer+ ")/";
+                answers = answers + (qnum+1) + `번.문제(${proba})-대답(${useranswer}:${useranswera})-정답(${pvanswer}:${correctanswera})/`; 
 
                 qnum++;
 
@@ -3552,101 +3606,105 @@
                 }
 
                 if(qnum < real_num){ //주어진 단어갯수보다 작아야 됨
-                    let total_pv_num = grammar_JSON.length;
-                    let random = Math.floor(Math.random()*(total_pv_num))+1;
-                    if(document.getElementById('pv_korean').checked){
-                        head.innerHTML = qnum+1+"번. 다음 주어진 영어단어의 한글뜻을 선택하세요";
-                        firstbody.innerHTML = grammar_JSON[random].eng;
-                        answertext = grammar_JSON[random].kor;
-                        grammar_JSON.splice(random,1);
-                        //나머지 3가지 보기를 만듬
-                        Temp_JSON = grammar_JSON;
-                        let random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
-                        p1text = Temp_JSON[random2].kor;
-                        Temp_JSON.splice(random2,1);
-                        random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
-                        p2text = Temp_JSON[random2].kor;
-                        Temp_JSON.splice(random2,1);
-                        random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
-                        p3text = Temp_JSON[random2].kor;
-                        Temp_JSON.splice(random2,1);
-                    }else if(document.getElementById('pv_english').checked){
-                        head.innerHTML = qnum+1+"번. 다음 주어진 한글 뜻에 해당되는 영어단어를 선택하세요";
-                        firstbody.innerHTML = grammar_JSON[random].kor;
-                        answertext = grammar_JSON[random].eng;
-                        grammar_JSON.splice(random,1);
-                        //나머지 3가지 보기를 만듬
-                        Temp_JSON = grammar_JSON;
-                        let random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
-                        p1text = Temp_JSON[random2].eng;
-                        Temp_JSON.splice(random2,1);
-                        random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
-                        p2text = Temp_JSON[random2].eng;
-                        Temp_JSON.splice(random2,1);
-                        random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
-                        p3text = Temp_JSON[random2].eng;
-                        Temp_JSON.splice(random2,1);
-                    }else{
-                        let ke_random = Math.floor(Math.random()*2);
-                        if(ke_random === 0){ //0이면 뜻 맞추기
-                            head.innerHTML = qnum+1+"번. 다음 주어진 영어단어의 한글뜻을 선택하세요";
-                            firstbody.innerHTML = grammar_JSON[random].eng;
-                            answertext = grammar_JSON[random].kor;
-                            grammar_JSON.splice(random,1);
-                            //나머지 3가지 보기를 만듬
-                            Temp_JSON = grammar_JSON;
-                            let random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
-                            p1text = Temp_JSON[random2].kor;
-                            Temp_JSON.splice(random2,1);
-                            random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
-                            p2text = Temp_JSON[random2].kor;
-                            Temp_JSON.splice(random2,1);
-                            random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
-                            p3text = Temp_JSON[random2].kor;
-                            Temp_JSON.splice(random2,1);
-                        }else{ // 1이면 영어 맞추기
-                            head.innerHTML = qnum+1+"번. 다음 주어진 한글 뜻에 해당되는 영어단어를 선택하세요";
-                            firstbody.innerHTML = grammar_JSON[random].kor;
-                            answertext = grammar_JSON[random].eng;
-                            grammar_JSON.splice(random,1);                                            
-                            //나머지 3가지 보기를 만듬
-                            Temp_JSON = grammar_JSON;
-                            let random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
-                            p1text = Temp_JSON[random2].eng;
-                            Temp_JSON.splice(random2,1);
-                            random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
-                            p2text = Temp_JSON[random2].eng;
-                            Temp_JSON.splice(random2,1);
-                            random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
-                            p3text = Temp_JSON[random2].eng;
-                            Temp_JSON.splice(random2,1);
-                        }
-                    }
-                }
+                                            let total_pv_num = grammar_JSON.length;
+                                            let random = Math.floor(Math.random()*(total_pv_num))+1;
+                                            if(document.getElementById('pv_korean').checked){
+                                                head.innerHTML = qnum+1+"번. 다음 주어진 영어단어의 한글뜻을 선택하세요";
+                                                prob = grammar_JSON[random].eng
+                                                firstbody.innerHTML = grammar_JSON[random].eng;
+                                                answertext = grammar_JSON[random].kor;
+                                                grammar_JSON.splice(random,1);
+                                                //나머지 3가지 보기를 만듬
+                                                Temp_JSON = grammar_JSON;
+                                                let random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
+                                                p1text = Temp_JSON[random2].kor;
+                                                Temp_JSON.splice(random2,1);
+                                                random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
+                                                p2text = Temp_JSON[random2].kor;
+                                                Temp_JSON.splice(random2,1);
+                                                random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
+                                                p3text = Temp_JSON[random2].kor;
+                                                Temp_JSON.splice(random2,1);
+                                            }else if(document.getElementById('pv_english').checked){
+                                                head.innerHTML = qnum+1+"번. 다음 주어진 한글 뜻에 해당되는 영어단어를 선택하세요";
+                                                prob = grammar_JSON[random].kor
+                                                firstbody.innerHTML = prob;
+                                                answertext = grammar_JSON[random].eng;
+                                                grammar_JSON.splice(random,1);
+                                                //나머지 3가지 보기를 만듬
+                                                Temp_JSON = grammar_JSON;
+                                                let random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
+                                                p1text = Temp_JSON[random2].eng;
+                                                Temp_JSON.splice(random2,1);
+                                                random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
+                                                p2text = Temp_JSON[random2].eng;
+                                                Temp_JSON.splice(random2,1);
+                                                random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
+                                                p3text = Temp_JSON[random2].eng;
+                                                Temp_JSON.splice(random2,1);
+                                            }else{
+                                                let ke_random = Math.floor(Math.random()*2);
+                                                if(ke_random === 0){ //0이면 뜻 맞추기
+                                                    head.innerHTML = qnum+1+"번. 다음 주어진 영어단어의 한글뜻을 선택하세요";
+                                                    prob = grammar_JSON[random].eng;
+                                                    firstbody.innerHTML = grammar_JSON[random].eng;
+                                                    answertext = grammar_JSON[random].kor;
+                                                    grammar_JSON.splice(random,1);
+                                                    //나머지 3가지 보기를 만듬
+                                                    Temp_JSON = grammar_JSON;
+                                                    let random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
+                                                    p1text = Temp_JSON[random2].kor;
+                                                    Temp_JSON.splice(random2,1);
+                                                    random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
+                                                    p2text = Temp_JSON[random2].kor;
+                                                    Temp_JSON.splice(random2,1);
+                                                    random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
+                                                    p3text = Temp_JSON[random2].kor;
+                                                    Temp_JSON.splice(random2,1);
+                                                }else{ // 1이면 영어 맞추기
+                                                    head.innerHTML = qnum+1+"번. 다음 주어진 한글 뜻에 해당되는 영어단어를 선택하세요";
+                                                    prob = grammar_JSON[random].kor;
+                                                    firstbody.innerHTML = grammar_JSON[random].kor;
+                                                    answertext = grammar_JSON[random].eng;
+                                                    grammar_JSON.splice(random,1);                                            
+                                                    //나머지 3가지 보기를 만듬
+                                                    Temp_JSON = grammar_JSON;
+                                                    let random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
+                                                    p1text = Temp_JSON[random2].eng;
+                                                    Temp_JSON.splice(random2,1);
+                                                    random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
+                                                    p2text = Temp_JSON[random2].eng;
+                                                    Temp_JSON.splice(random2,1);
+                                                    random2 = Math.floor(Math.random()*Temp_JSON.length)+1;
+                                                    p3text = Temp_JSON[random2].eng;
+                                                    Temp_JSON.splice(random2,1);
+                                                }
+                                            }
+                                        }
 
-                pvanswer = answerrandom;
+                                        pvanswer = answerrandom;
 
-                if(answerrandom === 1){
-                    secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv5_click(1)"><br>`+
-                        `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv5_click(2)"><br>`+
-                        `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv5_click(3)"><br>`+
-                        `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv5_click(4)">`;
-                }else if(answerrandom === 2){
-                    secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv5_click(1)"><br>`+
-                        `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv5_click(2)"><br>`+
-                        `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv5_click(3)"><br>`+
-                        `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv5_click(4)">`;
-                }else if(answerrandom === 3){
-                    secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv5_click(1)"><br>`+
-                        `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv5_click(2)"><br>`+
-                        `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv5_click(3)"><br>`+
-                        `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv5_click(4)">`;
-                }else{
-                    secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv5_click(1)"><br>`+
-                        `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv5_click(2)"><br>`+
-                        `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv5_click(3)"><br>`+
-                        `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv5_click(4)">`;
-                }
+                                        if(answerrandom === 1){
+                                            secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv5_click(1,'${prob}','${answertext}','${answertext}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv5_click(2,'${prob}','${answertext}','${p1text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv5_click(3,'${prob}','${answertext}','${p2text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv5_click(4,'${prob}','${answertext}','${p3text}')">`;
+                                        }else if(answerrandom === 2){
+                                            secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv5_click(1,'${prob}','${answertext}','${p1text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv5_click(2'${prob}','${answertext}','${answertext}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv5_click(3,'${prob}','${answertext}','${p2text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv5_click(4,'${prob}','${answertext}','${p3text}')">`;
+                                        }else if(answerrandom === 3){
+                                            secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv5_click(1,'${prob}','${answertext}','${p2text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv5_click(2,'${prob}','${answertext}','${p1text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv5_click(3'${prob}','${answertext}','${answertext}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv5_click(4,'${prob}','${answertext}','${p3text}')">`;
+                                        }else{
+                                            secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${p3text}" onclick="pv5_click(1,'${prob}','${answertext}','${p3text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p1text}" onclick="pv5_click(2,'${prob}','${answertext}','${p1text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p2text}" onclick="pv5_click(3,'${prob}','${answertext}','${p2text}')"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${answertext}" onclick="pv5_click(4'${prob}','${answertext}','${answertext}')">`;
+                                        }
 
                 // 완료되면 제출버튼 표시
                 if(qnum === real_num){
@@ -3686,10 +3744,7 @@
                 if(scores > 70){
                     voca_choice = "Power Voca 6";
 
-                    if(document.getElementById('reading').checked){                    
-                        title.innerText = "Reading Test를 시작합니다.";
-                        reading_test();
-                    } else if(document.getElementById('middle').checked){                    
+                    if(document.getElementById('middle').checked){                    
                         title.innerText = "중등실력 Test를 시작합니다.";
                         middle_test();
                     } else if(document.getElementById('rtst').checked){                    
@@ -3707,10 +3762,7 @@
                 }else{
                     voca_choice = "Power Voca 5";
 
-                    if(document.getElementById('reading').checked){                    
-                        title.innerText = "Reading Test를 시작합니다.";
-                        reading_test();
-                    } else if(document.getElementById('middle').checked){                    
+                    if(document.getElementById('middle').checked){                    
                         title.innerText = "중등실력 Test를 시작합니다.";
                         middle_test();
                     } else if(document.getElementById('rtst').checked){                    
@@ -3723,11 +3775,354 @@
             }
 
             function reading_test(){
+                const title = document.getElementById('title');
+                const head = document.getElementById('head');
+                const body = document.getElementById('body');
+                const button = document.getElementById('button');
+                const result = document.getElementById('result');
+
+                body.innerHTML = '<div id="firstbody"></div><div id="secondbody"></div>';
+                button.innerHTML = "";
+
                 console.log("Reading Test 시작 됨.");
+
+                alert("SR Test로 대신하여 진행합니다.");
+
+                rtst_test();
             }
            
             function middle_test(){
+                const title = document.getElementById('title');
+                const head = document.getElementById('head');
+                const body = document.getElementById('body');
+                const button = document.getElementById('button');
+                const result = document.getElementById('result');
+
+                let aio_str = document.getElementById('grade').value;
+                let aio_num = Number(aio_str);
+
                 console.log("중등 Test 시작 됨.");
+
+                body.innerHTML = '<div id="firstbody"></div><div id="secondbody"></div>';
+                button.innerHTML = "";
+
+                aio_start(aio_num+1);
+
+                /* if(aio_num === "0"){           
+                    aio1_start();
+                }else if (aio_num === "1"){        
+                    aio2_start();
+                }else if (aio_num === "2"){       
+                    aio3_start();
+                }else if (aio_num === "3"){            
+                    aio4_start();
+                }else if (aio_num === "4"){              
+                    aio5_start();
+                }else if (aio_num === "5"){             
+                    aio6_start();
+                }else{
+                    alert("중등 시작 단계가 설정되지 않았습니다.");
+                    body.innerHTML =  "";
+                }*/      
+            }
+
+            let aio_num_global; 
+            let aio1done = false;
+            let aio2done = false;
+            let aio3done = false;
+            let aio4done = false;
+            let aio5done = false;
+            let aio6done = false;
+            let aio_choice;
+
+            function aio_start(aio_num){
+                const title = document.getElementById('title');
+                const head = document.getElementById('head');
+                const body = document.getElementById('body');
+                const button = document.getElementById('button');
+                const secondbody = document.getElementById('secondbody');
+                const firstbody = document.getElementById('firstbody');
+                const result = document.getElementById('result');
+
+                let table = result.innerHTML;
+            
+                let p1text;     //보기1문자
+                let p2text;     //보기2문자
+                let p3text;     //보기3문자
+                let p4text;     //보기4문자
+                let p5text;     //보기5문자
+                
+                let openfilestr = "https://yooyoogithub.github.io/HSPELT/aio"+aio_num+".xlsx"; //오픈되는 파일명
+
+                phonics3count = 0;
+
+                answers = "";
+                qnum = 0;
+                correct = 0;
+
+                aio_num_global = aio_num;
+
+                title.innerText = `중등 All In One ${aio_num}의 Level Test를 시작합니다.`;
+
+                
+                // test 파일 불러와서 json 파일로 만들기
+                let selectedFile = new XMLHttpRequest();
+                selectedFile.open("GET", openfilestr); //파일명의 길이도 문제가 되는 것 같음. 짧게 유지
+                selectedFile.setRequestHeader('Content-Type','application/x-www-form-urlencoded; charset=UTF-8');
+                selectedFile.responseType = "blob"; //Blob형식으로 부탁합니다!
+                selectedFile.send();  //위 요청을 보낸다.
+
+                selectedFile.onload = function(){ 
+
+                    if(selectedFile.status === 200){
+
+                        let blob = new Blob([selectedFile.response], {type:'application/xlsx'}); //받은 파일의 내용을 blob 형태로 변환
+
+                        if(blob.size>0){
+                            let fileReader = new FileReader();
+                            fileReader.readAsBinaryString(blob);                    
+                            fileReader.onload = (event)=>{
+                                let data = event.target.result;
+                                let workbook = XLSX.read(data,{type:"binary"});
+
+                                workbook.SheetNames.forEach(sheet => {
+                                    sheet = `aio${aio_num}`;
+
+                                    let rowObject = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheet]);
+                                    let jsonexcelfile = JSON.stringify(rowObject, undefined, 4);
+                                    let jsonexcelfileparse = JSON.parse(jsonexcelfile);
+
+                                    grammar_JSON = JSON.parse(jsonexcelfile);
+                                    
+                                    if(qnum < grammar_JSON.length){
+                                        head.innerHTML = qnum+1+"번. "+grammar_JSON[qnum].head;
+
+                                        firstbody.innerHTML = grammar_JSON[qnum].q;
+                                        p1text = grammar_JSON[qnum].a1;
+                                        p2text = grammar_JSON[qnum].a2;
+                                        p3text = grammar_JSON[qnum].a3;
+                                        p4text = grammar_JSON[qnum].a4;
+                                        p5text = grammar_JSON[qnum].a5;
+
+                                        pvanswer = grammar_JSON[qnum].answer;
+
+                                        secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${p1text}" onclick="aio_click(1)"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p2text}" onclick="aio_click(2)"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p3text}" onclick="aio_click(3)"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p4text}" onclick="aio_click(4)"><br>`+
+                                                `<input type="button" id="grammarbutton" value="${p5text}" onclick="aio_click(5)">`;
+                                    }
+                                });
+                            }
+                        }
+                    }
+                }
+            }
+
+            function aio_click(useranswer){
+                const title = document.getElementById('title');
+                const head = document.getElementById('head');
+                const body = document.getElementById('body');
+                const button = document.getElementById('button');
+                const secondbody = document.getElementById('secondbody');
+                const firstbody = document.getElementById('firstbody');
+                const result = document.getElementById('result');
+
+                let table = result.innerHTML;
+            
+                let p1text;     //보기1문자
+                let p2text;     //보기2문자
+                let p3text;     //보기3문자
+                let p4text;     //보기4문자
+                let p5text;     //보기5문자
+                
+                let openfilestr = "https://yooyoogithub.github.io/HSPELT/aio"+aio_num_global+".xlsx"; //오픈되는 파일명
+
+                //정답체크
+                if(pvanswer === useranswer){
+                    correct ++;
+                }
+
+                answers = answers + (qnum+1) + `번.대답(${useranswer})-정답(${pvanswer})/`; 
+
+                if(qnum === 29){
+                    scores = Math.floor((correct / qnum)*100);
+                    total_result.push(["AIO_"+aio_num_global+"_Voca",scores,answers]);
+                }else if(qnum === 59){
+                    scores = Math.floor((correct / qnum)*100);
+                    total_result.push(["AIO_"+aio_num_global+"_Grammar",scores,answers]);
+                }else if(qnum === 89){
+                    scores = Math.floor((correct / qnum)*100);
+                    total_result.push(["AIO_"+aio_num_global+"_Expression",scores,answers]);
+                }else{
+
+                }
+                qnum++;
+                
+
+                //다음문제작성
+
+                if(qnum < grammar_JSON.length){
+                    head.innerHTML = qnum+1+"번. "+grammar_JSON[qnum].head;
+
+                    firstbody.innerHTML = grammar_JSON[qnum].q;
+                    p1text = grammar_JSON[qnum].a1;
+                    p2text = grammar_JSON[qnum].a2;
+                    p3text = grammar_JSON[qnum].a3;
+                    p4text = grammar_JSON[qnum].a4;
+                    p5text = grammar_JSON[qnum].a5;
+
+                    pvanswer = grammar_JSON[qnum].answer;
+
+                    secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${p1text}" onclick="aio_click(1)"><br>`+
+                            `<input type="button" id="grammarbutton" value="${p2text}" onclick="aio_click(2)"><br>`+
+                            `<input type="button" id="grammarbutton" value="${p3text}" onclick="aio_click(3)"><br>`+
+                            `<input type="button" id="grammarbutton" value="${p4text}" onclick="aio_click(4)"><br>`+
+                            `<input type="button" id="grammarbutton" value="${p5text}" onclick="aio_click(5)">`;
+                }
+
+                // 완료되면 제출버튼 표시
+                if(qnum === grammar_JSON.length){
+                    button.innerHTML = '<input type="button" id="bodybutton" onclick="aio_done()" value="제출합니다.">';
+                    firstbody.innerHTML = '<div><font size="200px" color="red">밑에 제출하기 버튼을 누르세요.</font></div>';
+                    secondbody.innerHTML = '';
+                }
+            }
+
+            function aio_done(){
+                const title = document.getElementById('title');
+                const head = document.getElementById('head');
+                const body = document.getElementById('body');
+                const button = document.getElementById('button');
+                const secondbody = document.getElementById('secondbody');
+                const firstbody = document.getElementById('firstbody');
+                const result = document.getElementById('result');
+
+                let table = result.innerHTML;
+
+                //점수 계산 후 표시
+                scores = Math.floor((correct / qnum)*100);
+                table = table + '중등 All In One '+aio_num_global+' Test 정답률 : ' + scores + "% <hr>";
+
+                result.innerHTML = table;
+                button.innerHTML = "";
+
+                total_result.push(["AIO_"+aio_num_global,scores,answers]);
+                pv5done = true;
+
+                //문제가 정해진 갯수만큼 출제되었을때 기본시험인 경우 무조건 PV1으로,..
+                //AIO_1인 경우 그외에는 체점이 70점 상이면 AIO_2 시험 진행, 아니면 AIO_1을 선택
+                //AIO_2~AIO_5인 경우 70점 이상이면 다음 시험 진행, 30점(?)이하이고 아랫단계를 진행하지 않았다면 진행, 그 사이 이면 해당교재선택
+                //AIO_6인 경우 70점 이상이면 AIO_6으로 추천, 30점(?)이하이고 아랫단계를 진행하지 않았다면 진행, 그 사이 이면 AIO_6추천
+                
+                if(aio_num_global === 1){
+                    aio1done = true;
+                }else if(aio_num_global === 2){
+                    aio2done = true;
+                }else if(aio_num_global === 3){
+                    aio3done = true;
+                }else if(aio_num_global === 4){
+                    aio4done = true;
+                }else if(aio_num_global === 5){
+                    aio5done = true;
+                }else{
+                    aio6done = true;
+                }
+
+                if(aio_num_global === 1){
+                    if(scores > 70){
+                        if(!aio2done){
+                            aio_start(aio_num_global+1);
+                        }else{
+                            aio_choice = "AIO 2";
+                        }
+                    }else{
+                        aio_choice = "AIO 1";
+                    }
+                }else if(aio_num_global === 2){
+                    if(scores > 70){
+                        if(!aio3done){
+                            aio_start(aio_num_global+1);
+                        }else{
+                            aio_choice = "AIO 3";
+                        }
+                    }else if(scores < 30){
+                        if(!aio1done){
+                            aio_start(aio_num_global-1);
+                        }else{
+                            aio_choice = "AIO 2";
+                        }
+                    }else{
+                        aio_choice = "AIO 2";
+                    }
+                }else if(aio_num_global === 3){
+                    if(scores > 70){
+                        if(!aio4done){
+                            aio_start(aio_num_global+1);
+                        }else{
+                            aio_choice = "AIO 4";
+                        }
+                    }else if(scores < 30){
+                        if(!aio2done){
+                            aio_start(aio_num_global-1);
+                        }else{
+                            aio_choice = "AIO 3";
+                        }
+                    }else{
+                        aio_choice = "AIO 3";
+                    }
+                }else if(aio_num_global === 4){
+                    if(scores > 70){
+                        if(!aio5done){
+                            aio_start(aio_num_global+1);
+                        }else{
+                            aio_choice = "AIO 5";
+                        }
+                    }else if(scores < 30){
+                        if(!aio3done){
+                            aio_start(aio_num_global-1);
+                        }else{
+                            aio_choice = "AIO 4";
+                        }
+                    }else{
+                        aio_choice = "AIO 4";
+                    }
+                }else if(aio_num_global === 5){
+                    if(scores > 70){
+                        if(!aio6done){
+                            aio_start(aio_num_global+1);
+                        }else{
+                            aio_choice = "AIO 6";
+                        }
+                    }else if(scores < 30){
+                        if(!aio4done){
+                            aio_start(aio_num_global-1);
+                        }else{
+                            aio_choice = "AIO 5";
+                        }
+                    }else{
+                        aio_choice = "AIO 5";
+                    }
+                }else{ //aio_num_globa === 6 일경우
+                    if(scores > 70){
+                            aio_choice = "AIO 6";
+                    }else if(scores < 30){
+                        if(!aio5done){
+                            aio_start(aio_num_global-1);
+                        }else{
+                            aio_choice = "AIO 6";
+                        }
+                    }else{
+                        aio_choice = "AIO 6";
+                    }
+                }
+                
+                if(document.getElementById('rtst').checked){                    
+                    title.innerText = "한솔플러스영어 교재선택을 위한 Test를 시작합니다.";
+                    rtst_test();
+                } else{
+                    alert("더 이상 출제된 시험이 없습니다.");
+                } 
             }
 
             function rtst_test(){
@@ -3768,17 +4163,17 @@
                     영어맞추기 : <input type="radio" class="checkbox" name="pv" id='pv_english' value="6"><br>
                     랜덤맞추기 : <input type="radio" class="checkbox" name="pv" id='pv_random' value="7" checked><br>
                     <!--V주관식(?) : <input type="checkbox" class="checkbox" name="pv_type" id='pv_type' value="8">-->
-                    Reading: <input type="checkbox" class="checkbox" name="reading" id='reading' value="9"><br>
+                    <!--Reading: <input type="checkbox" class="checkbox" name="reading" id='reading' value="9"><br>-->
                     중등: <input type="checkbox" class="checkbox" name="middle" id="middle" value="10"><br>
                     <select name="middle" id="grade">
-                        <option value="1-1">1학년 1학기</option>
-                        <option value="1-2">1학년 2학기</option>
-                        <option value="2-1">2학년 1학기</option>
-                        <option value="2-2">2학년 2학기</option>
-                        <option value="3-1">3학년 1학기</option>
-                        <option value="3-2">3학년 2학기</option>
+                        <option value="0">1학년 1학기</option>
+                        <option value="1">1학년 2학기</option>
+                        <option value="2">2학년 1학기</option>
+                        <option value="3">2학년 2학기</option>
+                        <option value="4">3학년 1학기</option>
+                        <option value="5">3학년 2학기</option>
                     </select><br>
-                    RT/ST : <input type="checkbox" class="checkbox" name="rtst" id="rtst" value="11"><br>
+                    교재선택Test : <input type="checkbox" class="checkbox" name="rtst" id="rtst" value="11"><br>
                     <select name="rtst" id="rtst">
                         <option value="1">Level 1(Phonics)</option>
                         <option value="2">Level 2(ST1/RT30)</option>
