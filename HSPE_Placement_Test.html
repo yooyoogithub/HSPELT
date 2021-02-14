@@ -246,7 +246,7 @@
             let answers=""; //각 단계의 사용자가 응답한 정답을 보관
             let scores; // 각 단계의 점수를 보여줌
             let grammar_result = [["level","no","ox","classify"],]; //Grammar 문제에 대한 답변의 정오를 저장 => 나중에 취약점 분석용
-            let voca_choice;
+            let voca_choice = "NONE";
             let pv1done = false;
             let pv2done = false;
             let pv3done = false;
@@ -3877,7 +3877,7 @@
             let aio4done = false;
             let aio5done = false;
             let aio6done = false;
-            let aio_choice;
+            let aio_choice = "NONE";
 
             function aio_start(aio_num){
                 const title = document.getElementById('title');
@@ -4221,9 +4221,9 @@
             let srpart4score;
             let srpart5score;
             let srpartscore=0;
-            let phonics_choice;
-            let story_choice;
-            let reading_choice;
+            let phonics_choice="NONE";
+            let story_choice="NONE";
+            let reading_choice="NONE";
 
             function srt_start(snum){
                 const title = document.getElementById('title');
