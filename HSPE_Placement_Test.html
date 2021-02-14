@@ -4909,24 +4909,24 @@
                             srt_start(2);
                         }else{
                             story_choice = "Story Town 1-1";
-                            phonics_choice = "None";
-                            reading_choice = "None";
+                            phonics_choice = "NONE";
+                            reading_choice = "NONE";
                             choicemade = true;
                         }
                     }else if((srpart1score+srpart2score)/2 > 89){
-                        story_choice = "None";
+                        story_choice = "NONE";
                         phonics_choice = "Easy Phonics Plus";
-                        reading_choice = "None";
+                        reading_choice = "NONE";
                         choicemade = true;
                     }else if((srpart1score+srpart2score)/2 > 75){
-                        story_choice = "None";
+                        story_choice = "NONE";
                         phonics_choice = "Easy Phonics";
-                        reading_choice = "None";
+                        reading_choice = "NONE";
                         choicemade = true;
                     }else{
-                        story_choice = "None";
+                        story_choice = "NONE";
                         phonics_choice = "Phonics Fun 1";
-                        reading_choice = "None";
+                        reading_choice = "NONE";
                         choicemade = true;
                     }
                 }else{
@@ -5057,6 +5057,12 @@
                 console.log("파닉스 교재 선택 : " + phonics_choice);
                 console.log("스토리 타운 선택 : " + story_choice);
                 console.log("리딩 타운 선택 : " + reading_choice);
+
+                result.innerHTML = result.innerHTML +   "Power Voca : " + voca_choice + "<br>"+
+                                                        "중등영어 : " + aio_choice + "<br>"+
+                                                        "파닉스 : " + phonics_choice + "<br>"+
+                                                        "Story  Town : " + story_choice + "<br>"+
+                                                        "Reading Town: " + reading_choice + "<hr>";
             }
 
         </script>
