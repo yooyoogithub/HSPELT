@@ -211,6 +211,30 @@
                 color: black;
             }
 
+            .questionimage imge {
+                -webkit-tranform:scale(1);
+                -moz-transform:scale(1);
+                -ms-transform:scale(1);
+                -o-tranform:scale(1);
+                transform: scale(1);
+                -webkit-transition:.3s;
+                -moz-transition:.3s;
+                -ms-transition:.3s;
+                -o-transition:.3s;
+                transition: .3s;
+                overflow: hidden;
+                cursor: pointer;
+            }
+
+            .questionimage:hover img {
+                -webkit-transform:scale(1.2);
+                -moz-transform:scale(1.2);
+                -ms-transform:scale(1.2);
+                -o-transform:scale(1.2);
+                transform:scale(1.2);
+                overflow: hidden;
+            }
+
         </style>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
@@ -228,7 +252,7 @@
             let pv3done = false;
             let pv4done = false;
             let pv5done = false;
-
+            let ischanged = false;
 
             function start(){
                 const title = document.getElementById('title');
@@ -922,6 +946,8 @@
                     rtst_test();
                 } else{
                     alert("더 이상 출제된 시험이 없습니다.");
+                    button.innerHTML = '<input type="button" id="bodybutton" onclick="printresult()" value="결과보기">';
+                    body.innerHTML = '<div><font size="200px" color="red">밑에 결과보기 버튼을 누르세요.</font></div>';
                 }               
 
             }
@@ -1382,6 +1408,8 @@
                     rtst_test();
                 } else{
                     alert("더 이상 출제된 시험이 없습니다.");
+                    button.innerHTML = '<input type="button" id="bodybutton" onclick="printresult()" value="결과보기">';
+                    body.innerHTML = '<div><font size="200px" color="red">밑에 결과보기 버튼을 누르세요.</font></div>';
                 }   
             }
 
@@ -2180,7 +2208,9 @@
                         rtst_test();
                     } else{
                         alert("더 이상 출제된 시험이 없습니다.");
-                    }   
+                        button.innerHTML = '<input type="button" id="bodybutton" onclick="printresult()" value="결과보기">';
+                        body.innerHTML = '<div><font size="200px" color="red">밑에 결과보기 버튼을 누르세요.</font></div>';
+                }   
                 }
             }
       
@@ -2575,7 +2605,9 @@
                         rtst_test();
                     } else{
                         alert("더 이상 출제된 시험이 없습니다.");
-                    }   
+                        button.innerHTML = '<input type="button" id="bodybutton" onclick="printresult()" value="결과보기">';
+                        body.innerHTML = '<div><font size="200px" color="red">밑에 결과보기 버튼을 누르세요.</font></div>';
+                }   
                 }
 
             }
@@ -2972,6 +3004,8 @@
                         rtst_test();
                     } else{
                         alert("더 이상 출제된 시험이 없습니다.");
+                        button.innerHTML = '<input type="button" id="bodybutton" onclick="printresult()" value="결과보기">';
+                        body.innerHTML = '<div><font size="200px" color="red">밑에 결과보기 버튼을 누르세요.</font></div>';
                     }   
                 }
             }
@@ -3367,6 +3401,8 @@
                         rtst_test();
                     } else{
                         alert("더 이상 출제된 시험이 없습니다.");
+                        button.innerHTML = '<input type="button" id="bodybutton" onclick="printresult()" value="결과보기">';
+                        body.innerHTML = '<div><font size="200px" color="red">밑에 결과보기 버튼을 누르세요.</font></div>';
                     }   
                 }
             }
@@ -3756,6 +3792,8 @@
                         rtst_test();
                     } else{
                         alert("더 이상 출제된 시험이 없습니다.");
+                        button.innerHTML = '<input type="button" id="bodybutton" onclick="printresult()" value="결과보기">';
+                        body.innerHTML = '<div><font size="200px" color="red">밑에 결과보기 버튼을 누르세요.</font></div>';
                     }  
                 }else if(scores < 30){
                     if(pv4done){
@@ -3774,6 +3812,8 @@
                         rtst_test();
                     } else{
                         alert("더 이상 출제된 시험이 없습니다.");
+                        button.innerHTML = '<input type="button" id="bodybutton" onclick="printresult()" value="결과보기">';
+                        body.innerHTML = '<div><font size="200px" color="red">밑에 결과보기 버튼을 누르세요.</font></div>';
                     }   
                 }
             }
@@ -3794,7 +3834,7 @@
 
                 rtst_test();
             }
-           
+
             function middle_test(){
                 const title = document.getElementById('title');
                 const head = document.getElementById('head');
@@ -3867,7 +3907,6 @@
                 aio_num_global = aio_num;
 
                 title.innerText = `중등 All In One ${aio_num}의 Level Test를 시작합니다.`;
-
                 
                 // test 파일 불러와서 json 파일로 만들기
                 let selectedFile = new XMLHttpRequest();
@@ -3940,8 +3979,6 @@
                 let p4text;     //보기4문자
                 let p5text;     //보기5문자
                 
-                let openfilestr = "https://yooyoogithub.github.io/HSPELT/aio"+aio_num_global+".xlsx"; //오픈되는 파일명
-
                 //정답체크
                 if(pvanswer === useranswer){
                     correct ++;
@@ -3963,7 +4000,6 @@
                 }
                 qnum++;
                 
-
                 //다음문제작성
 
                 if(qnum < grammar_JSON.length){
@@ -4146,6 +4182,8 @@
                         rtst_test();
                     } else{
                         alert("더 이상 출제된 시험이 없습니다.");
+                        button.innerHTML = '<input type="button" id="bodybutton" onclick="printresult()" value="결과보기">';
+                        body.innerHTML = '<div><font size="200px" color="red">밑에 결과보기 버튼을 누르세요.</font></div>';
                     } 
                 }
             }
@@ -4171,6 +4209,21 @@
             }
 
             let sr_num_global;
+            let myaudio = new Audio(); // 전역변수로 선언
+            let srpart1;
+            let srpart2;
+            let srpart3;
+            let srpart4;
+            let srpart5;  
+            let srpart1score;          
+            let srpart2score;
+            let srpart3score;
+            let srpart4score;
+            let srpart5score;
+            let srpartscore=0;
+            let phonics_choice;
+            let story_choice;
+            let reading_choice;
 
             function srt_start(snum){
                 const title = document.getElementById('title');
@@ -4182,12 +4235,10 @@
                 const result = document.getElementById('result');
 
                 let table = result.innerHTML;
+
+                let problem = ""; //문제를 담는 String
             
-                let p1text;     //보기1문자
-                let p2text;     //보기2문자
-                let p3text;     //보기3문자
-                let p4text;     //보기4문자
-                let p5text;     //보기5문자
+                let answerabc = "";     //보기를 저장하는 변수
                 
                 let openfilestr = "https://yooyoogithub.github.io/HSPELT/s"+snum+".xlsx"; //오픈되는 파일명
 
@@ -4201,6 +4252,22 @@
 
                 title.innerText = `교재선택 TEST ${snum}의 Level Test를 시작합니다.`;
 
+                let isnotrepeat = true;
+
+                //sr몇 번인지 알아내서 part별 갯수를 저장
+                if(snum === 1){
+                    srpart1 = 20;
+                    srpart2 = 20;
+                    srpart3 = 10;
+                    srpart4 = 20;
+                    srpart5 = 0;
+                }else{
+                    srpart1 = 20;
+                    srpart2 = 15;
+                    srpart3 = 10;
+                    srpart4 = 20;
+                    srpart5 = 20;
+                }
                 
                 // test 파일 불러와서 json 파일로 만들기
                 let selectedFile = new XMLHttpRequest();
@@ -4231,47 +4298,226 @@
 
                                     grammar_JSON = JSON.parse(jsonexcelfile);
 
-                                    // 여기까지 봤음
-                                    if(qnum < grammar_JSON.length){
-                                        head.innerHTML = qnum+1+"번. "+ grammar_JSON[qnum].head;
-                                        let p_style = grammar_JSON[qnum].type;
+                                    if(isnotrepeat){
+                                        isnotrepeat = false;
+                                        if(qnum < grammar_JSON.length){
+                                            //head 출력
+                                            head.innerHTML = qnum+1+"번. "+ grammar_JSON[qnum].head;
+                                            let p_style = grammar_JSON[qnum].type;
 
-                                        console.log(p_style);
-                                        //문제의 type에 따라 문제, 보기를 표시하는 방법이 다름
-                                        switch(p_style){
-                                            case 1 :
-                                                break;                                                
-                                            case 2 :
-                                                break;
-                                            case 3 :
-                                                break;
-                                            case 4 :
-                                                break;
-                                            case 5 :
-                                                break;
-                                            case 6 :
-                                                break;
+                                            //문제의 type에 따라 문제, 보기를 표시하는 방법이 다름
+                                            switch(p_style){
+                                                case 1 :
+                                                    //모든 case에 공통
+                                                    //문단이 주어진 문제는 firstbody에 지문보기 버튼 삽입 후 문제 출제
+                                                    if(grammar_JSON[qnum].iswithp){
+                                                        problem = `<input type="button" id="para" value="문단보기" onclick="showpara()"><br>`;
+                                                    }
+                                                    //문제출력
+                                                    problem = problem + grammar_JSON[qnum].q;
+                                                    firstbody.innerHTML = problem;
+                                                    //보기출력
+                                                    switch(grammar_JSON[qnum].anum){
+                                                        case 3:
+                                                            answerabc = answerabc + '<span class="questionimage">1<img src="'+'resource/s'+ snum + '/'+grammar_JSON[qnum].a1img+'" width="100px" height="100px" onclick="srt_click(1)"></span>'+
+                                                                    '<span class="questionimage">2<img src="'+'resource/s'+ snum + '/'+grammar_JSON[qnum].a2img+'" width="100px" height="100px" onclick="srt_click(2)"></span>'+
+                                                                    '<span class="questionimage">3<img src="'+'resource/s'+ snum + '/'+grammar_JSON[qnum].a3img+'" width="100px" height="100px" onclick="srt_click(3)"></span>';
+                                                            break;
+                                                        case 4:
+                                                        answerabc = answerabc + '<span class="questionimage">1<img src="'+'resource/s'+ snum + '/'+grammar_JSON[qnum].a1img+'" width="100px" height="100px" onclick="srt_click(1)"></span>'+
+                                                                    '<span class="questionimage">2<img src="'+'resource/s'+ snum + '/'+grammar_JSON[qnum].a2img+'" width="100px" height="100px" onclick="srt_click(2)"></span>'+
+                                                                    '<span class="questionimage">3<img src="'+'resource/s'+ snum + '/'+grammar_JSON[qnum].a3img+'" width="100px" height="100px" onclick="srt_click(3)"></span>'+
+                                                                    '<span class="questionimage">4<img src="'+'resource/s'+ snum + '/'+grammar_JSON[qnum].a4img+'" width="100px" height="100px" onclick="srt_click(4)"></span>';
+                                                            break;
+                                                        case 5:
+                                                        answerabc = answerabc + '<span class="questionimage">1<img src="'+'resource/s'+ snum + '/'+grammar_JSON[qnum].a1img+'" width="100px" height="100px" onclick="srt_click(1)"></span>'+
+                                                                    '<span class="questionimage">2<img src="'+'resource/s'+ snum + '/'+grammar_JSON[qnum].a2img+'" width="100px" height="100px" onclick="srt_click(2)"></span>'+
+                                                                    '<span class="questionimage">3<img src="'+'resource/s'+ snum + '/'+grammar_JSON[qnum].a3img+'" width="100px" height="100px" onclick="srt_click(3)"></span><br>'+
+                                                                    '<span class="questionimage">4<img src="'+'resource/s'+ snum + '/'+grammar_JSON[qnum].a4img+'" width="100px" height="100px" onclick="srt_click(4)"></span>'+
+                                                                    '<span class="questionimage">5<img src="'+'resource/s'+ snum + '/'+grammar_JSON[qnum].a5img+'" width="100px" height="100px" onclick="srt_click(5)"></span>';
+                                                            break;
+                                                    }                                               
+                                                    secondbody.innerHTML = answerabc;
+                                                    //오디오 출력
+                                                    myaudio.src = 'resource/s'+ snum + '/' + grammar_JSON[qnum].qmp3;   
+                                                    myaudio.play();
+                                                    //정답저장
+                                                    pvanswer = grammar_JSON[qnum].answer;
+                                                    break;                                                
+                                                case 2 :
+                                                    //모든 case에 공통
+                                                    //문단이 주어진 문제는 firstbody에 지문보기 버튼 삽입 후 문제 출제
+                                                    if(grammar_JSON[qnum].iswithp){
+                                                        problem = `<input type="button" id="para" value="문단보기" onclick="showpara()"><br>`;
+                                                    }
+                                                    //문제출력
+                                                    problem = problem + grammar_JSON[qnum].q;
+                                                    firstbody.innerHTML = problem;
+                                                    //보기출력
+                                                    switch(grammar_JSON[qnum].anum){
+                                                        case 3:
+                                                            answerabc = answerabc + `<input type="button" id="grammarbutton" value="${grammar_JSON[qnum].a1}" onclick="srt_click(1)"><br>`+
+                                                                                    `<input type="button" id="grammarbutton" value="${grammar_JSON[qnum].a2}" onclick="srt_click(2)"><br>`+
+                                                                                    `<input type="button" id="grammarbutton" value="${grammar_JSON[qnum].a3}" onclick="srt_click(3)">`;
+                                                            break;
+                                                        case 4:
+                                                        answerabc = answerabc + `<input type="button" id="grammarbutton" value="${grammar_JSON[qnum].a1}" onclick="srt_click(1)"><br>`+
+                                                                                `<input type="button" id="grammarbutton" value="${grammar_JSON[qnum].a2}" onclick="srt_click(2)"><br>`+
+                                                                                `<input type="button" id="grammarbutton" value="${grammar_JSON[qnum].a3}" onclick="srt_click(3)"><br>`+
+                                                                                `<input type="button" id="grammarbutton" value="${grammar_JSON[qnum].a4}" onclick="srt_click(4)">`;
+                                                            break;
+                                                        case 5:
+                                                        answerabc = answerabc + `<input type="button" id="grammarbutton" value="${grammar_JSON[qnum].a1}" onclick="srt_click(1)"><br>`+
+                                                                                `<input type="button" id="grammarbutton" value="${grammar_JSON[qnum].a2}" onclick="srt_click(2)"><br>`+
+                                                                                `<input type="button" id="grammarbutton" value="${grammar_JSON[qnum].a3}" onclick="srt_click(3)"><br>`+
+                                                                                `<input type="button" id="grammarbutton" value="${grammar_JSON[qnum].a4}" onclick="srt_click(4)"><br>`+
+                                                                                `<input type="button" id="grammarbutton" value="${grammar_JSON[qnum].a5}" onclick="srt_click(5)">`;
+                                                            break;
+                                                    }                                               
+                                                    secondbody.innerHTML = answerabc;
+                                                    //오디오 출력
+                                                    myaudio.src = 'resource/s'+ snum + '/' + grammar_JSON[qnum].qmp3;   
+                                                    myaudio.play();
+                                                    //정답저장
+                                                    pvanswer = grammar_JSON[qnum].answer;
+                                                    break;
+                                                case 3 :
+                                                    //모든 case에 공통
+                                                    //문단이 주어진 문제는 firstbody에 지문보기 버튼 삽입 후 문제 출제
+                                                    if(grammar_JSON[qnum].iswithp){
+                                                        problem = `<input type="button" id="para" value="문단보기" onclick="showpara()"><br>`;
+                                                    }
+                                                    //문제출력
+                                                    problem = problem +`<img src="resource/s${snum}/${grammar_JSON[qnum].qimg}" width="200px" height="150px">`;
+                                                    firstbody.innerHTML = problem;
+                                                    //보기출력
+                                                    switch(grammar_JSON[qnum].anum){
+                                                        case 3:
+                                                            answerabc = answerabc + `<input type="button" id="grammarbutton" value="${grammar_JSON[qnum].a1}" onclick="srt_click(1)"><br>`+
+                                                                                    `<input type="button" id="grammarbutton" value="${grammar_JSON[qnum].a2}" onclick="srt_click(2)"><br>`+
+                                                                                    `<input type="button" id="grammarbutton" value="${grammar_JSON[qnum].a3}" onclick="srt_click(3)">`;
+                                                            break;
+                                                        case 4:
+                                                        answerabc = answerabc + `<input type="button" id="grammarbutton" value="${grammar_JSON[qnum].a1}" onclick="srt_click(1)"><br>`+
+                                                                                `<input type="button" id="grammarbutton" value="${grammar_JSON[qnum].a2}" onclick="srt_click(2)"><br>`+
+                                                                                `<input type="button" id="grammarbutton" value="${grammar_JSON[qnum].a3}" onclick="srt_click(3)"><br>`+
+                                                                                `<input type="button" id="grammarbutton" value="${grammar_JSON[qnum].a4}" onclick="srt_click(4)">`;
+                                                            break;
+                                                        case 5:
+                                                        answerabc = answerabc + `<input type="button" id="grammarbutton" value="${grammar_JSON[qnum].a1}" onclick="srt_click(1)"><br>`+
+                                                                                `<input type="button" id="grammarbutton" value="${grammar_JSON[qnum].a2}" onclick="srt_click(2)"><br>`+
+                                                                                `<input type="button" id="grammarbutton" value="${grammar_JSON[qnum].a3}" onclick="srt_click(3)"><br>`+
+                                                                                `<input type="button" id="grammarbutton" value="${grammar_JSON[qnum].a4}" onclick="srt_click(4)"><br>`+
+                                                                                `<input type="button" id="grammarbutton" value="${grammar_JSON[qnum].a5}" onclick="srt_click(5)">`;
+                                                            break;
+                                                    }                                               
+                                                    secondbody.innerHTML = answerabc;
+                                                    //정답저장
+                                                    pvanswer = grammar_JSON[qnum].answer;
+                                                    break;
+                                                case 4 :
+                                                    //모든 case에 공통
+                                                    //문단이 주어진 문제는 firstbody에 지문보기 버튼 삽입 후 문제 출제
+                                                    if(grammar_JSON[qnum].iswithp){
+                                                        problem = `<input type="button" id="para" value="문단보기" onclick="showpara()"><br>`;
+                                                    }
+                                                    //문제출력
+                                                    problem = problem +`<img src="resource/s${snum}/${grammar_JSON[qnum].qimg}" width="200px" height="150px">`;
+                                                    firstbody.innerHTML = problem;
+                                                    //보기출력
+                                                    switch(grammar_JSON[qnum].anum){
+                                                        case 3:
+                                                            answerabc = answerabc + '<br><br><span class="questionimage">1<img src="'+'resource/s'+ snum + '/'+grammar_JSON[qnum].a1img+'" width="100px" height="100px" onclick="srt_click(1)"></span>'+
+                                                                                    '<span class="questionimage">2<img src="'+'resource/s'+ snum + '/'+grammar_JSON[qnum].a2img+'" width="100px" height="100px" onclick="srt_click(2)"></span>'+
+                                                                                    '<span class="questionimage">3<img src="'+'resource/s'+ snum + '/'+grammar_JSON[qnum].a3img+'" width="100px" height="100px" onclick="srt_click(3)"></span>';
+                                                            break;
+                                                        case 4:
+                                                        answerabc = answerabc + '<br><br><span class="questionimage">1<img src="'+'resource/s'+ snum + '/'+grammar_JSON[qnum].a1img+'" width="100px" height="100px" onclick="srt_click(1)"></span>'+
+                                                                                    '<span class="questionimage">2<img src="'+'resource/s'+ snum + '/'+grammar_JSON[qnum].a2img+'" width="100px" height="100px" onclick="srt_click(2)"></span>'+
+                                                                                    '<span class="questionimage">3<img src="'+'resource/s'+ snum + '/'+grammar_JSON[qnum].a3img+'" width="100px" height="100px" onclick="srt_click(3)"></span>'+
+                                                                                    '<span class="questionimage">4<img src="'+'resource/s'+ snum + '/'+grammar_JSON[qnum].a4img+'" width="100px" height="100px" onclick="srt_click(4)"></span>';
+                                                            break;
+                                                        case 5:
+                                                        answerabc = answerabc + '<br><br><span class="questionimage">1<img src="'+'resource/s'+ snum + '/'+grammar_JSON[qnum].a1img+'" width="100px" height="100px" onclick="srt_click(1)"></span>'+
+                                                                                    '<span class="questionimage">2<img src="'+'resource/s'+ snum + '/'+grammar_JSON[qnum].a2img+'" width="100px" height="100px" onclick="srt_click(2)"></span>'+
+                                                                                    '<span class="questionimage">3<img src="'+'resource/s'+ snum + '/'+grammar_JSON[qnum].a3img+'" width="100px" height="100px" onclick="srt_click(3)"></span>'+
+                                                                                    '<span class="questionimage">4<img src="'+'resource/s'+ snum + '/'+grammar_JSON[qnum].a4img+'" width="100px" height="100px" onclick="srt_click(4)"></span>'+
+                                                                                    '<span class="questionimage">5<img src="'+'resource/s'+ snum + '/'+grammar_JSON[qnum].a5img+'" width="100px" height="100px" onclick="srt_click(5)"></span>';
+                                                            break;
+                                                    }                                               
+                                                    secondbody.innerHTML = answerabc;
+                                                    //정답저장
+                                                    pvanswer = grammar_JSON[qnum].answer;
+                                                    break;
+                                                case 5 :
+                                                    //모든 case에 공통
+                                                    //문단이 주어진 문제는 firstbody에 지문보기 버튼 삽입 후 문제 출제
+                                                    if(grammar_JSON[qnum].iswithp){
+                                                        problem = `<input type="button" id="para" value="문단보기" onclick="showpara()"><br>`;
+                                                    }
+                                                    //문제출력                            
+                                                    firstbody.innerHTML = problem;
+                                                    //보기출력
+                                                    switch(grammar_JSON[qnum].anum){
+                                                        case 3:
+                                                            answerabc = answerabc + '<br><br><span class="questionimage">1<img src="'+'resource/s'+ snum + '/'+grammar_JSON[qnum].a1img+'" width="100px" height="100px" onclick="srt_click(1)"></span>'+
+                                                                                    '<span class="questionimage">2<img src="'+'resource/s'+ snum + '/'+grammar_JSON[qnum].a2img+'" width="100px" height="100px" onclick="srt_click(2)"></span>'+
+                                                                                    '<span class="questionimage">3<img src="'+'resource/s'+ snum + '/'+grammar_JSON[qnum].a3img+'" width="100px" height="100px" onclick="srt_click(3)"></span>';
+                                                            break;
+                                                        case 4:
+                                                        answerabc = answerabc + '<br><br><span class="questionimage">1<img src="'+'resource/s'+ snum + '/'+grammar_JSON[qnum].a1img+'" width="100px" height="100px" onclick="srt_click(1)"></span>'+
+                                                                                    '<span class="questionimage">2<img src="'+'resource/s'+ snum + '/'+grammar_JSON[qnum].a2img+'" width="100px" height="100px" onclick="srt_click(2)"></span>'+
+                                                                                    '<span class="questionimage">3<img src="'+'resource/s'+ snum + '/'+grammar_JSON[qnum].a3img+'" width="100px" height="100px" onclick="srt_click(3)"></span>'+
+                                                                                    '<span class="questionimage">4<img src="'+'resource/s'+ snum + '/'+grammar_JSON[qnum].a4img+'" width="100px" height="100px" onclick="srt_click(4)"></span>';
+                                                            break;
+                                                        case 5:
+                                                        answerabc = answerabc + '<br><br><span class="questionimage">1<img src="'+'resource/s'+ snum + '/'+grammar_JSON[qnum].a1img+'" width="100px" height="100px" onclick="srt_click(1)"></span>'+
+                                                                                    '<span class="questionimage">2<img src="'+'resource/s'+ snum + '/'+grammar_JSON[qnum].a2img+'" width="100px" height="100px" onclick="srt_click(2)"></span>'+
+                                                                                    '<span class="questionimage">3<img src="'+'resource/s'+ snum + '/'+grammar_JSON[qnum].a3img+'" width="100px" height="100px" onclick="srt_click(3)"></span>'+
+                                                                                    '<span class="questionimage">4<img src="'+'resource/s'+ snum + '/'+grammar_JSON[qnum].a4img+'" width="100px" height="100px" onclick="srt_click(4)"></span>'+
+                                                                                    '<span class="questionimage">5<img src="'+'resource/s'+ snum + '/'+grammar_JSON[qnum].a5img+'" width="100px" height="100px" onclick="srt_click(5)"></span>';
+                                                            break;
+                                                    }                                               
+                                                    secondbody.innerHTML = answerabc;
+                                                    //정답저장
+                                                    pvanswer = grammar_JSON[qnum].answer;   
+                                                    break;
+                                                case 6 :
+                                                    //모든 case에 공통
+                                                    //문단이 주어진 문제는 firstbody에 지문보기 버튼 삽입 후 문제 출제
+                                                    if(grammar_JSON[qnum].iswithp){
+                                                        problem = `<input type="button" id="para" value="문단보기" onclick="showpara()"><br>`;
+                                                    }
+                                                    //문제출력      
+                                                    problem = problem + grammar_JSON[qnum].q;                      
+                                                    firstbody.innerHTML = problem;
+                                                    //보기출력
+                                                    switch(grammar_JSON[qnum].anum){
+                                                        case 3:
+                                                            answerabc = answerabc + `<input type="button" id="grammarbutton" value="${grammar_JSON[qnum].a1}" onclick="srt_click(1)"><br>`+
+                                                                                    `<input type="button" id="grammarbutton" value="${grammar_JSON[qnum].a2}" onclick="srt_click(2)"><br>`+
+                                                                                    `<input type="button" id="grammarbutton" value="${grammar_JSON[qnum].a3}" onclick="srt_click(3)">`;
+                                                            break;
+                                                        case 4:
+                                                        answerabc = answerabc + `<input type="button" id="grammarbutton" value="${grammar_JSON[qnum].a1}" onclick="srt_click(1)"><br>`+
+                                                                                `<input type="button" id="grammarbutton" value="${grammar_JSON[qnum].a2}" onclick="srt_click(2)"><br>`+
+                                                                                `<input type="button" id="grammarbutton" value="${grammar_JSON[qnum].a3}" onclick="srt_click(3)"><br>`+
+                                                                                `<input type="button" id="grammarbutton" value="${grammar_JSON[qnum].a4}" onclick="srt_click(4)">`;
+                                                            break;
+                                                        case 5:
+                                                        answerabc = answerabc + `<input type="button" id="grammarbutton" value="${grammar_JSON[qnum].a1}" onclick="srt_click(1)"><br>`+
+                                                                                `<input type="button" id="grammarbutton" value="${grammar_JSON[qnum].a2}" onclick="srt_click(2)"><br>`+
+                                                                                `<input type="button" id="grammarbutton" value="${grammar_JSON[qnum].a3}" onclick="srt_click(3)"><br>`+
+                                                                                `<input type="button" id="grammarbutton" value="${grammar_JSON[qnum].a4}" onclick="srt_click(4)"><br>`+
+                                                                                `<input type="button" id="grammarbutton" value="${grammar_JSON[qnum].a5}" onclick="srt_click(5)">`;
+                                                            break;
+                                                    }                                               
+                                                    secondbody.innerHTML = answerabc;
+                                                    //정답저장
+                                                    pvanswer = grammar_JSON[qnum].answer;
+                                                    break;
+                                            }       
                                         }
-
-                                        // 문제표시 (mp3, imge, text)
-
-                                        // 보기표시
-
-                                        /*firstbody.innerHTML = grammar_JSON[qnum].q;
-                                        p1text = grammar_JSON[qnum].a1;
-                                        p2text = grammar_JSON[qnum].a2;
-                                        p3text = grammar_JSON[qnum].a3;
-                                        p4text = grammar_JSON[qnum].a4;
-                                        p5text = grammar_JSON[qnum].a5;
-
-                                        pvanswer = grammar_JSON[qnum].answer;
-
-                                        secondbody.innerHTML = `<input type="button" id="grammarbutton" value="${p1text}" onclick="aio_click(1)"><br>`+
-                                                `<input type="button" id="grammarbutton" value="${p2text}" onclick="aio_click(2)"><br>`+
-                                                `<input type="button" id="grammarbutton" value="${p3text}" onclick="aio_click(3)"><br>`+
-                                                `<input type="button" id="grammarbutton" value="${p4text}" onclick="aio_click(4)"><br>`+
-                                                `<input type="button" id="grammarbutton" value="${p5text}" onclick="aio_click(5)">`;
-                                        */
                                     }
                                 });
                             }
@@ -4280,52 +4526,539 @@
                 }
             }
             
-            /* 오디오 관련 
+            function srt_click(useranswer){
+                const title = document.getElementById('title');
+                const head = document.getElementById('head');
+                const body = document.getElementById('body');
+                const button = document.getElementById('button');
+                const secondbody = document.getElementById('secondbody');
+                const firstbody = document.getElementById('firstbody');
+                const result = document.getElementById('result');
 
-                let myaudio = new Audio(); // 전역변수로 선언
+                let table = result.innerHTML;
 
-                myaudio.src = bookselected + '/' + selecteditem[wordstudycount][2];            
-                myaudio.play();
+                let snum = sr_num_global;
+                let problem = ""; //문제를 담는 String
+                let answerabc = "";     //보기를 저장하는 변수
 
                 //음성이 있다면 다 멈춤
                 myaudio.pause();
                 myaudio.currentTime = 0;
+
+                //정답체크
+                if(pvanswer === useranswer){
+                    correct ++;
+                    srpartscore = srpartscore + Number(grammar_JSON[qnum].score);
+                }
+
+                answers = answers + (qnum+1) + `번.대답(${useranswer})-정답(${pvanswer})/`; 
+
+                //다음 문제출제
+                qnum++;
+                if(qnum < grammar_JSON.length){
+                    //head 출력
+                    head.innerHTML = qnum+1+"번. "+ grammar_JSON[qnum].head;
+                    let p_style = grammar_JSON[qnum].type;
+
+                    //문제의 type에 따라 문제, 보기를 표시하는 방법이 다름
+                    switch(p_style){
+                        case 1 :
+                            //모든 case에 공통
+                            //문단이 주어진 문제는 firstbody에 지문보기 버튼 삽입 후 문제 출제
+                            if(grammar_JSON[qnum].iswithp){
+                                problem = `<input type="button" id="para" value="문단보기" onclick="showpara()"><br>`;
+                            }
+                            //문제출력
+                            problem = problem + grammar_JSON[qnum].q;
+                            firstbody.innerHTML = problem;
+                            //보기출력
+                            switch(grammar_JSON[qnum].anum){
+                                case 3:
+                                    answerabc = answerabc + '<span class="questionimage">1<img src="'+'resource/s'+ snum + '/'+grammar_JSON[qnum].a1img+'" width="100px" height="100px" onclick="srt_click(1)"></span>'+
+                                            '<span class="questionimage">2<img src="'+'resource/s'+ snum + '/'+grammar_JSON[qnum].a2img+'" width="100px" height="100px" onclick="srt_click(2)"></span>'+
+                                            '<span class="questionimage">3<img src="'+'resource/s'+ snum + '/'+grammar_JSON[qnum].a3img+'" width="100px" height="100px" onclick="srt_click(3)"></span>';
+                                    break;
+                                case 4:
+                                answerabc = answerabc + '<span class="questionimage">1<img src="'+'resource/s'+ snum + '/'+grammar_JSON[qnum].a1img+'" width="100px" height="100px" onclick="srt_click(1)"></span>'+
+                                            '<span class="questionimage">2<img src="'+'resource/s'+ snum + '/'+grammar_JSON[qnum].a2img+'" width="100px" height="100px" onclick="srt_click(2)"></span>'+
+                                            '<span class="questionimage">3<img src="'+'resource/s'+ snum + '/'+grammar_JSON[qnum].a3img+'" width="100px" height="100px" onclick="srt_click(3)"></span>'+
+                                            '<span class="questionimage">4<img src="'+'resource/s'+ snum + '/'+grammar_JSON[qnum].a4img+'" width="100px" height="100px" onclick="srt_click(4)"></span>';
+                                    break;
+                                case 5:
+                                answerabc = answerabc + '<span class="questionimage">1<img src="'+'resource/s'+ snum + '/'+grammar_JSON[qnum].a1img+'" width="100px" height="100px" onclick="srt_click(1)"></span>'+
+                                            '<span class="questionimage">2<img src="'+'resource/s'+ snum + '/'+grammar_JSON[qnum].a2img+'" width="100px" height="100px" onclick="srt_click(2)"></span>'+
+                                            '<span class="questionimage">3<img src="'+'resource/s'+ snum + '/'+grammar_JSON[qnum].a3img+'" width="100px" height="100px" onclick="srt_click(3)"></span><br>'+
+                                            '<span class="questionimage">4<img src="'+'resource/s'+ snum + '/'+grammar_JSON[qnum].a4img+'" width="100px" height="100px" onclick="srt_click(4)"></span>'+
+                                            '<span class="questionimage">5<img src="'+'resource/s'+ snum + '/'+grammar_JSON[qnum].a5img+'" width="100px" height="100px" onclick="srt_click(5)"></span>';
+                                    break;
+                            }                                               
+                            secondbody.innerHTML = answerabc;
+                            //오디오 출력
+                            myaudio.src = 'resource/s'+ snum + '/' + grammar_JSON[qnum].qmp3;   
+                            myaudio.play();
+                            //정답저장
+                            pvanswer = grammar_JSON[qnum].answer;
+                            break;                                                
+                        case 2 :
+                            //모든 case에 공통
+                            //문단이 주어진 문제는 firstbody에 지문보기 버튼 삽입 후 문제 출제
+                            if(grammar_JSON[qnum].iswithp){
+                                problem = `<input type="button" id="para" value="문단보기" onclick="showpara()"><br>`;
+                            }
+                            //문제출력
+                            problem = problem + grammar_JSON[qnum].q;
+                            firstbody.innerHTML = problem;
+                            //보기출력
+                            switch(grammar_JSON[qnum].anum){
+                                case 3:
+                                    answerabc = answerabc + `<input type="button" id="grammarbutton" value="${grammar_JSON[qnum].a1}" onclick="srt_click(1)"><br>`+
+                                                            `<input type="button" id="grammarbutton" value="${grammar_JSON[qnum].a2}" onclick="srt_click(2)"><br>`+
+                                                            `<input type="button" id="grammarbutton" value="${grammar_JSON[qnum].a3}" onclick="srt_click(3)">`;
+                                    break;
+                                case 4:
+                                answerabc = answerabc + `<input type="button" id="grammarbutton" value="${grammar_JSON[qnum].a1}" onclick="srt_click(1)"><br>`+
+                                                        `<input type="button" id="grammarbutton" value="${grammar_JSON[qnum].a2}" onclick="srt_click(2)"><br>`+
+                                                        `<input type="button" id="grammarbutton" value="${grammar_JSON[qnum].a3}" onclick="srt_click(3)"><br>`+
+                                                        `<input type="button" id="grammarbutton" value="${grammar_JSON[qnum].a4}" onclick="srt_click(4)">`;
+                                    break;
+                                case 5:
+                                answerabc = answerabc + `<input type="button" id="grammarbutton" value="${grammar_JSON[qnum].a1}" onclick="srt_click(1)"><br>`+
+                                                        `<input type="button" id="grammarbutton" value="${grammar_JSON[qnum].a2}" onclick="srt_click(2)"><br>`+
+                                                        `<input type="button" id="grammarbutton" value="${grammar_JSON[qnum].a3}" onclick="srt_click(3)"><br>`+
+                                                        `<input type="button" id="grammarbutton" value="${grammar_JSON[qnum].a4}" onclick="srt_click(4)"><br>`+
+                                                        `<input type="button" id="grammarbutton" value="${grammar_JSON[qnum].a5}" onclick="srt_click(5)">`;
+                                    break;
+                            }                                               
+                            secondbody.innerHTML = answerabc;
+                            //오디오 출력
+                            myaudio.src = 'resource/s'+ snum + '/' + grammar_JSON[qnum].qmp3;   
+                            myaudio.play();
+                            //정답저장
+                            pvanswer = grammar_JSON[qnum].answer;
+                            break;
+                        case 3 :
+                            //모든 case에 공통
+                            //문단이 주어진 문제는 firstbody에 지문보기 버튼 삽입 후 문제 출제
+                            if(grammar_JSON[qnum].iswithp){
+                                problem = `<input type="button" id="para" value="문단보기" onclick="showpara()"><br>`;
+                            }
+                            //문제출력
+                            problem = problem +`<img src="resource/s${snum}/${grammar_JSON[qnum].qimg}" width="200px" height="150px">`;
+                            firstbody.innerHTML = problem;
+                            //보기출력
+                            switch(grammar_JSON[qnum].anum){
+                                case 3:
+                                    answerabc = answerabc + `<input type="button" id="grammarbutton" value="${grammar_JSON[qnum].a1}" onclick="srt_click(1)"><br>`+
+                                                            `<input type="button" id="grammarbutton" value="${grammar_JSON[qnum].a2}" onclick="srt_click(2)"><br>`+
+                                                            `<input type="button" id="grammarbutton" value="${grammar_JSON[qnum].a3}" onclick="srt_click(3)">`;
+                                    break;
+                                case 4:
+                                answerabc = answerabc + `<input type="button" id="grammarbutton" value="${grammar_JSON[qnum].a1}" onclick="srt_click(1)"><br>`+
+                                                        `<input type="button" id="grammarbutton" value="${grammar_JSON[qnum].a2}" onclick="srt_click(2)"><br>`+
+                                                        `<input type="button" id="grammarbutton" value="${grammar_JSON[qnum].a3}" onclick="srt_click(3)"><br>`+
+                                                        `<input type="button" id="grammarbutton" value="${grammar_JSON[qnum].a4}" onclick="srt_click(4)">`;
+                                    break;
+                                case 5:
+                                answerabc = answerabc + `<input type="button" id="grammarbutton" value="${grammar_JSON[qnum].a1}" onclick="srt_click(1)"><br>`+
+                                                        `<input type="button" id="grammarbutton" value="${grammar_JSON[qnum].a2}" onclick="srt_click(2)"><br>`+
+                                                        `<input type="button" id="grammarbutton" value="${grammar_JSON[qnum].a3}" onclick="srt_click(3)"><br>`+
+                                                        `<input type="button" id="grammarbutton" value="${grammar_JSON[qnum].a4}" onclick="srt_click(4)"><br>`+
+                                                        `<input type="button" id="grammarbutton" value="${grammar_JSON[qnum].a5}" onclick="srt_click(5)">`;
+                                    break;
+                            }                                               
+                            secondbody.innerHTML = answerabc;
+                            //정답저장
+                            pvanswer = grammar_JSON[qnum].answer;
+                            break;
+                        case 4 :
+                            //모든 case에 공통
+                            //문단이 주어진 문제는 firstbody에 지문보기 버튼 삽입 후 문제 출제
+                            if(grammar_JSON[qnum].iswithp){
+                                problem = `<input type="button" id="para" value="문단보기" onclick="showpara()"><br>`;
+                            }
+                            //문제출력
+                            problem = problem +`<img src="resource/s${snum}/${grammar_JSON[qnum].qimg}" width="200px" height="150px">`;
+                            firstbody.innerHTML = problem;
+                            //보기출력
+                            switch(grammar_JSON[qnum].anum){
+                                case 3:
+                                    answerabc = answerabc + '<br><br><span class="questionimage">1<img src="'+'resource/s'+ snum + '/'+grammar_JSON[qnum].a1img+'" width="100px" height="100px" onclick="srt_click(1)"></span>'+
+                                                            '<span class="questionimage">2<img src="'+'resource/s'+ snum + '/'+grammar_JSON[qnum].a2img+'" width="100px" height="100px" onclick="srt_click(2)"></span>'+
+                                                            '<span class="questionimage">3<img src="'+'resource/s'+ snum + '/'+grammar_JSON[qnum].a3img+'" width="100px" height="100px" onclick="srt_click(3)"></span>';
+                                    break;
+                                case 4:
+                                answerabc = answerabc + '<br><br><span class="questionimage">1<img src="'+'resource/s'+ snum + '/'+grammar_JSON[qnum].a1img+'" width="100px" height="100px" onclick="srt_click(1)"></span>'+
+                                                            '<span class="questionimage">2<img src="'+'resource/s'+ snum + '/'+grammar_JSON[qnum].a2img+'" width="100px" height="100px" onclick="srt_click(2)"></span>'+
+                                                            '<span class="questionimage">3<img src="'+'resource/s'+ snum + '/'+grammar_JSON[qnum].a3img+'" width="100px" height="100px" onclick="srt_click(3)"></span>'+
+                                                            '<span class="questionimage">4<img src="'+'resource/s'+ snum + '/'+grammar_JSON[qnum].a4img+'" width="100px" height="100px" onclick="srt_click(4)"></span>';
+                                    break;
+                                case 5:
+                                answerabc = answerabc + '<br><br><span class="questionimage">1<img src="'+'resource/s'+ snum + '/'+grammar_JSON[qnum].a1img+'" width="100px" height="100px" onclick="srt_click(1)"></span>'+
+                                                            '<span class="questionimage">2<img src="'+'resource/s'+ snum + '/'+grammar_JSON[qnum].a2img+'" width="100px" height="100px" onclick="srt_click(2)"></span>'+
+                                                            '<span class="questionimage">3<img src="'+'resource/s'+ snum + '/'+grammar_JSON[qnum].a3img+'" width="100px" height="100px" onclick="srt_click(3)"></span>'+
+                                                            '<span class="questionimage">4<img src="'+'resource/s'+ snum + '/'+grammar_JSON[qnum].a4img+'" width="100px" height="100px" onclick="srt_click(4)"></span>'+
+                                                            '<span class="questionimage">5<img src="'+'resource/s'+ snum + '/'+grammar_JSON[qnum].a5img+'" width="100px" height="100px" onclick="srt_click(5)"></span>';
+                                    break;
+                            }                                               
+                            secondbody.innerHTML = answerabc;
+                            //정답저장
+                            pvanswer = grammar_JSON[qnum].answer;
+                            break;
+                        case 5 :
+                            //모든 case에 공통
+                            //문단이 주어진 문제는 firstbody에 지문보기 버튼 삽입 후 문제 출제
+                            if(grammar_JSON[qnum].iswithp){
+                                problem = `<input type="button" id="para" value="문단보기" onclick="showpara()"><br>`;
+                            }
+                            //문제출력                            
+                            firstbody.innerHTML = problem;
+                            //보기출력
+                            switch(grammar_JSON[qnum].anum){
+                                case 3:
+                                    answerabc = answerabc + '<br><br><span class="questionimage">1<img src="'+'resource/s'+ snum + '/'+grammar_JSON[qnum].a1img+'" width="100px" height="100px" onclick="srt_click(1)"></span>'+
+                                                            '<span class="questionimage">2<img src="'+'resource/s'+ snum + '/'+grammar_JSON[qnum].a2img+'" width="100px" height="100px" onclick="srt_click(2)"></span>'+
+                                                            '<span class="questionimage">3<img src="'+'resource/s'+ snum + '/'+grammar_JSON[qnum].a3img+'" width="100px" height="100px" onclick="srt_click(3)"></span>';
+                                    break;
+                                case 4:
+                                answerabc = answerabc + '<br><br><span class="questionimage">1<img src="'+'resource/s'+ snum + '/'+grammar_JSON[qnum].a1img+'" width="100px" height="100px" onclick="srt_click(1)"></span>'+
+                                                            '<span class="questionimage">2<img src="'+'resource/s'+ snum + '/'+grammar_JSON[qnum].a2img+'" width="100px" height="100px" onclick="srt_click(2)"></span>'+
+                                                            '<span class="questionimage">3<img src="'+'resource/s'+ snum + '/'+grammar_JSON[qnum].a3img+'" width="100px" height="100px" onclick="srt_click(3)"></span>'+
+                                                            '<span class="questionimage">4<img src="'+'resource/s'+ snum + '/'+grammar_JSON[qnum].a4img+'" width="100px" height="100px" onclick="srt_click(4)"></span>';
+                                    break;
+                                case 5:
+                                answerabc = answerabc + '<br><br><span class="questionimage">1<img src="'+'resource/s'+ snum + '/'+grammar_JSON[qnum].a1img+'" width="100px" height="100px" onclick="srt_click(1)"></span>'+
+                                                            '<span class="questionimage">2<img src="'+'resource/s'+ snum + '/'+grammar_JSON[qnum].a2img+'" width="100px" height="100px" onclick="srt_click(2)"></span>'+
+                                                            '<span class="questionimage">3<img src="'+'resource/s'+ snum + '/'+grammar_JSON[qnum].a3img+'" width="100px" height="100px" onclick="srt_click(3)"></span>'+
+                                                            '<span class="questionimage">4<img src="'+'resource/s'+ snum + '/'+grammar_JSON[qnum].a4img+'" width="100px" height="100px" onclick="srt_click(4)"></span>'+
+                                                            '<span class="questionimage">5<img src="'+'resource/s'+ snum + '/'+grammar_JSON[qnum].a5img+'" width="100px" height="100px" onclick="srt_click(5)"></span>';
+                                    break;
+                            }                                               
+                            secondbody.innerHTML = answerabc;
+                            //정답저장
+                            pvanswer = grammar_JSON[qnum].answer;
+                            break;
+                        case 6 :
+                            //모든 case에 공통
+                            //문단이 주어진 문제는 firstbody에 지문보기 버튼 삽입 후 문제 출제
+                            if(grammar_JSON[qnum].iswithp){
+                                problem = `<input type="button" id="para" value="문단보기" onclick="showpara()"><br>`;
+                            }
+                            //문제출력      
+                            problem = problem + grammar_JSON[qnum].q;                      
+                            firstbody.innerHTML = problem;
+                            //보기출력
+                            switch(grammar_JSON[qnum].anum){
+                                case 3:
+                                    answerabc = answerabc + `<input type="button" id="grammarbutton" value="${grammar_JSON[qnum].a1}" onclick="srt_click(1)"><br>`+
+                                                            `<input type="button" id="grammarbutton" value="${grammar_JSON[qnum].a2}" onclick="srt_click(2)"><br>`+
+                                                            `<input type="button" id="grammarbutton" value="${grammar_JSON[qnum].a3}" onclick="srt_click(3)">`;
+                                    break;
+                                case 4:
+                                answerabc = answerabc + `<input type="button" id="grammarbutton" value="${grammar_JSON[qnum].a1}" onclick="srt_click(1)"><br>`+
+                                                        `<input type="button" id="grammarbutton" value="${grammar_JSON[qnum].a2}" onclick="srt_click(2)"><br>`+
+                                                        `<input type="button" id="grammarbutton" value="${grammar_JSON[qnum].a3}" onclick="srt_click(3)"><br>`+
+                                                        `<input type="button" id="grammarbutton" value="${grammar_JSON[qnum].a4}" onclick="srt_click(4)">`;
+                                    break;
+                                case 5:
+                                answerabc = answerabc + `<input type="button" id="grammarbutton" value="${grammar_JSON[qnum].a1}" onclick="srt_click(1)"><br>`+
+                                                        `<input type="button" id="grammarbutton" value="${grammar_JSON[qnum].a2}" onclick="srt_click(2)"><br>`+
+                                                        `<input type="button" id="grammarbutton" value="${grammar_JSON[qnum].a3}" onclick="srt_click(3)"><br>`+
+                                                        `<input type="button" id="grammarbutton" value="${grammar_JSON[qnum].a4}" onclick="srt_click(4)"><br>`+
+                                                        `<input type="button" id="grammarbutton" value="${grammar_JSON[qnum].a5}" onclick="srt_click(5)">`;
+                                    break;
+                            }                                               
+                            secondbody.innerHTML = answerabc;
+                            //정답저장
+                            pvanswer = grammar_JSON[qnum].answer;
+                            break;
+                    }       
+                }
+
+                //part1,2,3,4에 따라 점수를 따로 매겨야 함. part1,2,3,4의 갯수를 저장하는 변수 필요
+                if(qnum === (srpart1)){
+                    srpart1score = srpartscore;
+                    total_result.push(["SR_"+sr_num_global+" part 1",srpart1score,answers]);
+                    srpartscore = 0;
+                    answers = "";
+                }else if(qnum === (srpart1+srpart2)){
+                    srpart2score = srpartscore;
+                    total_result.push(["SR_"+sr_num_global+" part 2",srpart1score,answers]);
+                    srpartscore = 0;
+                    answers = "";
+                }else if(qnum === (srpart1+srpart2+srpart3)){
+                    srpart3score = srpartscore;
+                    total_result.push(["SR_"+sr_num_global+" part 3",srpart1score,answers]);
+                    srpartscore = 0;
+                    answers = "";
+                }else if(qnum === (srpart1+srpart2+srpart3+srpart4)){
+                    srpart4score = srpartscore;
+                    total_result.push(["SR_"+sr_num_global+" part 4",srpart1score,answers]);
+                    srpartscore = 0;
+                    answers = "";
+                }else{
+                    if(sr_num_global != 1 ){
+                        if(qnum === (srpart1+srpart2+spart3+srpart4+srpart5)){
+                            srpart5score = srpartscore;
+                            total_result.push(["SR_"+sr_num_global+" part 5",srpart1score,answers]);
+                            srpartscore = 0;
+                            answers = "";
+                        }
+                    }
+                }
+
+                // 완료되면 제출버튼 표시
+                if(qnum === grammar_JSON.length){
+                    button.innerHTML = '<input type="button" id="bodybutton" onclick="srt_done()" value="제출합니다.">';
+                    firstbody.innerHTML = '<div><font size="200px" color="red">밑에 제출하기 버튼을 누르세요.</font></div>';
+                    secondbody.innerHTML = '';
+                }
+            }
+
+            let tempbody; //문단을 보여주기 전 이전 상태를 임시로 저장하는 변수
+            //문단이 있는 문장의 경우 문단을 보여주는 함수
+            function showpara(){
+                const title = document.getElementById('title');
+                const head = document.getElementById('head');
+                const body = document.getElementById('body');
+                const secondbody = document.getElementById('secondbody');
+                const firstbody = document.getElementById('firstbody');
+                const button = document.getElementById('button');
+                const result = document.getElementById('result');
+
+                //body 전체를 저장후 para를 보여 줌
+                tempbody = body.innerHTML;
+                body.innerHTML = `<div>${grammar_JSON[qnum].p}</div><br><br><input type="button" id="grammarbutton" value="문제로 돌아가기" onclick="backfrompara()">`;
+            }
+
+            //문제로 돌아가기 함수
+            function backfrompara(){
+                const title = document.getElementById('title');
+                const head = document.getElementById('head');
+                const body = document.getElementById('body');
+                const button = document.getElementById('button');
+                const result = document.getElementById('result');
+
+                body.innerHTML = tempbody;
+            }
+
+            function srt_done(){
+                const title = document.getElementById('title');
+                const head = document.getElementById('head');
+                const body = document.getElementById('body');
+                const button = document.getElementById('button');
+                const secondbody = document.getElementById('secondbody');
+                const firstbody = document.getElementById('firstbody');
+                const result = document.getElementById('result');
+
+                let table = result.innerHTML;
+
+                let choicemade = false;
+
+                //점수 계산 후 표시
+                table = table + '교재선택 Test Level '+sr_num_global+'의 part 1 Test 점수 : ' + srpart1score + "점 <hr>";
+                table = table + '교재선택 Test Level '+sr_num_global+'의 part 2 Test 점수 : ' + srpart2score + "점 <hr>";
+                table = table + '교재선택 Test Level '+sr_num_global+'의 part 3 Test 점수 : ' + srpart3score + "점 <hr>";
+                table = table + '교재선택 Test Level '+sr_num_global+'의 part 4 Test 점수 : ' + srpart4score + "점 <hr>";
+                if(sr_num_global != 1){
+                    table = table + '교재선택 Test Level '+sr_num_global+'의 part 5 Test 점수 : ' + srpar5score + "% <hr>";
+                }else{
+                    srpart5score = 0;
+                }
+                scores = srpart1score + srpart1score + srpart1score + srpart1score + srpart1score;
+
+                result.innerHTML = table;
+                button.innerHTML = "";
+
+                if(sr_num_global === 1){
+                    aio1done = true;
+                }else if(sr_num_global === 2){
+                    aio2done = true;
+                }else if(sr_num_global === 3){
+                    aio3done = true;
+                }else{
+                    aio4done = true;
+                }
+                //s1 p1 => 20 p2=> 20 p3=>10 p4=>20 총 70문제 
+                /*
+                p3와 p4가 평균 70점 이상이면 st1-1추천하고 s2를 시행, 그렇지 않으면
+                p1와 p2가 평균 89점 이상이면 Easy Phonics Plus, 그렇지 않으면
+                p1와 p2가 평균 75점 이상이면 Easy Phonics, 그렇지 않으면 Phonics Fun 1 추천
+
+
+                s2~s4 p1=>20 p2=>15 p3=>10 p4=>20 p5=>20 총85문제
+                p2 점수 1~5까지 각 4점  => 20
+                    6~15까지 각 8점 => 80
+
+                p4가 89점 이상이면 st각 단계 *-5 추천하고 다음 단계 실행
+                p4가 84점 이상이면 st각 단계 *-4 추천
+                p4가 74점 이상이면 st각 단계 *-3 추천
+                p4가 69점 이상이면 st각 단계 *-2 추천
+                p4가 69점 미만이면 st각 단계 *-1 추천하고 아랫 단계 실행
+
+                p5가 84점 이상이면 rt각 단계 *-3 추천하고 다음 단계 실행
+                p5가 74점 이상이면 rt각 단계 *-2 추천
+                p5가 74점 미만이면 rt각 단계 *-1 추천
+
+                다음 단계 trigger p4가 89점 이상 이거나 p5가 84점 이상일 때
+                하위 단계 trigger p4가 69점 미만 인 경우 만 
                 */
-
-                /*이미지 관련 
-                    main.innerHTML = '<img src="'+ bookselected + '/' + selecteditem[wordstudycount][1]+'" width="50%" height="100%">';
-
-                    centerquestionimage = '<span class="questionimage">1<img src="'+q1+'" width="200px" height="190px" onclick="imageclick(1)"></span>'
-                        +'<span class="questionimage">2<img src="'+q2+'"width="200px" height="190px" onclick="imageclick(2)"></span>'
-                        +'<div> ---- </div>'
-                        +'<span class="questionimage">3<img src="'+q3+'" width="200px" height="190px" onclick="imageclick(3)"></span>'
-                        +'<span class="questionimage">4<img src="'+q4+'" width="200px" height="190px" onclick="imageclick(4)"></span>'
-                        +'<br><br><div><input class="justbutton" type="button" style="height:40px;" value="준비되면 누르세요." onclick="playquestion()"></div>';
-
-                    .questionimage imge {
-                        -webkit-tranform:scale(1);
-                        -moz-transform:scale(1);
-                        -ms-transform:scale(1);
-                        -o-tranform:scale(1);
-                        transform: scale(1);
-                        -webkit-transition:.3s;
-                        -moz-transition:.3s;
-                        -ms-transition:.3s;
-                        -o-transition:.3s;
-                        transition: .3s;
-                        overflow: hidden;
-                        cursor: pointer;
+                if(sr_num_global === 1){
+                    //Phonics Line 선택
+                    if((srpart3score+srpart4score)/2 > 70){
+                        if(!aio2done){
+                            srt_start(2);
+                        }else{
+                            story_choice = "Story Town 1-1";
+                            phonics_choice = "None";
+                            reading_choice = "None";
+                            choicemade = true;
+                        }
+                    }else if((srpart1score+srpart2score)/2 > 89){
+                        story_choice = "None";
+                        phonics_choice = "Easy Phonics Plus";
+                        reading_choice = "None";
+                        choicemade = true;
+                    }else if((srpart1score+srpart2score)/2 > 75){
+                        story_choice = "None";
+                        phonics_choice = "Easy Phonics";
+                        reading_choice = "None";
+                        choicemade = true;
+                    }else{
+                        story_choice = "None";
+                        phonics_choice = "Phonics Fun 1";
+                        reading_choice = "None";
+                        choicemade = true;
+                    }
+                }else{
+                    //Reading Town 선택
+                    if(srpart5score > 84){
+                        if(sr_num_global === 2){
+                            if(!aio3done){
+                                srt_start(3);
+                            }else{
+                                reading_choice = "Reading Town 30-3";
+                            }
+                        }else if(sr_num_global === 3){
+                            if(!aio4done){
+                                srt_start(4);
+                            }else{
+                                reading_choice = "Reading Town 50-3";
+                            }
+                        }else{
+                                reading_choice = "Reading Town 70-3";
+                        }
+                    }else if(srpart5 > 74){
+                        if(sr_num_global === 2){
+                            reading_choice = "Reading Town 30-2";
+                        }else if(sr_num_global === 3){
+                            reading_choice = "Reading Town 50-2";
+                        }else{
+                            reading_choice = "Reading Town 70-2";
+                        }
+                    }else{
+                        if(sr_num_global === 2){
+                            reading_choice = "Reading Town 30-1";
+                        }else if(sr_num_global === 3){
+                            reading_choice = "Reading Town 50-1";
+                        }else{
+                            reading_choice = "Reading Town 70-1";
+                        }
                     }
 
-                    .questionimage:hover img {
-                        -webkit-transform:scale(1.2);
-                        -moz-transform:scale(1.2);
-                        -ms-transform:scale(1.2);
-                        -o-transform:scale(1.2);
-                        transform:scale(1.2);
-                        overflow: hidden;
+                    //Story Town 선택
+                    if(srpart4score > 89){
+                        if(sr_num_global === 2){
+                            if(!aio3done){
+                                srt_start(3);
+                            }else{
+                                story_choice = "Story Town 1-5";
+                                choicemade = true;
+                            }
+                        }else if(sr_num_global === 3){
+                            if(!aio4done){
+                                srt_start(4);
+                            }else{
+                                story_choice = "Story Town 2-5";
+                                choicemade = true;
+                            }
+                        }else{
+                                story_choice = "Story Town 3-5 or Story Town 4-1";
+                                choicemade = true;
+                        }
+                    }else if(srpart4score > 84){
+                        if(sr_num_global === 2){
+                            story_choice = "Story Town 1-4";
+                            choicemade = true;
+                        }else if(sr_num_global === 3){
+                            story_choice = "Story Town 2-4";
+                            choicemade = true;
+                        }else{
+                            story_choice = "Story Town 3-4";
+                            choicemade = true;
+                        }
+                    }else if(srpart4score > 74){
+                        if(sr_num_global === 2){
+                            story_choice = "Story Town 1-3";
+                            choicemade = true;
+                        }else if(sr_num_global === 3){
+                            story_choice = "Story Town 2-3";
+                            choicemade = true;
+                        }else{
+                            story_choice = "Story Town 3-3";
+                            choicemade = true;
+                        }
+                    }else if(srpart4score > 69){
+                        if(sr_num_global === 2){
+                            story_choice = "Story Town 1-2";
+                            choicemade = true;
+                        }else if(sr_num_global === 3){
+                            story_choice = "Story Town 2-2";
+                            choicemade = true;
+                        }else{
+                            story_choice = "Story Town 3-2";
+                            choicemade = true;
+                        }
+                    }else{
+                        if(sr_num_global === 2){
+                            if(!aio1done){
+                                srt_test(1);
+                            }else{
+                                story_choice = "Story Town 1-1";
+                                choicemade = true;
+                            }
+                        }else if(sr_num_global === 3){
+                            if(!aio2done){
+                                srt_test(2);
+                            }else{
+                                story_choice = "Story Town 2-1";
+                                choicemade = true;
+                            }
+                        }else{
+                            if(!aio3done){
+                                srt_test(3);
+                            }else{
+                                story_choice = "Story Town 3-1";
+                                choicemade = true;
+                            }
+                        }
                     }
-                */
+                }
+
+                if(choicemade){
+                        alert("모든 시험이 끝났습니다.");
+                        button.innerHTML = '<input type="button" id="bodybutton" onclick="printresult()" value="결과보기">';
+                        body.innerHTML = '<div><font size="200px" color="red">밑에 결과보기 버튼을 누르세요.</font></div>';
+                } 
+            }
+
+            function printresult(){
+                console.log("Power Voca 선택 : " + voca_choice);
+                console.log("중등영어 선택 : " + aio_choice);
+                console.log("파닉스 교재 선택 : " + phonics_choice);
+                console.log("스토리 타운 선택 : " + story_choice);
+                console.log("리딩 타운 선택 : " + reading_choice);
+            }
+
         </script>
     </head>
     <body>
