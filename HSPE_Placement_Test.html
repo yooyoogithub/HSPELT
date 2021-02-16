@@ -4,7 +4,10 @@
         <meta charset="utf-8">
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,500&display=swap');
-            </style>
+            @import url('https://fonts.googleapis.com/css2?family=Gamja+Flower&display=swap');
+            @import url('https://fonts.googleapis.com/css2?family=Single+Day&display=swap');
+        </style>
+        
         <style>
             .container{
                 position: absolute;
@@ -93,9 +96,12 @@
                 margin: 10px 10px 10px 10px;
                 background-color: rgb(255, 255, 255);
                 color: rgb(0, 0, 0);
-                height: 10%;
+                height: 8%;
                 width: 96%;
                 border-radius: 5px 5px;
+                font-size : 26px;
+                padding : 20px 0px 0px 0px;
+                font-family: 'Gamja Flower', cursive;
             }
 
             #body {
@@ -181,6 +187,8 @@
             #firstbody{
                 padding : 10px;
                 height: 150px;
+                font-family: 'Single Day', cursive;
+                font-size: 40px;
             }
 
             #secondbody{
@@ -244,9 +252,16 @@
                 width: 500px;  
                 background-color:whitesmoke;
                 color: black;
+                font-size: 16px;
+                background: aliceblue;
             }
-
-            .questionimage imge {
+            
+            #grammarbutton:hover{
+                background-color: rgb(0, 40, 114);
+                color : white;
+            }
+            
+            .questionimage img {
                 -webkit-tranform:scale(1);
                 -moz-transform:scale(1);
                 -ms-transform:scale(1);
@@ -259,6 +274,7 @@
                 transition: .3s;
                 overflow: hidden;
                 cursor: pointer;
+                padding: 20px;
             }
 
             .questionimage:hover img {
@@ -268,6 +284,28 @@
                 -o-transform:scale(1.2);
                 transform:scale(1.2);
                 overflow: hidden;
+                border-color: darkblue;
+            }
+
+            #parag{
+                text-align: left;
+                font-size: 20px;
+                padding-left: 100px;
+                background-color: black;
+                color: white;
+            }
+
+            #para{
+                font-size: 30px;
+                background-color: maroon;
+                color: white;
+                font-family: 'Gamja Flower', cursive; 
+            }
+
+            #pushbutton{
+                font-size: 40px;
+                color: rgb(255, 123, 0);
+                font-family: 'Gamja Flower', cursive; 
             }
 
         </style>
@@ -727,7 +765,7 @@
 
                 if(phonics3count == 26){
                     button.innerHTML = '<input type="button" id="bodybutton" onclick="phonics3_done()" value="제출">';
-                    body.innerHTML = '<div><font size="80px" color="red">아래 제출 버튼을 누르세요.</font></div>';
+                    body.innerHTML = '<div id="pushbutton">아래 제출 버튼을 누르세요.</div>';
                 }
             }
 
@@ -833,7 +871,7 @@
 
                 if(phonics3count == 26){
                     button.innerHTML = '<input type="button" id="bodybutton" onclick="phonics4_done()" value="제출">';
-                    body.innerHTML = '<div><font size="80px" color="red">아래 제출 버튼을 누르세요.</font></div>';
+                    body.innerHTML = '<div id="pushbutton">아래 제출 버튼을 누르세요.</div>';
                 }
             }
 
@@ -940,7 +978,7 @@
 
                 if(phonics3count == 26){
                     button.innerHTML = '<input type="button" id="bodybutton" onclick="phonics5_done()" value="제출">';
-                    body.innerHTML = '<div><font size="80px" color="red">아래 제출 버튼을 누르세요.</font></div>';
+                    body.innerHTML = '<div id="pushbutton">아래 제출 버튼을 누르세요.</div>';
                 }
             }
 
@@ -982,7 +1020,7 @@
                 } else{
                     alert("더 이상 출제된 시험이 없습니다.");
                     button.innerHTML = '<input type="button" id="bodybutton" onclick="printresult()" value="결과보기">';
-                    body.innerHTML = '<div><font size="80px" color="red">밑에 결과보기 버튼을 누르세요.</font></div>';
+                    body.innerHTML = '<div id="pushbutton">아래 결과보기 버튼을 누르세요.</div>';
                 }               
 
             }
@@ -1126,7 +1164,7 @@
 
                 if(phonics3count === tqnum){
                     button.innerHTML = `<input type="button" id="bodybutton" onclick="grammar1_done(${tqnum})" value="제출">`;
-                    firstbody.innerHTML = '<div><font size="80px" color="red">아래 제출 버튼을 누르세요.</font></div>';
+                    firstbody.innerHTML = '<div id="pushbutton">아래 제출 버튼을 누르세요.</div>';
                     secondbody.innerHTML = '';
                 }
 
@@ -1265,7 +1303,7 @@
 
                 if(phonics3count === tqnum){
                     button.innerHTML = `<input type="button" id="bodybutton" onclick="grammar2_done(${tqnum})" value="제출">`;
-                    firstbody.innerHTML = '<div><font size="80px" color="red">아래 제출 버튼을 누르세요.</font></div>';
+                    firstbody.innerHTML = '<div id="pushbutton">아래 제출 버튼을 누르세요.</div>';
                     secondbody.innerHTML = '';
                 }
 
@@ -1403,7 +1441,7 @@
 
                 if(phonics3count === tqnum){
                     button.innerHTML = `<input type="button" id="bodybutton" onclick="grammar3_done(${tqnum})" value="제출">`;
-                    firstbody.innerHTML = '<div><font size="80px" color="red">아래 제출 버튼을 누르세요.</font></div>';
+                    firstbody.innerHTML = '<div id="pushbutton">아래 제출 버튼을 누르세요.</div>';
                     secondbody.innerHTML = '';
                 }
 
@@ -1444,7 +1482,7 @@
                 } else{
                     alert("더 이상 출제된 시험이 없습니다.");
                     button.innerHTML = '<input type="button" id="bodybutton" onclick="printresult()" value="결과보기">';
-                    body.innerHTML = '<div><font size="80px" color="red">밑에 결과보기 버튼을 누르세요.</font></div>';
+                    body.innerHTML = '<div id="pushbutton">아래 결과보기 버튼을 누르세요.</div>';
                 }   
             }
 
@@ -1824,7 +1862,7 @@
                 // 완료되면 제출버튼 표시
                 if(qnum === real_num){
                     button.innerHTML = '<input type="button" id="bodybutton" onclick="pv0_done()" value="제출">';
-                    firstbody.innerHTML = '<div><font size="80px" color="red">아래 제출 버튼을 누르세요.</font></div>';
+                    firstbody.innerHTML = '<div id="pushbutton">아래 제출 버튼을 누르세요.</div>';
                     secondbody.innerHTML = '';
                 }
             }
@@ -2199,7 +2237,7 @@
                 // 완료되면 제출버튼 표시
                 if(qnum === real_num){
                     button.innerHTML = '<input type="button" id="bodybutton" onclick="pv1_done()" value="제출">';
-                    firstbody.innerHTML = '<div><font size="80px" color="red">아래 제출 버튼을 누르세요.</font></div>';
+                    firstbody.innerHTML = '<div id="pushbutton">아래 제출 버튼을 누르세요.</div>';
                     secondbody.innerHTML = '';
                 }
             }
@@ -2244,7 +2282,7 @@
                     } else{
                         alert("더 이상 출제된 시험이 없습니다.");
                         button.innerHTML = '<input type="button" id="bodybutton" onclick="printresult()" value="결과보기">';
-                        body.innerHTML = '<div><font size="80px" color="red">밑에 결과보기 버튼을 누르세요.</font></div>';
+                        body.innerHTML = '<div id="pushbutton">아래 결과보기 버튼을 누르세요.</div>';
                 }   
                 }
             }
@@ -2590,7 +2628,7 @@
                 // 완료되면 제출버튼 표시
                 if(qnum === real_num){
                     button.innerHTML = '<input type="button" id="bodybutton" onclick="pv2_done()" value="제출">';
-                    firstbody.innerHTML = '<div><font size="80px" color="red">아래 제출 버튼을 누르세요.</font></div>';
+                    firstbody.innerHTML = '<div id="pushbutton">아래 제출 버튼을 누르세요.</div>';
                     secondbody.innerHTML = '';
                 }
             }
@@ -2641,7 +2679,7 @@
                     } else{
                         alert("더 이상 출제된 시험이 없습니다.");
                         button.innerHTML = '<input type="button" id="bodybutton" onclick="printresult()" value="결과보기">';
-                        body.innerHTML = '<div><font size="80px" color="red">밑에 결과보기 버튼을 누르세요.</font></div>';
+                        body.innerHTML = '<div id="pushbutton">아래 결과보기 버튼을 누르세요.</div>';
                 }   
                 }
 
@@ -2988,7 +3026,7 @@
                 // 완료되면 제출버튼 표시
                 if(qnum === real_num){
                     button.innerHTML = '<input type="button" id="bodybutton" onclick="pv3_done()" value="제출">';
-                    firstbody.innerHTML = '<div><font size="80px" color="red">아래 제출 버튼을 누르세요.</font></div>';
+                    firstbody.innerHTML = '<div id="pushbutton">아래 제출 버튼을 누르세요.</div>';
                     secondbody.innerHTML = '';
                 }
             }
@@ -3040,7 +3078,7 @@
                     } else{
                         alert("더 이상 출제된 시험이 없습니다.");
                         button.innerHTML = '<input type="button" id="bodybutton" onclick="printresult()" value="결과보기">';
-                        body.innerHTML = '<div><font size="80px" color="red">밑에 결과보기 버튼을 누르세요.</font></div>';
+                        body.innerHTML = '<div id="pushbutton">아래 결과보기 버튼을 누르세요.</div>';
                     }   
                 }
             }
@@ -3386,7 +3424,7 @@
                 // 완료되면 제출버튼 표시
                 if(qnum === real_num){
                     button.innerHTML = '<input type="button" id="bodybutton" onclick="pv4_done()" value="제출">';
-                    firstbody.innerHTML = '<div><font size="80px" color="red">아래 제출 버튼을 누르세요.</font></div>';
+                    firstbody.innerHTML = '<div id="pushbutton">아래 제출 버튼을 누르세요.</div>';
                     secondbody.innerHTML = '';
                 }
             }
@@ -3437,7 +3475,7 @@
                     } else{
                         alert("더 이상 출제된 시험이 없습니다.");
                         button.innerHTML = '<input type="button" id="bodybutton" onclick="printresult()" value="결과보기">';
-                        body.innerHTML = '<div><font size="80px" color="red">밑에 결과보기 버튼을 누르세요.</font></div>';
+                        body.innerHTML = '<div id="pushbutton">아래 결과보기 버튼을 누르세요.</div>';
                     }   
                 }
             }
@@ -3784,7 +3822,7 @@
                 // 완료되면 제출버튼 표시
                 if(qnum === real_num){
                     button.innerHTML = '<input type="button" id="bodybutton" onclick="pv5_done()" value="제출">';
-                    firstbody.innerHTML = '<div><font size="80px" color="red">아래 제출 버튼을 누르세요.</font></div>';
+                    firstbody.innerHTML = '<div id="pushbutton">아래 제출 버튼을 누르세요.</div>';
                     secondbody.innerHTML = '';
                 }
             }
@@ -3828,7 +3866,7 @@
                     } else{
                         alert("더 이상 출제된 시험이 없습니다.");
                         button.innerHTML = '<input type="button" id="bodybutton" onclick="printresult()" value="결과보기">';
-                        body.innerHTML = '<div><font size="80px" color="red">밑에 결과보기 버튼을 누르세요.</font></div>';
+                        body.innerHTML = '<div id="pushbutton">아래 결과보기 버튼을 누르세요.</div>';
                     }  
                 }else if(scores < 30){
                     if(pv4done){
@@ -3848,7 +3886,7 @@
                     } else{
                         alert("더 이상 출제된 시험이 없습니다.");
                         button.innerHTML = '<input type="button" id="bodybutton" onclick="printresult()" value="결과보기">';
-                        body.innerHTML = '<div><font size="80px" color="red">밑에 결과보기 버튼을 누르세요.</font></div>';
+                        body.innerHTML = '<div id="pushbutton">아래 결과보기 버튼을 누르세요.</div>';
                     }   
                 }
             }
@@ -4059,7 +4097,7 @@
                 // 완료되면 제출버튼 표시
                 if(qnum === grammar_JSON.length){
                     button.innerHTML = '<input type="button" id="bodybutton" onclick="aio_done()" value="제출">';
-                    firstbody.innerHTML = '<div><font size="80px" color="red">아래 제출 버튼을 누르세요.</font></div>';
+                    firstbody.innerHTML = '<div id="pushbutton">아래 제출 버튼을 누르세요.</div>';
                     secondbody.innerHTML = '';
                 }
             }
@@ -4218,7 +4256,7 @@
                     } else{
                         alert("더 이상 출제된 시험이 없습니다.");
                         button.innerHTML = '<input type="button" id="bodybutton" onclick="printresult()" value="결과보기">';
-                        body.innerHTML = '<div><font size="80px" color="red">밑에 결과보기 버튼을 누르세요.</font></div>';
+                        body.innerHTML = '<div id="pushbutton">아래 결과보기 버튼을 누르세요.</div>';
                     } 
                 }
             }
@@ -4844,7 +4882,7 @@
                 // 완료되면 제출버튼 표시
                 if(qnum === grammar_JSON.length){
                     button.innerHTML = '<input type="button" id="bodybutton" onclick="srt_done()" value="제출">';
-                    firstbody.innerHTML = '<div><font size="80px" color="red">아래 제출 버튼을 누르세요.</font></div>';
+                    firstbody.innerHTML = '<div id="pushbutton">아래 제출 버튼을 누르세요.</div>';
                     secondbody.innerHTML = '';
                 }
             }
@@ -4862,7 +4900,7 @@
 
                 //body 전체를 저장후 para를 보여 줌
                 tempbody = body.innerHTML;
-                body.innerHTML = `<div>${grammar_JSON[qnum].p}</div><br><br><input type="button" id="grammarbutton" value="문제로 돌아가기" onclick="backfrompara()">`;
+                body.innerHTML = `<div id="parag">${grammar_JSON[qnum].p}</div><br><br><input type="button" id="grammarbutton" value="문제로 돌아가기" onclick="backfrompara()">`;
             }
 
             //문제로 돌아가기 함수
@@ -5082,7 +5120,7 @@
                 if(choicemade){
                         alert("모든 시험이 끝났습니다.");
                         button.innerHTML = '<input type="button" id="bodybutton" onclick="printresult()" value="결과보기">';
-                        body.innerHTML = '<div><font size="80px" color="red">밑에 결과보기 버튼을 누르세요.</font></div>';
+                        body.innerHTML = '<div id="pushbutton">아래 결과보기 버튼을 누르세요.</div>';
                 } 
             }
 
