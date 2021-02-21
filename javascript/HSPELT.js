@@ -60,23 +60,26 @@
                 const button = document.getElementById('button');
 
                 let thisbutton = document.getElementById('donebutton');
-                thisbutton.innerHTML = '<input type="button" value="다시선택" class="subinput" onclick="restart()"></input>';
-                
                                 
                 if(document.getElementById('phonics').checked){                    
                     title.innerText = "Phonics Test를 시작합니다.";
+                    thisbutton.innerHTML = '<input type="button" value="다시선택" class="subinput" onclick="restart()"></input>';
                     phonics1_test();
                 } else if(document.getElementById('grammar').checked){                    
                     title.innerText = "Grammar Test를 시작합니다.";
+                    thisbutton.innerHTML = '<input type="button" value="다시선택" class="subinput" onclick="restart()"></input>';
                     grammar_test();
                 } else if(document.getElementById('voca').checked){                    
                     title.innerText = "Vocabulary Test를 시작합니다.";
+                    thisbutton.innerHTML = '<input type="button" value="다시선택" class="subinput" onclick="restart()"></input>';
                     voca_test();
                 } else if(document.getElementById('middle').checked){                    
                     title.innerText = "중등실력 Test를 시작합니다.";
+                    thisbutton.innerHTML = '<input type="button" value="다시선택" class="subinput" onclick="restart()"></input>';
                     middle_test();
                 } else if(document.getElementById('rtst').checked){                    
                     title.innerText = "한솔플러스영어 교재선택을 위한 Test를 시작합니다.";
+                    thisbutton.innerHTML = '<input type="button" value="다시선택" class="subinput" onclick="restart()"></input>';
                     rtst_test();
                 } else{
                     alert("체크된 시험이 없습니다.");
@@ -1200,9 +1203,6 @@
                 if(document.getElementById('voca').checked){                    
                     title.innerText = "Vocabulary Test를 시작합니다.";
                     voca_test();
-                } else if(document.getElementById('reading').checked){                    
-                    title.innerText = "Reading Test를 시작합니다.";
-                    reading_test();
                 } else if(document.getElementById('middle').checked){                    
                     title.innerText = "중등실력 Test를 시작합니다.";
                     middle_test();
@@ -4860,13 +4860,411 @@
                 fullscreen.style.color = 'white';
                 fullscreen.style.display = 'block';
                 //fullscreen.style.border = 'none';
+
+                let numbering = 1;
+                let rtext;
+                let tscore;
                 
-                
-
-
-
+                //reportform 초기화
                 reportform = 
-                `<div id='resulthtml'>
+                `<div id='resulthtml_base'>
+                <br><br><br><br><br>
+                    <table align="center" border="1px" cellspacing="1px" cellpadding="3px">
+                        <tr>
+                            <td>Name</td><td>김한솔</td>
+                        </tr>
+                        <tr>
+                            <td>Date</td><td>2021.3.1</td>
+                        </tr>
+                        <tr>
+                            <td>학원명</td><td>한솔플러스영어</td>
+                        </tr>
+                        <tr>
+                            <td>Phone</td><td>1577-7435</td>
+                        </tr>
+                    </table>
+                <br><br>`;
+
+
+                reportform = reportform + `<div id='resulthtml_center'>`;
+
+                //Phonics Test를 봤을 때
+                if(total_result.length > 1){
+                    let i = 1;
+                    if(total_result[i][0] === "대문자순서"){
+                        tscore = Number(total_result[i][2]);
+                        tscore = tscore + Number(total_result[i+1][2]);
+                        tscore = tscore + Number(total_result[i+2][2]);
+                        tscore = tscore + Number(total_result[i+3][2]);
+                        tscore = tscore + Number(total_result[i+4][2]);
+
+                        if((tscore/5) > 79){
+                            rtext = "Alphabet Phonics 교재는 진행할 필요 없음!";
+                        }else{
+                            rtext = "Alphabet Phonics";
+                        }
+
+                        reportform = reportform +
+                        `
+                        ${numbering}. Alphbet Test Result (추천 : ${rtext})<br>
+                            <div id='nextlinealpha1'>
+                            <table>
+                                <thead>
+                                <tr><td>대문자순서 맞추기 점수 ( ${total_result[i][1]} 점 )</td></tr>
+                                </thead>
+                                <tbody>
+                                <tr><td>${total_result[i][2]}</td></tr>
+                                </tbody>
+                            </table>
+                            </div>
+                            <hr>
+
+                            <div id='nextlinealpha2'>
+                            <table>
+                                <thead>
+                                <tr><td>소문자순서 맞추기 점수 ( ${total_result[i+1][1]} 점 )</td></tr>
+                                </thead>
+                                <tbody>
+                                <tr><td>${total_result[i+1][2]}</td></tr>
+                                </tbody>
+                            </table>
+                            </div>
+                            <hr>
+
+                            <div id='nextlinealpha3'>
+                            <table>
+                                <thead>
+                                <tr><td>대소문자 매칭 점수( ${total_result[i+2][1]} 점 )</td></tr>
+                                </thead>
+                                <tbody>
+                                <tr><td>${total_result[i+2][2]}</td></tr>
+                                </tbody>
+                            </table>
+                            </div>
+                            <hr>
+                            
+                            <div id='nextlinealpha4'>
+                            <table>
+                                <thead>
+                                <tr><td>알파벳 이름 맞추기 점수 ( ${total_result[i+3][1]} 점 )</td></tr>
+                                </thead>
+                                <tbody>
+                                <tr><td>${total_result[i+3][2]}</td></tr>
+                                </tbody>
+                            </table>
+                            </div>
+                            <hr>
+
+                            <div id='nextlinealpha5'>
+                            <table>
+                                <thead>
+                                <tr><td>알파벳 소리 맞추기 점수( ${total_result[i+4][1]} 점 )</td></tr>
+                                </thead>
+                                <tbody>
+                                <tr><td>${total_result[i+4][2]}</td></tr>
+                                </tbody>
+                            </table>
+                            </div>
+                            <hr>`;
+                        i = i + 5;
+                        numbering++;
+                    }
+
+                    if(total_result.length > i){
+                        //Grammar Test 1 의 경우
+                        tscore = 0;
+                        if(total_result[i][0] === "Grammar 1"){
+                            tscore = Number(total_result[i][2]);
+
+                            if(tscore > 79){
+                                rtext = "Grammar 1 관련 문법은 진행할 필요 없음!";
+                            }else{
+                                rtext = "Grammar 1 관련 문법";
+                            }
+                            reportform = reportform +
+                            `<br>
+                            ${numbering}. Grammar 1 (추천 : ${rtext})<br>
+                                <div id='nextlinealpha1'>
+                                <table>
+                                    <thead>
+                                    <tr><td>Grammar 1 점수 ( ${total_result[i][1]} 점 )</td></tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr><td>${total_result[i][2]}</td></tr>
+                                    </tbody>
+                                </table>
+                                </div>
+                                <hr>`;
+                            i = i + 1;
+                            numbering++;
+                        }
+                    }
+
+                    if(total_result.length > i){
+                        //Grammar Test 2 의 경우
+                        tscore = 0;
+                        if(total_result[i][0] === "Grammar 2"){
+                            tscore = Number(total_result[i][2]);
+
+                            if(tscore > 79){
+                                rtext = "Grammar 2 관련 문법은 진행할 필요 없음!";
+                            }else{
+                                rtext = "Grammar 2 관련 문법";
+                            }
+                            reportform = reportform +
+                            `<br>
+                            ${numbering}. Grammar 2 (추천 : ${rtext})<br>
+                                <div id='nextlinealpha2'>
+                                <table>
+                                    <thead>
+                                    <tr><td>Grammar 2 점수 ( ${total_result[i][1]} 점 )</td></tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr><td>${total_result[i][2]}</td></tr>
+                                    </tbody>
+                                </table>
+                                </div>
+                                <hr>`;
+                            i = i + 1;
+                            numbering++;
+                        }
+                    }
+
+                    if(total_result.length > i){
+                        //Grammar Test 3 의 경우
+                        tscore = 0;
+                        if(total_result[i][0] === "Grammar 3"){
+                            tscore = Number(total_result[i][2]);
+
+                            if(tscore > 79){
+                                rtext = "Grammar 3 관련 문법은 진행할 필요 없음!";
+                            }else{
+                                rtext = "Grammar 3 관련 문법";
+                            }
+                            reportform = reportform +
+                            `<br>
+                            ${numbering}. Grammar 3 (추천 : ${rtext})<br>
+                                <div id='nextlinealpha3'>
+                                <table>
+                                    <thead>
+                                    <tr><td>Grammar 3 점수 ( ${total_result[i][1]} 점 )</td></tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr><td>${total_result[i][2]}</td></tr>
+                                    </tbody>
+                                </table>
+                                </div>
+                                <hr>`;
+                            i = i + 1;
+                            numbering++;
+                        }
+                    }
+
+                    if(total_result.length > i){
+                        //Voca Test의 경우
+                        if(total_result[i][0][0] === 'V'){
+                            reportform = reportform +
+                            `<br>
+                            ${numbering}. Voca (추천 : ${voca_choice})<br>`;                            
+                            for(let checki=0;checki<1;){
+                                if(total_result.length > i){
+                                    if(total_result[i][0] === 'Voca0'){
+                                        reportform = reportform + 
+                                        `<div id='nextlinealpha1'>
+                                            Voca Basic 점수 ( ${total_result[i][1]})</div>`;
+                                    }else if(total_result[i][0] === 'Voca1'){
+                                        reportform = reportform + 
+                                        `<div id='nextlinealpha2'>
+                                            Power Voca 1 점수 ( ${total_result[i][1]})</div>`;
+                                    }else if(total_result[i][0] === 'Voca2'){
+                                        reportform = reportform + 
+                                        `<div id='nextlinealpha3'>
+                                            Power Voca 2 점수 ( ${total_result[i][1]})</div>`;
+                                    }else if(total_result[i][0] === 'Voca3'){
+                                        reportform = reportform + 
+                                        `<div id='nextlinealpha4'>
+                                            Power Voca 3 점수 ( ${total_result[i][1]})</div>`;   
+                                    }else if(total_result[i][0] === 'Voca4'){
+                                        reportform = reportform + 
+                                        `<div id='nextlinealpha1'>
+                                            Power Voca 4 점수 ( ${total_result[i][1]})</div>`;
+                                    }else if(total_result[i][0] === 'Voca5'){
+                                        reportform = reportform + 
+                                        `<div id='nextlinealpha1'>
+                                            Power Voca 5 점수 ( ${total_result[i][1]})</div>`;
+                                    }else{
+                                        checki=1;
+                                    }
+                                    i++;
+                                }else{
+                                    checki=1;
+                                }
+                            }
+                            numbering++;
+                            reportform = reportform + `<hr>`;
+                        }
+                    }
+
+                    if(total_result.length > i){
+                        //중등 All in One Test의 경우
+                        if(total_result[i][0][0] === 'A'){
+                            reportform = reportform +
+                            `<br>
+                            ${numbering}. 중등 AIO (추천 : ${aio_choice})<br>`;                            
+                            for(let checki=0;checki<1;){
+                                if(total_result.length > i){
+                                    if(total_result[i][0][4] === '1'){
+                                        console.log(i);
+                                        reportform = reportform + 
+                                        `<div id='nextlinealpha1'>
+                                            <table>
+                                                <thead>
+                                                    <tr><td>AIO 1 어휘</td><td>AIO 1 문법</td><td>AIO 1 표현</td></tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr><td>${total_result[i][1]}</td><td>${total_result[i+1][1]}</td><td>${total_result[i+2][1]}</td></tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <hr>`;
+                                        i = i + 4;
+                                    }else if(total_result[i][0][4] === '2'){
+                                        reportform = reportform + 
+                                        `<div id='nextlinealpha2'>
+                                            <table>
+                                                <thead>
+                                                    <tr><td>AIO 2 어휘</td><td>AIO 2 문법</td><td>AIO 2 표현</td></tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr><td>${total_result[i][1]}</td><td>${total_result[i+1][1]}</td><td>${total_result[i+2][1]}</td></tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <hr>`;
+                                        i = i + 4;
+                                    }else if(total_result[i][0][4] === '3'){
+                                        reportform = reportform + 
+                                        `<div id='nextlinealpha3'>
+                                            <table>
+                                                <thead>
+                                                    <tr><td>AIO 3 어휘</td><td>AIO 3 문법</td><td>AIO 3 표현</td></tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr><td>${total_result[i][1]}</td><td>${total_result[i+1][1]}</td><td>${total_result[i+2][1]}</td></tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <hr>`;
+                                        i = i + 4;
+                                    }else if(total_result[i][0][4] === '4'){
+                                        reportform = reportform + 
+                                        `<div id='nextlinealpha4'>
+                                            <table>
+                                                <thead>
+                                                    <tr><td>AIO 4 어휘</td><td>AIO 4 문법</td><td>AIO 4 표현</td></tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr><td>${total_result[i][1]}</td><td>${total_result[i+1][1]}</td><td>${total_result[i+2][1]}</td></tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <hr>`;
+                                        i = i + 4;
+                                    }else if(total_result[i][0][4] === '5'){
+                                        reportform = reportform + 
+                                        `<div id='nextlinealpha1'>
+                                            <table>
+                                                <thead>
+                                                    <tr><td>AIO 5 어휘</td><td>AIO 5 문법</td><td>AIO 5 표현</td></tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr><td>${total_result[i][1]}</td><td>${total_result[i+1][1]}</td><td>${total_result[i+2][1]}</td></tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <hr>`;
+                                        i = i + 4;
+                                    }else if(total_result[i][0][4] === '6'){
+                                        reportform = reportform + 
+                                        `<div id='nextlinealpha2'>
+                                            <table>
+                                                <thead>
+                                                    <tr><td>AIO 6 어휘</td><td>AIO 6 문법</td><td>AIO 6 표현</td></tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr><td>${total_result[i][1]}</td><td>${total_result[i+1][1]}</td><td>${total_result[i+2][1]}</td></tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <hr>`;
+                                        i = i + 4;
+                                    }else{
+                                        checki=1;
+                                    }
+                                }else{
+                                    checki=1;
+                                }
+                            }
+                            numbering++;
+                        }
+                    }
+
+                    if(total_result.length > i){
+                        //교재선택 Test의 경우
+                        if(total_result[i][0][0] === "S"){
+                            if(phonics_choice == 'NONE'){
+                                reportform = reportform +
+                                `<br>
+                                ${numbering}. 한솔플러스영어 교재 (Story Town 추천 : ${story_choice} / Reading Town 추천 : ${reading_choice})<br>`;                                                            
+                            }else{
+                                reportform = reportform +
+                                `<br>
+                                ${numbering}. 한솔플러스영어 교재 (Phonics 교재 : ${phonics_choice} / Story Town 추천 : ${story_choice} / Reading Town 추천 : ${reading_choice})<br>`;
+                            }
+
+                            for(let checki=0;checki<1;){
+                                if(total_result.length > i){
+                                    if(total_result[i][0][3] === "1"){
+                                        reportform = reportform + 
+                                        `<div id='nextlinealpha1'>
+                                            <table>
+                                                <thead>
+                                                    <tr><td>SR Part 1</td><td>SR Part 2</td><td>SR Part 3</td><td>SR Part 4</td></tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr><td>${total_result[i][1]}</td><td>${total_result[i+1][1]}</td><td>${total_result[i+2][1]}</td><td>${total_result[i+3][1]}</td></tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <hr>`;
+                                        i = i +  4;
+                                    }else{
+                                        `<div id='nextlinealpha2'>
+                                            <table>
+                                                <thead>
+                                                    <tr><td>SR Part 1</td><td>SR Part 2</td><td>SR Part 3</td><td>SR Part 4</td><td>SR Part 5</td></tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr><td>${total_result[i][1]}</td><td>${total_result[i+1][1]}</td><td>${total_result[i+2][1]}</td><td>${total_result[i+3][1]}</td><td>${total_result[i+4][1]}</td></tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <hr>`;
+                                        i = i +  5;
+                                    }
+                                }else{
+                                    checki=1;
+                                }
+                            }
+                            numbering++;
+                        }
+                        i++;
+                    }
+                }
+
+                /*reportform = reportform + 
+                `</div>
+                <div id='resulthtml_bottom'>
                     <div>TOTAL RESULT : ${total_result}</div>
                     <div>Grammar Test Result : ${grammar_result}</div>
                     <div>Power Voca 추천 : ${voca_choice}</div>
@@ -4874,7 +5272,9 @@
                     <div>Phonics 추천 : ${phonics_choice}</div>
                     <div>Story Town 추천 : ${story_choice}</div>
                     <div>Reading Town 추천 : ${reading_choice}</div>
-                </div>`;
+                </div>`;*/
+
+                reportform = reportform + `</div>`;
                 
                 buttonprint = `<div><div><input id="resultbutton" type="button" value="print" onclick = "realprint()"></div>`+
                             `<div><input id="resultbutton" type="button" value="다시 돌아가기" onclick="returnfull()"></div></div><br>`;

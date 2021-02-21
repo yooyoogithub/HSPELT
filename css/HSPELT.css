@@ -368,8 +368,78 @@
   color: black;
 }
 
-#resulthtml {
-  margin: 20px 20px 20px 20px;
-  background-color: seashell;
+#resulthtml_base {
+  position: relative;
+  display: inline-block;
+  top: 5px;
+  background-color: white;
+  width: 1050px;
+  height: 1350px;
   color: black;
+  background-image: url("resource/rb.png");
+  background-size: 1050px 1350px;
+  align-items: center;
+  font-size: 20px;
+}
+
+#resulthtml_center {
+  position: relative;
+  display: block;
+  left: 100px;
+  top: 5px;
+  width: 850px;
+  color: black;
+  text-align: left;
+  align-items: left;
+  font-size: 20px;
+}
+
+#resulthtml_bottom {
+  position: relative;
+  display: inline-block;
+  top: 5px;
+  color: black;
+  text-align: left;
+  align-items: left;
+  font-size: 20px;
+}
+
+#nextlinealpha1 {
+  position: relative;
+  display: inline-block;
+  left: 30px;
+  width: 800px;
+  background-color: rgb(187, 255, 0);
+}
+
+#nextlinealpha2 {
+  position: relative;
+  display: inline-block;
+  left: 30px;
+  width: 800px;
+  background-color: rgb(0, 234, 255);
+}
+
+#nextlinealpha3 {
+  position: relative;
+  display: inline-block;
+  left: 30px;
+  width: 800px;
+  background-color: rgb(255, 187, 0);
+}
+
+#nextlinealpha4 {
+  position: relative;
+  display: inline-block;
+  left: 30px;
+  width: 800px;
+  background-color: rgb(103, 131, 255);
+}
+
+#nextlinealpha5 {
+  position: relative;
+  display: inline-block;
+  left: 30px;
+  width: 800px;
+  background-color: rgb(255, 88, 88);
 }
