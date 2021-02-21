@@ -4853,6 +4853,12 @@
                 const result = document.getElementById('result');
                 const fullscreen = document.getElementById('fullscreen');
 
+                let studentname = document.getElementById('studentname').value;
+                let studentgrade = document.getElementById('studentgrade').value;
+                let classname = document.getElementById('classname').value;
+                let classphone = document.getElementById('classphone').value;
+                let testdate = document.getElementById('testdate').value;
+
                 let buttonprint;
 
                 saveall = fullscreen.innerHTML;
@@ -4864,23 +4870,30 @@
                 let numbering = 1;
                 let rtext;
                 let tscore;
-                
+
+                /*<span>학생이름</span><input type="text" id="studentname"><br>
+                <span>학년</span><input type="text" id="studentgrade"><br>
+                <span>학원명</span><input type="text" id="classname"><br>
+                <span>학원전화번호</span><input type="text" id="classphone"><br>
+                <span>날짜</span><input type="text" id="testdate"><br><hr></hr>
+                */
+
                 //reportform 초기화
                 reportform = 
                 `<div id='resulthtml_base'>
                 <br><br><br><br><br>
                     <table align="center" border="1px" cellspacing="1px" cellpadding="3px">
                         <tr>
-                            <td>Name</td><td>김한솔</td>
+                            <td>Name</td><td>${studentname} - ${studentgrade}학년</td>
                         </tr>
                         <tr>
-                            <td>Date</td><td>2021.3.1</td>
+                            <td>Date</td><td>${testdate}</td>
                         </tr>
                         <tr>
-                            <td>학원명</td><td>한솔플러스영어</td>
+                            <td>학원명</td><td>${classname}</td>
                         </tr>
                         <tr>
-                            <td>Phone</td><td>1577-7435</td>
+                            <td>Phone</td><td>${classphone}</td>
                         </tr>
                     </table>
                 <br><br>`;
