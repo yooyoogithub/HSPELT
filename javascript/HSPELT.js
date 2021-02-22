@@ -5252,11 +5252,14 @@
                                 if(total_result.length > i){
                                     if(total_result[i][0][3] === "1"){
                                         reportform = reportform + 
-                                        `<div id='nextlinealpha1'>
+                                        `<div style="color:white;background-color:blue">
                                             ${total_result[i][0][0]}${total_result[i][0][1]} - ${total_result[i][0][3]} Test Result
-                                            <table>
+                                        </div>
+                                        <div id='nextlinealpha1'>
+                                        
+                                            <table align="center" border="1">
                                                 <thead>
-                                                    <tr><td>SR Part 1</td><td>SR Part 2</td><td>SR Part 3</td><td>SR Part 4</td></tr>
+                                                    <tr><td>Listening</td><td>Phonics</td><td>Grammar</td><td>Reading</td></tr>
                                                 </thead>
                                                 <tbody>
                                                     <tr><td>${total_result[i][1]}</td><td>${total_result[i+1][1]}</td><td>${total_result[i+2][1]}</td><td>${total_result[i+3][1]}</td></tr>
@@ -5267,11 +5270,13 @@
                                         i = i +  4;
                                     }else{
                                         reportform = reportform +
-                                        `<div id='nextlinealpha${total_result[i][0][3]}'>
-                                            ${total_result[i][0][0]}${total_result[i][0][1]} - ${total_result[i][0][3]} Test Result
-                                            <table>
+                                        `<div style="color:white;background-color:blue">
+                                        ${total_result[i][0][0]}${total_result[i][0][1]} - ${total_result[i][0][3]} Test Result
+                                        </div>
+                                        <div id='nextlinealpha${total_result[i][0][3]}'>
+                                            <table align="center" border="1">
                                                 <thead>
-                                                    <tr><td>SR Part 1</td><td>SR Part 2</td><td>SR Part 3</td><td>SR Part 4</td><td>SR Part 5</td></tr>
+                                                    <tr><td>Listening</td><td>Vocabulary</td><td>Grammar</td><td>Language Form</td><td>Reading</td></tr>
                                                 </thead>
                                                 <tbody>
                                                     <tr><td>${total_result[i][1]}</td><td>${total_result[i+1][1]}</td><td>${total_result[i+2][1]}</td><td>${total_result[i+3][1]}</td><td>${total_result[i+4][1]}</td></tr>
