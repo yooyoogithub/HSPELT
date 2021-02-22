@@ -2,7 +2,7 @@
 
             let total_result = [["subject","score","answers"],];
             let answers=""; //각 단계의 사용자가 응답한 정답을 보관
-            let scores; // 각 단계의 점수를 보여줌
+            let scores=0; // 각 단계의 점수를 보여줌
             let grammar_result = [["level","no","ox","classify"],]; //Grammar 문제에 대한 답변의 정오를 저장 => 나중에 취약점 분석용
             let voca_choice = "NONE";
             let pv1done = false;
@@ -115,6 +115,9 @@
                 const button = document.getElementById('button');
 
                 console.log("파닉스 Test 시작 됨.");
+
+                scores = 0;
+
                 head.innerText = "아래 알파벳을 순서에 맞게 배열하세요.";
 
                 answers ="";
@@ -283,6 +286,7 @@
                 const button = document.getElementById('button');
 
                 answers ="";
+                scores = 0;
 
                 downlist.splice(1,26);
 
@@ -459,6 +463,7 @@
 
                 let table = "";
                 correct = 0;
+                scores = 0;
 
                 let au = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
                 let al = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
@@ -547,6 +552,7 @@
                 let table = "";
                 let table2 = "";
                 answers ="";
+                scores = 0;
 
                 console.log("파닉스 Test 4 시작 됨.");
                 head.innerText = "아래 큐빜은 알파벳의 대문자,소문자,이름,소리를 표시한 것입니다. 노란색칸에 맞는 것을 찾아보세요.";
@@ -654,6 +660,7 @@
                 let table2 = "";
 
                 answers ="";
+                scores = 0;
 
                 console.log("파닉스 Test 5 시작 됨.");
                 head.innerText = "아래 큐빜은 알파벳의 대문자,소문자,이름,소리를 표시한 것입니다. 노란색칸에 맞는 것을 찾아보세요.";
@@ -783,6 +790,7 @@
                 body.innerHTML = '<div id="firstbody"></div><div id="secondbody"></div>';
                 button.innerHTML = "";
                 correct = 0;
+                scores = 0;
 
                 if(grammar_num === "0"){   
                     qnum = 0;                 
@@ -3788,13 +3796,15 @@
                 answers = answers + (qnum+1) + `번.대답(${useranswer})-정답(${pvanswer})/`; 
 
                 if(qnum === 29){
-                    scores = Math.floor((correct / qnum)*100);
+                    scores = Math.floor((correct / (qnum+1))*100);
                     total_result.push(["AIO_"+aio_num_global+"_Voca",scores,answers]);
+                    correct = 0;
                 }else if(qnum === 59){
-                    scores = Math.floor((correct / qnum)*100);
+                    scores = Math.floor((correct / (qnum-29)*100);
                     total_result.push(["AIO_"+aio_num_global+"_Grammar",scores,answers]);
+                    correct = 0;
                 }else if(qnum === 89){
-                    scores = Math.floor((correct / qnum)*100);
+                    scores = Math.floor((correct / (qnum-59))*100);
                     total_result.push(["AIO_"+aio_num_global+"_Expression",scores,answers]);
                 }else{
 
@@ -4566,24 +4576,24 @@
                     answers = "";
                 }else if(qnum === (srpart1+srpart2)){
                     srpart2score = srpartscore;
-                    total_result.push(["SR_"+sr_num_global+" part 2",srpart1score,answers]);
+                    total_result.push(["SR_"+sr_num_global+" part 2",srpart2score,answers]);
                     srpartscore = 0;
                     answers = "";
                 }else if(qnum === (srpart1+srpart2+srpart3)){
                     srpart3score = srpartscore;
-                    total_result.push(["SR_"+sr_num_global+" part 3",srpart1score,answers]);
+                    total_result.push(["SR_"+sr_num_global+" part 3",srpart3score,answers]);
                     srpartscore = 0;
                     answers = "";
                 }else if(qnum === (srpart1+srpart2+srpart3+srpart4)){
                     srpart4score = srpartscore;
-                    total_result.push(["SR_"+sr_num_global+" part 4",srpart1score,answers]);
+                    total_result.push(["SR_"+sr_num_global+" part 4",srpart4score,answers]);
                     srpartscore = 0;
                     answers = "";
                 }else{
                     if(sr_num_global != 1 ){
                         if(qnum === (srpart1+srpart2+srpart3+srpart4+srpart5)){
                             srpart5score = srpartscore;
-                            total_result.push(["SR_"+sr_num_global+" part 5",srpart1score,answers]);
+                            total_result.push(["SR_"+sr_num_global+" part 5",srpart5score,answers]);
                             srpartscore = 0;
                             answers = "";
                         }
