@@ -3800,7 +3800,7 @@
                     total_result.push(["AIO_"+aio_num_global+"_Voca",scores,answers]);
                     correct = 0;
                 }else if(qnum === 59){
-                    scores = Math.floor((correct / (qnum-29)*100);
+                    scores = Math.floor((correct / (qnum-29))*100);
                     total_result.push(["AIO_"+aio_num_global+"_Grammar",scores,answers]);
                     correct = 0;
                 }else if(qnum === 89){
