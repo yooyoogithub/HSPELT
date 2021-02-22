@@ -93,7 +93,14 @@
                 document.getElementById('body').innerHTML = "";
                 document.getElementById('button').innerHTML = "";
 
-                document.getElementById('result').innerHTML = `<h1>RESULT</h1><hr><input id="resultbutton" type="button" value="결과보기Print" onclick="printoutresult()"><hr></hr>`;
+                document.getElementById('result').innerHTML = `<h1>RESULT</h1><hr>
+                <span>학생이름</span><input type="text" id="studentname"><br>
+                <span>학년</span><input type="text" id="studentgrade"><br>
+                <span>학원명</span><input type="text" id="classname"><br>
+                <span>학원전화번호</span><input type="text" id="classphone"><br>
+                <span>날짜</span><input type="text" id="testdate"><br><hr>
+                <input id="resultbutton" type="button" value="결과보기Print" onclick="printoutresult()"><hr>`;
+                
                 let thisbutton = document.getElementById('donebutton');
                 thisbutton.innerHTML = '<input type="button" value="선택완료" class="subinput" onclick="start()"></input>';
 
@@ -810,8 +817,8 @@
 
                 // test 파일 불러와서 json 파일로 만들기
                 let selectedFile = new XMLHttpRequest();
-                //selectedFile.open("GET","https://yooyoogithub.github.io/HSPELT/level_test_grammar_1.xlsx");
-                selectedFile.open("GET","https://yooyoogithub.github.io/HSPELT/grammar_1.xlsx"); //파일명의 길이도 문제가 되는 것 같음. 짧게 유지
+                //selectedFile.open("GET","https://yooyoogithub.github.io/HSPELT/data/level_test_grammar_1.xlsx");
+                selectedFile.open("GET","https://yooyoogithub.github.io/HSPELT/data/grammar_1.xlsx"); //파일명의 길이도 문제가 되는 것 같음. 짧게 유지
                 //selectedFile.open("GET","https://yooyoogithub.github.io/HSPELT/test.xlsx");
                 selectedFile.setRequestHeader('Content-Type','application/x-www-form-urlencoded; charset=UTF-8');
                 selectedFile.responseType = "blob"; //Blob형식으로 부탁합니다!
@@ -949,7 +956,7 @@
                 // test 파일 불러와서 json 파일로 만들기
                 let selectedFile = new XMLHttpRequest();
                 //selectedFile.open("GET","https://yooyoogithub.github.io/HSPELT/level_test_grammar_1.xlsx");
-                selectedFile.open("GET","https://yooyoogithub.github.io/HSPELT/grammar_2.xlsx"); //파일명의 길이도 문제가 되는 것 같음. 짧게 유지
+                selectedFile.open("GET","https://yooyoogithub.github.io/HSPELT/data/grammar_2.xlsx"); //파일명의 길이도 문제가 되는 것 같음. 짧게 유지
                 //selectedFile.open("GET","https://yooyoogithub.github.io/HSPELT/test.xlsx");
                 selectedFile.setRequestHeader('Content-Type','application/x-www-form-urlencoded; charset=UTF-8');
                 selectedFile.responseType = "blob"; //Blob형식으로 부탁합니다!
@@ -1088,7 +1095,7 @@
                 // test 파일 불러와서 json 파일로 만들기
                 let selectedFile = new XMLHttpRequest();
                 //selectedFile.open("GET","https://yooyoogithub.github.io/HSPELT/level_test_grammar_1.xlsx");
-                selectedFile.open("GET","https://yooyoogithub.github.io/HSPELT/grammar_3.xlsx"); //파일명의 길이도 문제가 되는 것 같음. 짧게 유지
+                selectedFile.open("GET","https://yooyoogithub.github.io/HSPELT/data/grammar_3.xlsx"); //파일명의 길이도 문제가 되는 것 같음. 짧게 유지
                 //selectedFile.open("GET","https://yooyoogithub.github.io/HSPELT/test.xlsx");
                 selectedFile.setRequestHeader('Content-Type','application/x-www-form-urlencoded; charset=UTF-8');
                 selectedFile.responseType = "blob"; //Blob형식으로 부탁합니다!
@@ -1281,7 +1288,7 @@
                 // test 파일 불러와서 json 파일로 만들기
                 let selectedFile = new XMLHttpRequest();
                 //selectedFile.open("GET","https://yooyoogithub.github.io/HSPELT/level_test_grammar_1.xlsx");
-                selectedFile.open("GET","https://yooyoogithub.github.io/HSPELT/pv0.xlsx"); //파일명의 길이도 문제가 되는 것 같음. 짧게 유지
+                selectedFile.open("GET","https://yooyoogithub.github.io/HSPELT/data/pv0.xlsx"); //파일명의 길이도 문제가 되는 것 같음. 짧게 유지
                 //selectedFile.open("GET","https://yooyoogithub.github.io/HSPELT/test.xlsx");
                 selectedFile.setRequestHeader('Content-Type','application/x-www-form-urlencoded; charset=UTF-8');
                 selectedFile.responseType = "blob"; //Blob형식으로 부탁합니다!
@@ -1655,8 +1662,8 @@
                 // test 파일 불러와서 json 파일로 만들기
                 let selectedFile = new XMLHttpRequest();
                 //selectedFile.open("GET","https://yooyoogithub.github.io/HSPELT/level_test_grammar_1.xlsx");
-                selectedFile.open("GET","https://yooyoogithub.github.io/HSPELT/pv1.xlsx"); //파일명의 길이도 문제가 되는 것 같음. 짧게 유지
-                //selectedFile.open("GET","https://yooyoogithub.github.io/HSPELT/test.xlsx");
+                selectedFile.open("GET","https://yooyoogithub.github.io/HSPELT/data/pv1.xlsx"); //파일명의 길이도 문제가 되는 것 같음. 짧게 유지
+                //selectedFile.open("GET","https://yooyoogithub.github.io/HSPELT/data/test.xlsx");
                 selectedFile.setRequestHeader('Content-Type','application/x-www-form-urlencoded; charset=UTF-8');
                 selectedFile.responseType = "blob"; //Blob형식으로 부탁합니다!
                 selectedFile.send();  //위 요청을 보낸다.
@@ -2046,9 +2053,9 @@
 
                 // test 파일 불러와서 json 파일로 만들기
                 let selectedFile = new XMLHttpRequest();
-                //selectedFile.open("GET","https://yooyoogithub.github.io/HSPELT/level_test_grammar_1.xlsx");
-                selectedFile.open("GET","https://yooyoogithub.github.io/HSPELT/pv2.xlsx"); //파일명의 길이도 문제가 되는 것 같음. 짧게 유지
-                //selectedFile.open("GET","https://yooyoogithub.github.io/HSPELT/test.xlsx");
+                //selectedFile.open("GET","https://yooyoogithub.github.io/HSPELT/data/level_test_grammar_1.xlsx");
+                selectedFile.open("GET","https://yooyoogithub.github.io/HSPELT/data/pv2.xlsx"); //파일명의 길이도 문제가 되는 것 같음. 짧게 유지
+                //selectedFile.open("GET","https://yooyoogithub.github.io/HSPELT/data/test.xlsx");
                 selectedFile.setRequestHeader('Content-Type','application/x-www-form-urlencoded; charset=UTF-8');
                 selectedFile.responseType = "blob"; //Blob형식으로 부탁합니다!
                 selectedFile.send();  //위 요청을 보낸다.
@@ -2444,9 +2451,9 @@
 
                 // test 파일 불러와서 json 파일로 만들기
                 let selectedFile = new XMLHttpRequest();
-                //selectedFile.open("GET","https://yooyoogithub.github.io/HSPELT/level_test_grammar_1.xlsx");
-                selectedFile.open("GET","https://yooyoogithub.github.io/HSPELT/pv3.xlsx"); //파일명의 길이도 문제가 되는 것 같음. 짧게 유지
-                //selectedFile.open("GET","https://yooyoogithub.github.io/HSPELT/test.xlsx");
+                //selectedFile.open("GET","https://yooyoogithub.github.io/HSPELT/data/level_test_grammar_1.xlsx");
+                selectedFile.open("GET","https://yooyoogithub.github.io/HSPELT/data/pv3.xlsx"); //파일명의 길이도 문제가 되는 것 같음. 짧게 유지
+                //selectedFile.open("GET","https://yooyoogithub.github.io/HSPELT/data/test.xlsx");
                 selectedFile.setRequestHeader('Content-Type','application/x-www-form-urlencoded; charset=UTF-8');
                 selectedFile.responseType = "blob"; //Blob형식으로 부탁합니다!
                 selectedFile.send();  //위 요청을 보낸다.
@@ -2842,9 +2849,9 @@
 
                 // test 파일 불러와서 json 파일로 만들기
                 let selectedFile = new XMLHttpRequest();
-                //selectedFile.open("GET","https://yooyoogithub.github.io/HSPELT/level_test_grammar_1.xlsx");
-                selectedFile.open("GET","https://yooyoogithub.github.io/HSPELT/pv4.xlsx"); //파일명의 길이도 문제가 되는 것 같음. 짧게 유지
-                //selectedFile.open("GET","https://yooyoogithub.github.io/HSPELT/test.xlsx");
+                //selectedFile.open("GET","https://yooyoogithub.github.io/HSPELT/data/level_test_grammar_1.xlsx");
+                selectedFile.open("GET","https://yooyoogithub.github.io/HSPELT/data/pv4.xlsx"); //파일명의 길이도 문제가 되는 것 같음. 짧게 유지
+                //selectedFile.open("GET","https://yooyoogithub.github.io/HSPELT/data/test.xlsx");
                 selectedFile.setRequestHeader('Content-Type','application/x-www-form-urlencoded; charset=UTF-8');
                 selectedFile.responseType = "blob"; //Blob형식으로 부탁합니다!
                 selectedFile.send();  //위 요청을 보낸다.
@@ -3240,9 +3247,9 @@
 
                 // test 파일 불러와서 json 파일로 만들기
                 let selectedFile = new XMLHttpRequest();
-                //selectedFile.open("GET","https://yooyoogithub.github.io/HSPELT/level_test_grammar_1.xlsx");
-                selectedFile.open("GET","https://yooyoogithub.github.io/HSPELT/pv5.xlsx"); //파일명의 길이도 문제가 되는 것 같음. 짧게 유지
-                //selectedFile.open("GET","https://yooyoogithub.github.io/HSPELT/test.xlsx");
+                //selectedFile.open("GET","https://yooyoogithub.github.io/HSPELT/data/level_test_grammar_1.xlsx");
+                selectedFile.open("GET","https://yooyoogithub.github.io/HSPELT/data/pv5.xlsx"); //파일명의 길이도 문제가 되는 것 같음. 짧게 유지
+                //selectedFile.open("GET","https://yooyoogithub.github.io/HSPELT/data/test.xlsx");
                 selectedFile.setRequestHeader('Content-Type','application/x-www-form-urlencoded; charset=UTF-8');
                 selectedFile.responseType = "blob"; //Blob형식으로 부탁합니다!
                 selectedFile.send();  //위 요청을 보낸다.
@@ -3690,7 +3697,7 @@
                 let p4text;     //보기4문자
                 let p5text;     //보기5문자
                 
-                let openfilestr = "https://yooyoogithub.github.io/HSPELT/aio"+aio_num+".xlsx"; //오픈되는 파일명
+                let openfilestr = "https://yooyoogithub.github.io/HSPELT/data/aio"+aio_num+".xlsx"; //오픈되는 파일명
 
                 phonics3count = 0;
 
@@ -4017,7 +4024,7 @@
             
                 let answerabc = "";     //보기를 저장하는 변수
                 
-                let openfilestr = "https://yooyoogithub.github.io/HSPELT/s"+snum+".xlsx"; //오픈되는 파일명
+                let openfilestr = "https://yooyoogithub.github.io/HSPELT/data/s"+snum+".xlsx"; //오픈되는 파일명
 
                 phonics3count = 0;
 
@@ -4843,6 +4850,12 @@
                 
             }
 
+            let studentname;
+            let studentgrade;
+            let classname;
+            let classphone;
+            let testdate;
+
             function printoutresult(){
                 const title = document.getElementById('title');
                 const head = document.getElementById('head');
@@ -4853,11 +4866,11 @@
                 const result = document.getElementById('result');
                 const fullscreen = document.getElementById('fullscreen');
 
-                let studentname = document.getElementById('studentname').value;
-                let studentgrade = document.getElementById('studentgrade').value;
-                let classname = document.getElementById('classname').value;
-                let classphone = document.getElementById('classphone').value;
-                let testdate = document.getElementById('testdate').value;
+                studentname = document.getElementById('studentname').value;
+                studentgrade = document.getElementById('studentgrade').value;
+                classname = document.getElementById('classname').value;
+                classphone = document.getElementById('classphone').value;
+                testdate = document.getElementById('testdate').value;
 
                 let buttonprint;
 
