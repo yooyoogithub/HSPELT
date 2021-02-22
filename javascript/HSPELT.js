@@ -100,7 +100,7 @@
                 <span>학원전화번호</span><input type="text" id="classphone"><br>
                 <span>날짜</span><input type="text" id="testdate"><br><hr>
                 <input id="resultbutton" type="button" value="결과보기Print" onclick="printoutresult()"><hr>`;
-                
+
                 let thisbutton = document.getElementById('donebutton');
                 thisbutton.innerHTML = '<input type="button" value="선택완료" class="subinput" onclick="start()"></input>';
 
@@ -5116,7 +5116,7 @@
                                             Power Voca 4 점수 ( ${total_result[i][1]})</div>`;
                                     }else if(total_result[i][0] === 'Voca5'){
                                         reportform = reportform + 
-                                        `<div id='nextlinealpha1'>
+                                        `<div id='nextlinealpha2'>
                                             Power Voca 5 점수 ( ${total_result[i][1]})</div>`;
                                     }else{
                                         checki=1;
@@ -5253,6 +5253,7 @@
                                     if(total_result[i][0][3] === "1"){
                                         reportform = reportform + 
                                         `<div id='nextlinealpha1'>
+                                            ${total_result[i][0][0]}${total_result[i][0][1]} - ${total_result[i][0][3]} Test Result
                                             <table>
                                                 <thead>
                                                     <tr><td>SR Part 1</td><td>SR Part 2</td><td>SR Part 3</td><td>SR Part 4</td></tr>
@@ -5265,7 +5266,9 @@
                                         <hr>`;
                                         i = i +  4;
                                     }else{
-                                        `<div id='nextlinealpha2'>
+                                        reportform = reportform +
+                                        `<div id='nextlinealpha${total_result[i][0][3]}'>
+                                            ${total_result[i][0][0]}${total_result[i][0][1]} - ${total_result[i][0][3]} Test Result
                                             <table>
                                                 <thead>
                                                     <tr><td>SR Part 1</td><td>SR Part 2</td><td>SR Part 3</td><td>SR Part 4</td><td>SR Part 5</td></tr>
