@@ -18,6 +18,8 @@
 
             let correct = 1;
 
+            let local_correct; //부분점수 계산하기 위한 변수
+
             let phonics3count;
 
             let qnum;
@@ -3781,6 +3783,8 @@
                 const result = document.getElementById('result');
 
                 let table = result.innerHTML;
+
+                
             
                 let p1text;     //보기1문자
                 let p2text;     //보기2문자
@@ -3798,13 +3802,15 @@
                 if(qnum === 29){
                     scores = Math.floor((correct / (qnum+1))*100);
                     total_result.push(["AIO_"+aio_num_global+"_Voca",scores,answers]);
-                    correct = 0;
+                    local_correct = correct;
                 }else if(qnum === 59){
-                    scores = Math.floor((correct / (qnum-29))*100);
+                    local_correct = (correct - local_correct);
+                    scores = Math.floor((local_correct / (qnum-29))*100);
                     total_result.push(["AIO_"+aio_num_global+"_Grammar",scores,answers]);
-                    correct = 0;
+                    local_correct = correct;
                 }else if(qnum === 89){
-                    scores = Math.floor((correct / (qnum-59))*100);
+                    local_correct = (correct - local_correct);
+                    scores = Math.floor((local_correct / (qnum-59))*100);
                     total_result.push(["AIO_"+aio_num_global+"_Expression",scores,answers]);
                 }else{
 
