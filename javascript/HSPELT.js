@@ -5113,31 +5113,36 @@
                                     if(total_result[i][0] === 'Voca0'){
                                         reportform = reportform + 
                                         `<div id='nextlinealpha1'>
-                                            Voca Basic 점수 ( ${total_result[i][1]})</div>`;
+                                            Voca Basic 점수 ( ${total_result[i][1]} 점 )</div>`;
+                                        i++;
                                     }else if(total_result[i][0] === 'Voca1'){
                                         reportform = reportform + 
                                         `<div id='nextlinealpha2'>
-                                            Power Voca 1 점수 ( ${total_result[i][1]})</div>`;
+                                            Power Voca 1 점수 ( ${total_result[i][1]} 점 )</div>`;
+                                        i++;
                                     }else if(total_result[i][0] === 'Voca2'){
                                         reportform = reportform + 
                                         `<div id='nextlinealpha3'>
-                                            Power Voca 2 점수 ( ${total_result[i][1]})</div>`;
+                                            Power Voca 2 점수 ( ${total_result[i][1]} 점 )</div>`;
+                                        i++;
                                     }else if(total_result[i][0] === 'Voca3'){
                                         reportform = reportform + 
                                         `<div id='nextlinealpha4'>
-                                            Power Voca 3 점수 ( ${total_result[i][1]})</div>`;   
+                                            Power Voca 3 점수 ( ${total_result[i][1]} 점 )</div>`;   
+                                        i++;
                                     }else if(total_result[i][0] === 'Voca4'){
                                         reportform = reportform + 
                                         `<div id='nextlinealpha1'>
-                                            Power Voca 4 점수 ( ${total_result[i][1]})</div>`;
+                                            Power Voca 4 점수 ( ${total_result[i][1]} 점 )</div>`;
+                                        i++;
                                     }else if(total_result[i][0] === 'Voca5'){
                                         reportform = reportform + 
                                         `<div id='nextlinealpha2'>
-                                            Power Voca 5 점수 ( ${total_result[i][1]})</div>`;
+                                            Power Voca 5 점수 ( ${total_result[i][1]} 점 )</div>`;
+                                        i++;
                                     }else{
                                         checki=1;
                                     }
-                                    i++;
                                 }else{
                                     checki=1;
                                 }
@@ -5156,7 +5161,7 @@
                             for(let checki=0;checki<1;){
                                 if(total_result.length > i){
                                     if(total_result[i][0][4] === '1'){
-                                        console.log(i);
+
                                         reportform = reportform + 
                                         `<div id='nextlinealpha1'>
                                             <table>
@@ -5164,7 +5169,7 @@
                                                     <tr><td>AIO 1 어휘</td><td>AIO 1 문법</td><td>AIO 1 표현</td></tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr><td>${total_result[i][1]}</td><td>${total_result[i+1][1]}</td><td>${total_result[i+2][1]}</td></tr>
+                                                    <tr><td>${total_result[i][1]} 점</td><td>${total_result[i+1][1]} 점</td><td>${total_result[i+2][1]} 점</td></tr>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -5178,7 +5183,7 @@
                                                     <tr><td>AIO 2 어휘</td><td>AIO 2 문법</td><td>AIO 2 표현</td></tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr><td>${total_result[i][1]}</td><td>${total_result[i+1][1]}</td><td>${total_result[i+2][1]}</td></tr>
+                                                    <tr><td>${total_result[i][1]} 점</td><td>${total_result[i+1][1]} 점</td><td>${total_result[i+2][1]} 점</td></tr>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -5192,7 +5197,7 @@
                                                     <tr><td>AIO 3 어휘</td><td>AIO 3 문법</td><td>AIO 3 표현</td></tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr><td>${total_result[i][1]}</td><td>${total_result[i+1][1]}</td><td>${total_result[i+2][1]}</td></tr>
+                                                    <tr><td>${total_result[i][1]} 점</td><td>${total_result[i+1][1]} 점</td><td>${total_result[i+2][1]} 점</td></tr>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -5206,7 +5211,7 @@
                                                     <tr><td>AIO 4 어휘</td><td>AIO 4 문법</td><td>AIO 4 표현</td></tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr><td>${total_result[i][1]}</td><td>${total_result[i+1][1]}</td><td>${total_result[i+2][1]}</td></tr>
+                                                    <tr><td>${total_result[i][1]} 점</td><td>${total_result[i+1][1]} 점</td><td>${total_result[i+2][1]} 점</td></tr>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -5220,7 +5225,7 @@
                                                     <tr><td>AIO 5 어휘</td><td>AIO 5 문법</td><td>AIO 5 표현</td></tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr><td>${total_result[i][1]}</td><td>${total_result[i+1][1]}</td><td>${total_result[i+2][1]}</td></tr>
+                                                    <tr><td>${total_result[i][1]} 점</td><td>${total_result[i+1][1]} 점</td><td>${total_result[i+2][1]} 점</td></tr>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -5234,7 +5239,7 @@
                                                     <tr><td>AIO 6 어휘</td><td>AIO 6 문법</td><td>AIO 6 표현</td></tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr><td>${total_result[i][1]}</td><td>${total_result[i+1][1]}</td><td>${total_result[i+2][1]}</td></tr>
+                                                    <tr><td>${total_result[i][1]} 점</td><td>${total_result[i+1][1]} 점</td><td>${total_result[i+2][1]} 점</td></tr>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -5278,7 +5283,7 @@
                                                     <tr><td>Listening</td><td>Phonics</td><td>Grammar</td><td>Reading</td></tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr><td>${total_result[i][1]}</td><td>${total_result[i+1][1]}</td><td>${total_result[i+2][1]}</td><td>${total_result[i+3][1]}</td></tr>
+                                                    <tr><td>${total_result[i][1]} 점</td><td>${total_result[i+1][1]} 점</td><td>${total_result[i+2][1]} 점</td><td>${total_result[i+3][1]} 점</td></tr>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -5295,7 +5300,7 @@
                                                     <tr><td>Listening</td><td>Vocabulary</td><td>Grammar</td><td>Language Form</td><td>Reading</td></tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr><td>${total_result[i][1]}</td><td>${total_result[i+1][1]}</td><td>${total_result[i+2][1]}</td><td>${total_result[i+3][1]}</td><td>${total_result[i+4][1]}</td></tr>
+                                                    <tr><td>${total_result[i][1]} 점</td><td>${total_result[i+1][1]} 점</td><td>${total_result[i+2][1]} 점</td><td>${total_result[i+3][1]} 점</td><td>${total_result[i+4][1]} 점</td></tr>
                                                 </tbody>
                                             </table>
                                         </div>
