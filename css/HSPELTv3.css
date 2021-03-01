@@ -1,0 +1,1025 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Gamja+Flower&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Single+Day&display=swap");
+
+.container {
+  position: absolute;
+  display: flex;
+  /*left : 50%;
+    top : 50%;
+    margin-left: -515px;
+    margin-top: -410px; */
+  height: 820px;
+  width: 1040px;
+  border: solid;
+  color: #b4cc00;
+  background-color: #e6e94778;
+  text-align: center;
+  font-family: "Montserrat", sans-serif;
+  border-radius: 10px 10px;
+}
+
+.select {
+  position: relative;
+  display: block;
+  margin-left: 10px;
+  margin-top: 10px;
+  height: 800px;
+  width: 200px;
+  background-color: rgba(8, 8, 85, 0.89);
+  color: white;
+  border-radius: 10px 0px 0px 10px;
+}
+
+.wordnum {
+  width: 150px;
+  height: 20px;
+  text-align: end;
+}
+
+.whatis {
+  position: relative;
+  display: block;
+  width: 180px;
+  height: 45px;
+  margin-left: 10px;
+  background-color: cornsilk;
+  color: darkblue;
+  padding: 5px 0px 0px 0px;
+}
+
+.subject {
+  position: relative;
+  display: block;
+  width: 180px;
+  text-align: right;
+  font-size: 20px;
+}
+
+.subinput {
+  font-size: 25px;
+  cursor: pointer;
+  width: 180px;
+  height: 40px;
+  border-radius: 10px;
+}
+
+.subinput:hover {
+  background-color: rgb(255, 0, 0);
+  color: rgb(255, 255, 255);
+}
+
+.submit {
+  position: relative;
+  display: block;
+  margin-top: 10px;
+  margin-left: 10px;
+  height: 800px;
+  width: 600px;
+  background-color: rgba(8, 8, 85, 0.89);
+}
+
+#title {
+  position: relative;
+  display: block;
+  margin: 10px 10px 10px 10px;
+  background-color: rgba(8, 8, 85, 0.89);
+  height: 10%;
+  width: 96%;
+  color: white;
+  font-size: 200%;
+}
+#head {
+  position: relative;
+  display: block;
+  margin: 10px 10px 10px 10px;
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+  height: 8%;
+  width: 96%;
+  border-radius: 5px 5px;
+  font-size: 26px;
+  padding: 20px 0px 0px 0px;
+  font-family: "Gamja Flower", cursive;
+}
+
+#body {
+  position: relative;
+  display: block;
+  margin-top: 10px;
+  margin-left: 10px;
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
+  height: 62%;
+  width: 96%;
+  border-radius: 5px 5px;
+}
+
+#answers {
+  position: relative;
+  display: block;
+  margin-top: 10px;
+  margin-left: 10px;
+  background-color: yellow;
+  height: 1%;
+  width: 96%;
+  border-radius: 10px 10px;
+}
+
+#button {
+  position: relative;
+  display: block;
+  margin-top: 10px;
+  margin-left: 10px;
+  background-color: rgba(8, 8, 85, 0.89);
+  height: 8%;
+  width: 96%;
+  border-radius: 5px 5px;
+  padding-top: 5px;
+}
+
+.result {
+  position: relative;
+  display: block;
+  margin-top: 10px;
+  margin-left: 10px;
+  background-color: rgba(8, 8, 85, 0.89);
+  height: 800px;
+  width: 200px;
+  overflow: auto;
+  border-radius: 0px 10px 10px 0px;
+}
+
+#capital {
+  font-size: 70px;
+}
+
+#ab {
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  font-size: 25px;
+  border-radius: 5px 5px;
+  background-color: lightgray;
+}
+
+#ab:hover {
+  background-color: rgb(255, 72, 0);
+  color: white;
+}
+
+#cd {
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  font-size: 25px;
+  background-color: rgb(255, 72, 0);
+  color: white;
+  border-radius: 5px 5px;
+}
+
+#cd:hover {
+  background-color: lightgray;
+  color: black;
+}
+
+#firstbody {
+  padding: 10px;
+  height: 150px;
+  font-family: "Single Day", cursive;
+  font-size: 20px;
+}
+
+#secondbody {
+  height: auto;
+}
+
+#bodybutton {
+  height: 56px;
+  width: 250px;
+  background-color: #fffe00;
+  border-radius: 20px 20px;
+  background: border-box;
+  color: white;
+  font-size: 25px;
+}
+
+#bodybutton:hover {
+  background: unset;
+  background-color: #fffe00;
+  color: black;
+}
+
+#ef {
+  width: 80px;
+  height: 50px;
+  text-align: center;
+  font-size: 16px;
+  background-color: rgb(204, 35, 23);
+  border-radius: 5px;
+  color: yellow;
+}
+
+#ef:hover {
+  background-color: yellow;
+  color: rgb(204, 35, 23);
+}
+
+#gh {
+  width: 60px;
+  height: 60px;
+  text-align: center;
+  font-size: 25px;
+}
+
+#hg {
+  width: 60px;
+  height: 60px;
+  text-align: center;
+  font-size: 20px;
+  background-color: gold;
+  color: red;
+}
+
+#table {
+  display: relative;
+  top: 50px;
+  left: 200px;
+  height: 50px;
+  width: 100px;
+  background-color: cornsilk;
+  color: darkblue;
+}
+
+#grammarbutton {
+  height: 50px;
+  width: 500px;
+  background-color: whitesmoke;
+  color: black;
+  font-size: 16px;
+  background: aliceblue;
+}
+
+#grammarbutton:hover {
+  background-color: rgb(0, 40, 114);
+  color: white;
+}
+
+.questionimage img {
+  -webkit-tranform: scale(1);
+  -moz-transform: scale(1);
+  -ms-transform: scale(1);
+  -o-tranform: scale(1);
+  transform: scale(1);
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -ms-transition: 0.3s;
+  -o-transition: 0.3s;
+  transition: 0.3s;
+  overflow: hidden;
+  cursor: pointer;
+  padding: 20px;
+}
+
+.questionimage:hover img {
+  -webkit-transform: scale(1.2);
+  -moz-transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  -o-transform: scale(1.2);
+  transform: scale(1.2);
+  overflow: hidden;
+  border-color: darkblue;
+}
+
+#parag {
+  text-align: left;
+  font-size: 20px;
+  padding-left: 100px;
+  background-color: black;
+  color: white;
+}
+
+#para {
+  font-size: 30px;
+  background-color: maroon;
+  color: white;
+  font-family: "Gamja Flower", cursive;
+}
+
+#pushbutton {
+  font-size: 40px;
+  color: rgb(255, 123, 0);
+  font-family: "Gamja Flower", cursive;
+}
+
+/*
+.page {
+  width: 21cm;
+  min-height: 29.7cm;
+  padding: 2cm;
+  margin: 0 auto;
+  background: #eee;
+  color: black;
+}
+
+.subpage {
+  border: 2px red solid;
+  background: #fff;
+  color: black;
+  height: 257mm;
+}
+
+@page {
+  size: A4;
+  margin: 0;
+}
+
+@media print {
+  html,
+  body {
+    width: 210mm;
+    height: 297mm;
+  }
+
+  .page {
+    margin: 0;
+    border: initial;
+    width: initial;
+    min-height: initial;
+    box-shadow: initial;
+    background: initial;
+    page-break-after: always;
+  }
+}
+*/
+
+#resultbutton {
+  height: 40px;
+  width: 150px;
+  background-color: #000000;
+  border-radius: 20px 20px;
+  color: rgb(255, 255, 255);
+  font-size: 20px;
+}
+
+#resultbutton:hover {
+  background: unset;
+  background-color: #fffe00;
+  color: black;
+}
+
+#resulthtml_base {
+  position: relative;
+  display: inline-block;
+  top: 5px;
+  background-color: white;
+  width: 1050px;
+  /*height: 1350px;*/
+  color: black;
+  background-image: url("resource/rb.png");
+  background-size: 1050px 1350px;
+  align-items: center;
+  font-size: 20px;
+}
+
+#resulthtml_center {
+  position: relative;
+  display: block;
+  left: 10px;
+  top: 5px;
+  width: 1000px;
+  color: black;
+  text-align: left;
+  align-items: left;
+  font-size: 20px;
+}
+
+#resulthtml_bottom {
+  position: relative;
+  display: inline-block;
+  top: 5px;
+  color: black;
+  text-align: left;
+  align-items: left;
+  font-size: 20px;
+}
+
+#nextlinealpha1 {
+  position: relative;
+  display: inline-block;
+  left: 30px;
+  width: 700px;
+  font-size: 25px;
+  background-color: rgb(187, 255, 0);
+}
+
+#nextlinealpha2 {
+  position: relative;
+  display: inline-block;
+  left: 30px;
+  width: 700px;
+  background-color: rgb(0, 234, 255);
+  font-size: 25px;
+}
+
+#nextlinealpha3 {
+  position: relative;
+  display: inline-block;
+  left: 30px;
+  width: 700px;
+  background-color: rgb(255, 187, 0);
+  font-size: 25px;
+}
+
+#nextlinealpha4 {
+  position: relative;
+  display: inline-block;
+  left: 30px;
+  width: 700px;
+  background-color: rgb(103, 131, 255);
+  color: white;
+  font-size: 25px;
+}
+
+#nextlinealpha5 {
+  position: relative;
+  display: inline-block;
+  left: 30px;
+  width: 700px;
+  background-color: rgb(255, 88, 88);
+  color: white;
+  font-size: 25px;
+}
+
+#alphabet_result {
+  position: relative;
+  display: block;
+  width: 750px;
+  /*background-color: rgb(0, 0, 0)*/
+}
+
+#a_chart {
+  position: relative;
+  display: block;
+  border: slateblue;
+  margin-left: 40px;
+  width: 300px;
+}
+
+#alphabet_display {
+  position: relative;
+  display: flex;
+}
+
+#dchart1 {
+  margin-top: 30px;
+  border: solid;
+  border-style: groove;
+  padding: 20px;
+}
+
+#dchart2 {
+  margin-top: 50px;
+  border: solid;
+  padding: 20px;
+  border-style: groove;
+}
+
+#myChart1 {
+}
+
+#comment {
+  border: solid;
+  border-style: groove;
+  padding: 5px;
+}
+
+#nextlinegrammar1 {
+  position: relative;
+  display: inline-block;
+  left: 30px;
+  width: 900px;
+  font-size: 25px;
+  background-color: rgb(187, 255, 0);
+}
+
+#nextlinegrammar2 {
+  position: relative;
+  display: inline-block;
+  left: 30px;
+  width: 900px;
+  font-size: 25px;
+  background-color: rgb(0, 234, 255);
+}
+
+#nextlinegrammar3 {
+  position: relative;
+  display: inline-block;
+  left: 30px;
+  width: 900px;
+  font-size: 25px;
+  background-color: rgb(255, 187, 0);
+}
+
+.grammardp {
+  padding-left: 35px;
+}
+
+#Gcomment {
+  position: relative;
+  border: solid;
+  border-style: groove;
+  padding: 5px;
+}
+
+#Vcomment {
+  position: relative;
+  border: solid;
+  border-style: groove;
+  padding: 5px;
+}
+
+.Vanswer {
+  position: relative;
+  border: solid;
+  border-style: groove;
+  padding: 5px;
+  left: 50px;
+  width: 930px;
+}
+
+#Mcomment {
+  position: relative;
+  border: solid;
+  border-style: groove;
+  padding: 5px;
+}
+
+#aio_1_display {
+  position: relative;
+  display: flex;
+}
+
+#aio_1_title {
+  height: 40px;
+  text-align: center;
+  padding-top: 10px;
+  margin-left: 20px;
+}
+#aio_1_voca {
+  height: 40px;
+  border: solid;
+  border-style: outset;
+  text-align: center;
+  padding-top: 10px;
+  margin-left: 25px;
+}
+#aio_1_grammar {
+  height: 40px;
+  border: solid;
+  border-style: outset;
+  text-align: center;
+  padding-top: 10px;
+  margin-left: 25px;
+}
+#aio_1_expression {
+  height: 40px;
+  border: solid;
+  border-style: outset;
+  text-align: center;
+  padding-top: 10px;
+  margin-left: 25px;
+}
+
+#aio_2_display {
+  position: relative;
+  display: flex;
+}
+
+#aio_2_title {
+  height: 40px;
+  text-align: center;
+  padding-top: 10px;
+  margin-left: 20px;
+}
+#aio_2_voca {
+  height: 40px;
+  border: solid;
+  border-style: outset;
+  text-align: center;
+  padding-top: 10px;
+  margin-left: 25px;
+}
+#aio_2_grammar {
+  height: 40px;
+  border: solid;
+  border-style: outset;
+  text-align: center;
+  padding-top: 10px;
+  margin-left: 25px;
+}
+#aio_2_expression {
+  height: 40px;
+  border: solid;
+  border-style: outset;
+  text-align: center;
+  padding-top: 10px;
+  margin-left: 25px;
+}
+
+#aio_3_display {
+  position: relative;
+  display: flex;
+}
+
+#aio_3_title {
+  height: 40px;
+  text-align: center;
+  padding-top: 10px;
+  margin-left: 20px;
+}
+#aio_3_voca {
+  height: 40px;
+  border: solid;
+  border-style: outset;
+  text-align: center;
+  padding-top: 10px;
+  margin-left: 25px;
+}
+#aio_3_grammar {
+  height: 40px;
+  border: solid;
+  border-style: outset;
+  text-align: center;
+  padding-top: 10px;
+  margin-left: 25px;
+}
+#aio_3_expression {
+  height: 40px;
+  border: solid;
+  border-style: outset;
+  text-align: center;
+  padding-top: 10px;
+  margin-left: 25px;
+}
+
+#aio_4_display {
+  position: relative;
+  display: flex;
+}
+
+#aio_4_title {
+  height: 40px;
+  text-align: center;
+  padding-top: 10px;
+  margin-left: 20px;
+}
+#aio_4_voca {
+  height: 40px;
+  border: solid;
+  border-style: outset;
+  text-align: center;
+  padding-top: 10px;
+  margin-left: 25px;
+}
+#aio_4_grammar {
+  height: 40px;
+  border: solid;
+  border-style: outset;
+  text-align: center;
+  padding-top: 10px;
+  margin-left: 25px;
+}
+#aio_4_expression {
+  height: 40px;
+  border: solid;
+  border-style: outset;
+  text-align: center;
+  padding-top: 10px;
+  margin-left: 25px;
+}
+
+#aio_5_display {
+  position: relative;
+  display: flex;
+}
+
+#aio_5_title {
+  height: 40px;
+  text-align: center;
+  padding-top: 10px;
+  margin-left: 20px;
+}
+#aio_5_voca {
+  height: 40px;
+  border: solid;
+  border-style: outset;
+  text-align: center;
+  padding-top: 10px;
+  margin-left: 25px;
+}
+#aio_5_grammar {
+  height: 40px;
+  border: solid;
+  border-style: outset;
+  text-align: center;
+  padding-top: 10px;
+  margin-left: 25px;
+}
+#aio_5_expression {
+  height: 40px;
+  border: solid;
+  border-style: outset;
+  text-align: center;
+  padding-top: 10px;
+  margin-left: 25px;
+}
+
+#aio_6_display {
+  position: relative;
+  display: flex;
+}
+
+#aio_6_title {
+  height: 40px;
+  text-align: center;
+  padding-top: 10px;
+  margin-left: 20px;
+}
+#aio_6_voca {
+  height: 40px;
+  border: solid;
+  border-style: outset;
+  text-align: center;
+  padding-top: 10px;
+  margin-left: 25px;
+}
+#aio_6_grammar {
+  height: 40px;
+  border: solid;
+  border-style: outset;
+  text-align: center;
+  padding-top: 10px;
+  margin-left: 25px;
+}
+#aio_6_expression {
+  height: 40px;
+  border: solid;
+  border-style: outset;
+  text-align: center;
+  padding-top: 10px;
+  margin-left: 25px;
+}
+
+#Hcomment {
+  position: relative;
+  border: solid;
+  border-style: groove;
+  padding: 5px;
+}
+
+#hsp_1_display {
+  position: relative;
+  display: flex;
+}
+
+#hsp_1_title {
+  height: 40px;
+  text-align: center;
+  padding-top: 10px;
+  margin-left: 25px;
+  width: 305px;
+  margin-right: 20px;
+}
+#hsp_1_listening {
+  height: 40px;
+  border: solid;
+  border-style: outset;
+  text-align: center;
+  padding-top: 10px;
+  margin-left: 25px;
+  width: 300px;
+  margin-right: 20px;
+}
+#hsp_1_phonics {
+  height: 40px;
+  border: solid;
+  border-style: outset;
+  text-align: center;
+  padding-top: 10px;
+  margin-left: 25px;
+  width: 300px;
+  margin-right: 20px;
+}
+#hsp_1_grammar {
+  height: 40px;
+  border: solid;
+  border-style: outset;
+  text-align: center;
+  padding-top: 10px;
+  margin-left: 25px;
+  width: 300px;
+  margin-right: 20px;
+}
+#hsp_1_reading {
+  height: 40px;
+  border: solid;
+  border-style: outset;
+  text-align: center;
+  padding-top: 10px;
+  margin-left: 25px;
+  width: 300px;
+  margin-right: 20px;
+}
+
+#hsp_2_display {
+  position: relative;
+  display: flex;
+}
+
+#hsp_2_title {
+  height: 40px;
+  text-align: center;
+  padding-top: 10px;
+  margin-left: 25px;
+  width: 305px;
+  margin-right: 20px;
+}
+#hsp_2_listening {
+  height: 40px;
+  border: solid;
+  border-style: outset;
+  text-align: center;
+  padding-top: 10px;
+  margin-left: 25px;
+  width: 300px;
+  margin-right: 20px;
+}
+#hsp_2_voca {
+  height: 40px;
+  border: solid;
+  border-style: outset;
+  text-align: center;
+  padding-top: 10px;
+  margin-left: 25px;
+  width: 300px;
+  margin-right: 20px;
+}
+#hsp_2_grammar {
+  height: 40px;
+  border: solid;
+  border-style: outset;
+  text-align: center;
+  padding-top: 10px;
+  margin-left: 25px;
+  width: 300px;
+  margin-right: 20px;
+}
+#hsp_2_languageform {
+  height: 40px;
+  border: solid;
+  border-style: outset;
+  text-align: center;
+  padding-top: 10px;
+  margin-left: 25px;
+  width: 300px;
+  margin-right: 20px;
+}
+#hsp_2_reading {
+  height: 40px;
+  border: solid;
+  border-style: outset;
+  text-align: center;
+  padding-top: 10px;
+  margin-left: 25px;
+  width: 300px;
+  margin-right: 20px;
+}
+
+#hsp_3_display {
+  position: relative;
+  display: flex;
+}
+
+#hsp_3_title {
+  height: 40px;
+  text-align: center;
+  padding-top: 10px;
+  margin-left: 25px;
+  width: 305px;
+  margin-right: 20px;
+}
+#hsp_3_listening {
+  height: 40px;
+  border: solid;
+  border-style: outset;
+  text-align: center;
+  padding-top: 10px;
+  margin-left: 25px;
+  width: 300px;
+  margin-right: 20px;
+}
+#hsp_3_voca {
+  height: 40px;
+  border: solid;
+  border-style: outset;
+  text-align: center;
+  padding-top: 10px;
+  margin-left: 25px;
+  width: 300px;
+  margin-right: 20px;
+}
+#hsp_3_grammar {
+  height: 40px;
+  border: solid;
+  border-style: outset;
+  text-align: center;
+  padding-top: 10px;
+  margin-left: 25px;
+  width: 300px;
+  margin-right: 20px;
+}
+#hsp_3_languageform {
+  height: 40px;
+  border: solid;
+  border-style: outset;
+  text-align: center;
+  padding-top: 10px;
+  margin-left: 25px;
+  width: 300px;
+  margin-right: 20px;
+}
+#hsp_3_reading {
+  height: 40px;
+  border: solid;
+  border-style: outset;
+  text-align: center;
+  padding-top: 10px;
+  margin-left: 25px;
+  width: 300px;
+  margin-right: 20px;
+}
+
+#hsp_4_display {
+  position: relative;
+  display: flex;
+}
+
+#hsp_4_title {
+  height: 40px;
+  text-align: center;
+  padding-top: 10px;
+  margin-left: 25px;
+  width: 305px;
+  margin-right: 20px;
+}
+#hsp_4_listening {
+  height: 40px;
+  border: solid;
+  border-style: outset;
+  text-align: center;
+  padding-top: 10px;
+  margin-left: 25px;
+  width: 300px;
+  margin-right: 20px;
+}
+#hsp_4_voca {
+  height: 40px;
+  border: solid;
+  border-style: outset;
+  text-align: center;
+  padding-top: 10px;
+  margin-left: 25px;
+  width: 300px;
+  margin-right: 20px;
+}
+#hsp_4_grammar {
+  height: 40px;
+  border: solid;
+  border-style: outset;
+  text-align: center;
+  padding-top: 10px;
+  margin-left: 25px;
+  width: 300px;
+  margin-right: 20px;
+}
+#hsp_4_languageform {
+  height: 40px;
+  border: solid;
+  border-style: outset;
+  text-align: center;
+  padding-top: 10px;
+  margin-left: 25px;
+  width: 300px;
+  margin-right: 20px;
+}
+#hsp_4_reading {
+  height: 40px;
+  border: solid;
+  border-style: outset;
+  text-align: center;
+  padding-top: 10px;
+  margin-left: 25px;
+  width: 300px;
+  margin-right: 20px;
+}
