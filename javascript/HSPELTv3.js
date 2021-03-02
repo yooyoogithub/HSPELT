@@ -95,12 +95,7 @@
                 document.getElementById('body').innerHTML = "";
                 document.getElementById('button').innerHTML = "";
 
-                document.getElementById('result').innerHTML = `<h1>RESULT</h1><hr>
-                <span>학생이름</span><input type="text" id="studentname"><br>
-                <span>학년</span><input type="text" id="studentgrade"><br>
-                <span>학원명</span><input type="text" id="classname"><br>
-                <span>학원전화번호</span><input type="text" id="classphone"><br>
-                <span>날짜</span><input type="text" id="testdate"><br><hr>
+                document.getElementById('result').innerHTML = `
                 <input id="resultbutton" type="button" value="결과보기Print" onclick="printoutresult()"><hr>`;
 
                 let thisbutton = document.getElementById('donebutton');
@@ -4890,12 +4885,6 @@
             }
 
             function printresult(){
-                console.log("Power Voca 선택 : " + voca_choice);
-                console.log("중등영어 선택 : " + aio_choice);
-                console.log("파닉스 교재 선택 : " + phonics_choice);
-                console.log("스토리 타운 선택 : " + story_choice);
-                console.log("리딩 타운 선택 : " + reading_choice);
-
                 result.innerHTML = result.innerHTML +   "Power Voca : " + voca_choice + "<br>"+
                                                         "중등영어 : " + aio_choice + "<br>"+
                                                         "파닉스 : " + phonics_choice + "<br>"+
@@ -4903,7 +4892,6 @@
                                                         "Reading Town: " + reading_choice + "<hr>";
 
                 document.getElementById('button').innerHTML = '<input id="bodybutton" type="button" value="결과보기Print" onclick="printoutresult()">';
-                
             }
 
             let studentname;
@@ -4911,6 +4899,18 @@
             let classname;
             let classphone;
             let testdate;
+            let pcheck;
+            let gcheck;
+            let vcheck;
+            let vchoice;
+            let vnum;
+            let vstyleK;
+            let vstyleE;
+            let vstyleR;
+            let mcheck;
+            let mchoice;
+            let hcheck;
+            let hchoice;
 
             function printoutresult(){
                 const title = document.getElementById('title');
@@ -4928,9 +4928,24 @@
                 classphone = document.getElementById('classphone').value;
                 testdate = document.getElementById('testdate').value;
 
+                pcheck = document.getElementById('phonics').checked;
+                gcheck = document.getElementById('grammar').checked;
+                vcheck = document.getElementById('voca').checked;
+                vchoice = document.getElementById('pv').value;
+                vnum = document.getElementsByClassName('wordnum')[0].value;
+                vstyleK = document.getElementById('pv_korean').checked;
+                vstyleE = document.getElementById('pv_english').checked;
+                vstyleR = document.getElementById('pv_random').checked;
+                mcheck = document.getElementById('middle').checked;
+                mchoice = document.getElementById('grade').value;
+                hcheck = document.getElementById('rtst').checked;
+                hchoice = document.getElementById('rtstselect').value;
+
+
                 let buttonprint;
 
                 saveall = fullscreen.innerHTML;
+
                 fullscreen.style.backgroundColor = 'white';
                 fullscreen.style.color = 'white';
                 fullscreen.style.display = 'block';
@@ -4997,11 +5012,13 @@
                 if(total_result.length > 1){
                     let i = 1;
                     if(total_result[i][0] === "대문자순서"){
-                        tscore = Number(total_result[i][2]);
-                        tscore = tscore + Number(total_result[i+1][2]);
-                        tscore = tscore + Number(total_result[i+2][2]);
-                        tscore = tscore + Number(total_result[i+3][2]);
-                        tscore = tscore + Number(total_result[i+4][2]);
+                        tscore = total_result[i][1];
+                        tscore = tscore + total_result[i+1][1];
+                        tscore = tscore + total_result[i+2][1];
+                        tscore = tscore + total_result[i+3][1];
+                        tscore = tscore + total_result[i+4][1];
+
+                        console.log(tscore);
 
                         if((tscore/5) > 79){
                             rtext = "Alphabet Phonics 교재는 진행할 필요가 없습니다.";
@@ -6567,19 +6584,18 @@
                                 }
                             }
                             numbering++;
+                            if(story_choice === 'NONE'){
+                                commentlist = `위 학생은 아직 Story Town이나 Reading Town을 진행하기에는 무리가 있어보입니다. ${phonics_choice}교재를 진행한 뒤에 다시 평가를 거쳐 Story Town으로 진행하시기 바랍니다.`;
+                            }else{
+                                commentlist = `위 학생은 Story Town의 경우 ${story_choice}교재를 Reading Town의 경우에는 ${reading_choice}교재를 진행하시기를 추천해 드립니다.`;
+                            }
+                            
+                            commentlist = commentlist + "다만, 본 수업을 통해서 학습 습득 능력을 평가하여 추천교재를 기준으로 한단계 낮은 교재, 또는 한단계 높은 교재로 진행할수도 있습니다.";
+    
+                            document.getElementById('Hcomment').innerHTML = commentlist;
+                            reportform = "";
                         }
                         i++;
-
-                        if(story_choice === 'NONE'){
-                            commentlist = `위 학생은 아직 Story Town이나 Reading Town을 진행하기에는 무리가 있어보입니다. ${phonics_choice}교재를 진행한 뒤에 다시 평가를 거쳐 Story Town으로 진행하시기 바랍니다.`;
-                        }else{
-                            commentlist = `위 학생은 Story Town의 경우 ${story_choice}교재를 Reading Town의 경우에는 ${reading_choice}교재를 진행하시기를 추천해 드립니다.`;
-                        }
-                        
-                        commentlist = commentlist + "다만, 본 수업을 통해서 학습 습득 능력을 평가하여 추천교재를 기준으로 한단계 낮은 교재, 또는 한단계 높은 교재로 진행할수도 있습니다.";
-
-                        document.getElementById('Hcomment').innerHTML = commentlist;
-                        reportform = "";
                     }
                 }
             }
@@ -6601,4 +6617,23 @@
                 fullscreen.style.backgroundColor = '#e6e94778';
                 fullscreen.style.color = '#b4cc00';
                 fullscreen.style.display = 'flex';
+
+                document.getElementById('studentname').value = studentname;
+                document.getElementById('studentgrade').value = studentgrade;
+                document.getElementById('classname').value = classname;
+                document.getElementById('classphone').value = classphone;
+                document.getElementById('testdate').value = testdate;
+
+                document.getElementById('phonics').checked = pcheck;
+                document.getElementById('grammar').checked = gcheck;
+                document.getElementById('voca').checked = vcheck;
+                document.getElementById('pv').value = vchoice;
+                document.getElementsByClassName('wordnum')[0].value = vnum;
+                document.getElementById('pv_korean').checked = vstyleK;
+                document.getElementById('pv_english').checked = vstyleE;
+                document.getElementById('pv_random').checked = vstyleR;
+                document.getElementById('middle').checked = mcheck;
+                document.getElementById('grade').value = mchoice;
+                document.getElementById('rtst').checked = hcheck;
+                document.getElementById('rtstselect').value = hchoice;
             }
