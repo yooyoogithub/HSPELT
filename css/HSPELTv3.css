@@ -139,6 +139,19 @@
 }
 
 .result {
+  /*position: relative;
+  display: block;
+  margin-top: 10px;
+  margin-left: 10px;
+  background-color: rgba(8, 8, 85, 0.89);
+  height: 800px;
+  width: 200px;
+  overflow: auto;
+  border-radius: 0px 10px 10px 0px;
+  */
+}
+
+#result_all {
   position: relative;
   display: block;
   margin-top: 10px;
