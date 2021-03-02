@@ -4972,13 +4972,13 @@
                         <div id = 'resulthtml_center'>
                             <div id = 'alphabetR'></div>
                             <div id = 'grammarR'></div>
-                            <div id = 'vocaR'></div>
-                            <div id = 'middleR'></div>
-                            <div id = 'hspR'></div>
+                            <div id = 'vocaR'></div><br>
+                            <div id = 'middleR'></div><br>
+                            <div id = 'hspR'></div><br>
                         </div>
                         <div id = 'result_summary'></div>
                     </div>
-
+                    <br>
                     `;
                 // 버튼 초기화 
                 buttonprint = `<div><div><input id="resultbutton" type="button" value="print" onclick = "realprint()"></div>`+
@@ -5178,7 +5178,7 @@
                             type: 'radar', //line, bar, rada, doughnut, pie, polarArea, bubble, scatter, area, mixed
                             // The data for our dataset
                             data: {
-                                labels: ['BL', 'SL', 'Match', 'Name', 'Sound'], //x축에 붙는 각 항목에 대한 item
+                                labels: ['Score','BL', 'SL', 'Match', 'Name', 'Sound'], //x축에 붙는 각 항목에 대한 item
                                 datasets: [{
                                     label: 'Alpahbet', //그래프의 제목
                                     backgroundColor: [                      
@@ -5188,11 +5188,12 @@
                                                     'rgb(255, 187, 0)',
                                                     'rgb(103, 131, 255)',
                                                     'rgb(255, 88, 88)',
+                                                    'rgb(252, 3, 236)',
                                                     ],
                                     borderColor: 'rgb(0, 0, 0)',
                                     borderWidth : 1,
                                     hoverBorderWidth : 10,
-                                    data: [total_result[i][1],total_result[i+1][1],total_result[i+2][1],total_result[i+3][1],total_result[i+4][1]] //labe의 순서에 맞는 대비값
+                                    data: [100,total_result[i][1],total_result[i+1][1],total_result[i+2][1],total_result[i+3][1],total_result[i+4][1]] //labe의 순서에 맞는 대비값
                                 }]
                             },
                             options:{
@@ -5205,7 +5206,7 @@
                             type: 'doughnut', //line, bar, rada, doughnut, pie, polarArea, bubble, scatter, area, mixed
                             // The data for our dataset
                             data: {
-                                labels: ['BL', 'SL', 'Match', 'Name', 'Sound'], //x축에 붙는 각 항목에 대한 item
+                                labels: ['Score','BL', 'SL', 'Match', 'Name', 'Sound'], //x축에 붙는 각 항목에 대한 item
                                 datasets: [{
                                     label: 'Alpahbet', //그래프의 제목
                                     backgroundColor: [                      
@@ -5215,11 +5216,12 @@
                                             'rgb(255, 187, 0)',
                                             'rgb(103, 131, 255)',
                                             'rgb(255, 88, 88)',
+                                            'rgb(252, 3, 236)',
                                             ],
                             borderColor: 'rgb(0, 0, 0)',
                                     borderWidth : 1,
                                     hoverBorderWidth : 10,
-                                    data: [total_result[i][1],total_result[i+1][1],total_result[i+2][1],total_result[i+3][1],total_result[i+4][1]] //labe의 순서에 맞는 대비값
+                                    data: [100,total_result[i][1],total_result[i+1][1],total_result[i+2][1],total_result[i+3][1],total_result[i+4][1]] //labe의 순서에 맞는 대비값
                                 }]
                             },
                             options:{
