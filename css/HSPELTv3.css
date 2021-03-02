@@ -486,16 +486,10 @@
 
 #dchart1 {
   margin-top: 30px;
-  border: solid;
-  border-style: groove;
-  padding: 20px;
 }
 
 #dchart2 {
   margin-top: 50px;
-  border: solid;
-  padding: 20px;
-  border-style: groove;
 }
 
 #myChart1 {
@@ -568,197 +562,32 @@
   padding: 5px;
 }
 
-#aio_1_display {
-  position: relative;
-  display: flex;
-}
-
-#aio_1_title {
-  height: 40px;
-  text-align: center;
-  padding-top: 10px;
-  margin-left: 20px;
-}
-#aio_1_voca {
-  height: 40px;
-  border: solid;
-  border-style: outset;
-  text-align: center;
-  padding-top: 10px;
-  margin-left: 25px;
-}
-#aio_1_grammar {
-  height: 40px;
-  border: solid;
-  border-style: outset;
-  text-align: center;
-  padding-top: 10px;
-  margin-left: 25px;
-}
-#aio_1_expression {
-  height: 40px;
-  border: solid;
-  border-style: outset;
-  text-align: center;
-  padding-top: 10px;
-  margin-left: 25px;
-}
-
-#aio_2_display {
-  position: relative;
-  display: flex;
-}
-
-#aio_2_title {
-  height: 40px;
-  text-align: center;
-  padding-top: 10px;
-  margin-left: 20px;
-}
-#aio_2_voca {
-  height: 40px;
-  border: solid;
-  border-style: outset;
-  text-align: center;
-  padding-top: 10px;
-  margin-left: 25px;
-}
-#aio_2_grammar {
-  height: 40px;
-  border: solid;
-  border-style: outset;
-  text-align: center;
-  padding-top: 10px;
-  margin-left: 25px;
-}
-#aio_2_expression {
-  height: 40px;
-  border: solid;
-  border-style: outset;
-  text-align: center;
-  padding-top: 10px;
-  margin-left: 25px;
-}
-
-#aio_3_display {
-  position: relative;
-  display: flex;
-}
-
-#aio_3_title {
-  height: 40px;
-  text-align: center;
-  padding-top: 10px;
-  margin-left: 20px;
-}
-#aio_3_voca {
-  height: 40px;
-  border: solid;
-  border-style: outset;
-  text-align: center;
-  padding-top: 10px;
-  margin-left: 25px;
-}
-#aio_3_grammar {
-  height: 40px;
-  border: solid;
-  border-style: outset;
-  text-align: center;
-  padding-top: 10px;
-  margin-left: 25px;
-}
-#aio_3_expression {
-  height: 40px;
-  border: solid;
-  border-style: outset;
-  text-align: center;
-  padding-top: 10px;
-  margin-left: 25px;
-}
-
-#aio_4_display {
-  position: relative;
-  display: flex;
-}
-
-#aio_4_title {
-  height: 40px;
-  text-align: center;
-  padding-top: 10px;
-  margin-left: 20px;
-}
-#aio_4_voca {
-  height: 40px;
-  border: solid;
-  border-style: outset;
-  text-align: center;
-  padding-top: 10px;
-  margin-left: 25px;
-}
-#aio_4_grammar {
-  height: 40px;
-  border: solid;
-  border-style: outset;
-  text-align: center;
-  padding-top: 10px;
-  margin-left: 25px;
-}
-#aio_4_expression {
-  height: 40px;
-  border: solid;
-  border-style: outset;
-  text-align: center;
-  padding-top: 10px;
-  margin-left: 25px;
-}
-
-#aio_5_display {
-  position: relative;
-  display: flex;
-}
-
-#aio_5_title {
-  height: 40px;
-  text-align: center;
-  padding-top: 10px;
-  margin-left: 20px;
-}
-#aio_5_voca {
-  height: 40px;
-  border: solid;
-  border-style: outset;
-  text-align: center;
-  padding-top: 10px;
-  margin-left: 25px;
-}
-#aio_5_grammar {
-  height: 40px;
-  border: solid;
-  border-style: outset;
-  text-align: center;
-  padding-top: 10px;
-  margin-left: 25px;
-}
-#aio_5_expression {
-  height: 40px;
-  border: solid;
-  border-style: outset;
-  text-align: center;
-  padding-top: 10px;
-  margin-left: 25px;
-}
-
+#aio_1_display,
+#aio_2_display,
+#aio_3_display,
+#aio_4_display,
+#aio_5_display,
 #aio_6_display {
   position: relative;
   display: flex;
 }
 
+#aio_1_title,
+#aio_2_title,
+#aio_3_title,
+#aio_4_title,
+#aio_5_title,
 #aio_6_title {
   height: 40px;
   text-align: center;
   padding-top: 10px;
   margin-left: 20px;
 }
+#aio_1_voca,
+#aio_2_voca,
+#aio_3_voca,
+#aio_4_voca,
+#aio_5_voca,
 #aio_6_voca {
   height: 40px;
   border: solid;
@@ -766,15 +595,28 @@
   text-align: center;
   padding-top: 10px;
   margin-left: 25px;
+  width: 300px;
+  margin-right: 20px;
 }
-#aio_6_grammar {
+#aio_1_grammar,
+#aio_2_grammar,
+#aio_3_grammar,
+#aio_4_grammar,
+#aio_5_grammar {
   height: 40px;
   border: solid;
   border-style: outset;
   text-align: center;
   padding-top: 10px;
   margin-left: 25px;
+  width: 300px;
+  margin-right: 20px;
 }
+#aio_1_expression,
+#aio_2_expression,
+#aio_3_expression,
+#aio_4_expression,
+#aio_5_expression,
 #aio_6_expression {
   height: 40px;
   border: solid;
@@ -782,6 +624,8 @@
   text-align: center;
   padding-top: 10px;
   margin-left: 25px;
+  width: 300px;
+  margin-right: 20px;
 }
 
 #Hcomment {
@@ -791,12 +635,18 @@
   padding: 5px;
 }
 
-#hsp_1_display {
+#hsp_1_display,
+#hsp_2_display,
+#hsp_3_display,
+#hsp_4_display {
   position: relative;
   display: flex;
 }
 
-#hsp_1_title {
+#hsp_1_title,
+#hsp_2_title,
+#hsp_3_title,
+#hsp_4_title {
   height: 40px;
   text-align: center;
   padding-top: 10px;
@@ -850,142 +700,8 @@
   display: flex;
 }
 
-#hsp_2_title {
-  height: 40px;
-  text-align: center;
-  padding-top: 10px;
-  margin-left: 25px;
-  width: 305px;
-  margin-right: 20px;
-}
-#hsp_2_listening {
-  height: 40px;
-  border: solid;
-  border-style: outset;
-  text-align: center;
-  padding-top: 10px;
-  margin-left: 25px;
-  width: 300px;
-  margin-right: 20px;
-}
-#hsp_2_voca {
-  height: 40px;
-  border: solid;
-  border-style: outset;
-  text-align: center;
-  padding-top: 10px;
-  margin-left: 25px;
-  width: 300px;
-  margin-right: 20px;
-}
-#hsp_2_grammar {
-  height: 40px;
-  border: solid;
-  border-style: outset;
-  text-align: center;
-  padding-top: 10px;
-  margin-left: 25px;
-  width: 300px;
-  margin-right: 20px;
-}
-#hsp_2_languageform {
-  height: 40px;
-  border: solid;
-  border-style: outset;
-  text-align: center;
-  padding-top: 10px;
-  margin-left: 25px;
-  width: 300px;
-  margin-right: 20px;
-}
-#hsp_2_reading {
-  height: 40px;
-  border: solid;
-  border-style: outset;
-  text-align: center;
-  padding-top: 10px;
-  margin-left: 25px;
-  width: 300px;
-  margin-right: 20px;
-}
-
-#hsp_3_display {
-  position: relative;
-  display: flex;
-}
-
-#hsp_3_title {
-  height: 40px;
-  text-align: center;
-  padding-top: 10px;
-  margin-left: 25px;
-  width: 305px;
-  margin-right: 20px;
-}
-#hsp_3_listening {
-  height: 40px;
-  border: solid;
-  border-style: outset;
-  text-align: center;
-  padding-top: 10px;
-  margin-left: 25px;
-  width: 300px;
-  margin-right: 20px;
-}
-#hsp_3_voca {
-  height: 40px;
-  border: solid;
-  border-style: outset;
-  text-align: center;
-  padding-top: 10px;
-  margin-left: 25px;
-  width: 300px;
-  margin-right: 20px;
-}
-#hsp_3_grammar {
-  height: 40px;
-  border: solid;
-  border-style: outset;
-  text-align: center;
-  padding-top: 10px;
-  margin-left: 25px;
-  width: 300px;
-  margin-right: 20px;
-}
-#hsp_3_languageform {
-  height: 40px;
-  border: solid;
-  border-style: outset;
-  text-align: center;
-  padding-top: 10px;
-  margin-left: 25px;
-  width: 300px;
-  margin-right: 20px;
-}
-#hsp_3_reading {
-  height: 40px;
-  border: solid;
-  border-style: outset;
-  text-align: center;
-  padding-top: 10px;
-  margin-left: 25px;
-  width: 300px;
-  margin-right: 20px;
-}
-
-#hsp_4_display {
-  position: relative;
-  display: flex;
-}
-
-#hsp_4_title {
-  height: 40px;
-  text-align: center;
-  padding-top: 10px;
-  margin-left: 25px;
-  width: 305px;
-  margin-right: 20px;
-}
+#hsp_2_listening,
+#hsp_3_listening,
 #hsp_4_listening {
   height: 40px;
   border: solid;
@@ -996,6 +712,8 @@
   width: 300px;
   margin-right: 20px;
 }
+#hsp_2_voca,
+#hsp_3_voca,
 #hsp_4_voca {
   height: 40px;
   border: solid;
@@ -1006,6 +724,8 @@
   width: 300px;
   margin-right: 20px;
 }
+#hsp_2_grammar,
+#hsp_3_grammar,
 #hsp_4_grammar {
   height: 40px;
   border: solid;
@@ -1016,6 +736,8 @@
   width: 300px;
   margin-right: 20px;
 }
+#hsp_2_languageform,
+#hsp_3_languageform,
 #hsp_4_languageform {
   height: 40px;
   border: solid;
@@ -1026,6 +748,8 @@
   width: 300px;
   margin-right: 20px;
 }
+#hsp_2_reading,
+#hsp_3_reading,
 #hsp_4_reading {
   height: 40px;
   border: solid;
